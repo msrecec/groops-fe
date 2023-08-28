@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {GROOPS, LOGIN, SERVER_API_URL} from "../../constants/app.constants";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {User} from "../../model/user.model";
 import {catchError, Observable, tap} from "rxjs";
 import {ErrorHandlerService} from "../error/error-handler.service";
 
@@ -11,7 +10,6 @@ import {ErrorHandlerService} from "../error/error-handler.service";
 })
 export class AuthService {
   private authUrl = `${SERVER_API_URL}/authentication`;
-  private registerURL: string = `${SERVER_API_URL}/users/register`;
   private tokenExpirationTimer: any;
   private groopsExp = 'groops-exp';
 
@@ -20,18 +18,6 @@ export class AuthService {
 
   private nop() {
     return this.http.get<any>(`${this.authUrl}/nop`)
-  }
-
-  public register(username: string, password: string, email: string, firstName: string, lastName: string, dateOfBirth: Date, description: string) {
-    return this.http.post<User>(this.registerURL, {
-      username: username,
-      password: password,
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      dateOfBirth: dateOfBirth,
-      description: description
-    }).pipe(catchError(this.errorHandlerService.handleError))
   }
 
   public login(username: string, password: string) {
