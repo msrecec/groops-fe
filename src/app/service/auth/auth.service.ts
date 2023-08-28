@@ -5,7 +5,6 @@ import {Router} from "@angular/router";
 import {User} from "../../model/user.model";
 import {catchError, Observable, tap} from "rxjs";
 import {ErrorHandlerService} from "../error/error-handler.service";
-import {Error} from "../../model/error.model";
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +40,7 @@ export class AuthService {
         catchError(this.errorHandlerService.handleError),
         tap((resData) => {
           this.handleAuthentication(resData.exp);
-          this.router.navigate([`/${GROOPS}`]).then(() => console.log(""));
+          this.router.navigate([`/${GROOPS}`]).then(() => console.log("Navigating to groops homepage"));
         })
       );
   }
@@ -81,7 +80,9 @@ export class AuthService {
     let groopsExpString = localStorage.getItem(this.groopsExp);
     if (groopsExpString) {
       let exp = new Date(groopsExpString);
-      return this.autoLogout(exp);
+      return this.autoLogout(exp).pipe(tap(() => {
+        this.router.navigate([`/${GROOPS}`]).then(() => console.log("Navigating to groops homepage"));
+      }));
     }
     return this.logout();
   }
