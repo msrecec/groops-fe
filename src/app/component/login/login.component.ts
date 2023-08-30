@@ -23,7 +23,7 @@ export class LoginComponent {
           console.log(`Successfully logged in with date ${value.exp}`)
         }
       )
-    );
+    ).subscribe();
   }
 
 }

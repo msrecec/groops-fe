@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GROOPS, LOGIN, SERVER_API_URL} from "../../constants/app.constants";
+import {GROOPS, HOME, LOGIN, SERVER_API_URL} from "../../constants/app.constants";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {catchError, Observable, tap} from "rxjs";
@@ -21,25 +21,25 @@ export class AuthService {
   }
 
   public login(username: string, password: string) {
-    return this.http.post<{ exp: Date }>(`${this.authUrl}/login`, {username: String, password: String})
+    return this.http.post<{ exp: Date }>(`${this.authUrl}/login`, {username: username, password: password})
       .pipe(
         catchError(this.errorHandlerService.handleError),
         tap((resData) => {
           this.handleAuthentication(resData.exp);
-          this.router.navigate([`/${GROOPS}`]).then(() => console.log("Navigating to groops homepage"));
+          this.router.navigate([`/${HOME}`]).then(() => console.log("Navigating to groops homepage"));
         })
       );
   }
 
   private handleAuthentication(exp: Date) {
     localStorage.setItem(this.groopsExp, exp.toString());
-    this.autoLogout(exp);
+    this.autoLogout(exp).subscribe();
   }
 
   private autoLogout(exp: Date) {
-    const expirationDuration: number = exp.getTime() - new Date().getTime();
+    const expirationDuration: number = (new Date(exp.toString())).getTime() - new Date().getTime();
     this.tokenExpirationTimer = setTimeout(() => {
-      this.logout();
+      this.logout().subscribe();
     }, expirationDuration);
     return new Observable();
   }
@@ -48,14 +48,15 @@ export class AuthService {
     return this.http.post<any>(`${this.authUrl}/logout`, {}).pipe(
       catchError(this.errorHandlerService.handleError),
       tap(() => {
-        this.handleLogout();
+        this.handleLogout().subscribe();
       })
     )
   }
 
   public autoLogin() {
-    this.nop().pipe(catchError(this.handleAutoLoginError), tap(this.handleAutoLogin)
-    )
+    this.nop().pipe(catchError(this.handleAutoLoginError)).subscribe(() => {
+        this.handleAutoLogin().subscribe();
+      })
   }
 
   private handleAutoLoginError() {
