@@ -4,12 +4,14 @@ import {Error} from "../../model/error.model";
 import {catchError, tap, throwError} from "rxjs";
 import {Router} from "@angular/router";
 import {CONFIRM_EMAIL, HOME, LOGIN} from "../../constants/app.constants";
+import {transitionAnimation} from "../../animation/transition.animation";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [transitionAnimation]
 })
 export class RegisterComponent {
   username: string = ""

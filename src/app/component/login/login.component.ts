@@ -4,12 +4,14 @@ import {catchError, tap, throwError} from "rxjs";
 import {Error} from "../../model/error.model";
 import {CONFIRM_EMAIL, CONFIRM_PASSWORD, REGISTER} from "../../constants/app.constants";
 import {Router} from "@angular/router";
+import {transitionAnimation} from "../../animation/transition.animation";
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    animations: [transitionAnimation]
 })
 export class LoginComponent {
     errorToggle: Boolean = false

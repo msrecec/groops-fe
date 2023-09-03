@@ -1,5 +1,5 @@
 <div class="background">
-  <div class="container">
+  <div [@transitionAnimation] class="container">
     <form (submit)="$event.preventDefault()" class="login-form">
       <div>
         <input [(ngModel)]="username" type="text" id="username" name="username" placeholder="username" required>

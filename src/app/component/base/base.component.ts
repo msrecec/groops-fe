@@ -1,12 +1,14 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from "@angular/router";
 import {LOGIN, REGISTER} from "../../constants/app.constants";
+import {transitionAnimation} from "../../animation/transition.animation";
 
 @Component({
   selector: 'app-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [transitionAnimation]
 })
 export class BaseComponent {
 
