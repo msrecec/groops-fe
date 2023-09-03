@@ -2,7 +2,7 @@
     position: sticky;
     top: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
+    /*backdrop-filter: blur(10px);*/
     padding: 20px 20px;
     border-radius: 10px;
     width: 80%;
@@ -27,12 +27,30 @@
     margin-left: auto;
 }
 
-.nav-list a {
+.nav-list .button {
     text-decoration: none;
     color: white;
     background-color: #2196f3;
     padding: 10px 20px;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.nav-list .button-red {
+    text-decoration: none;
+    color: white;
+    background-color: #cb1a1a;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.nav-list .button:hover {
+    background-color: #1976d2;
+}
+
+.nav-list .button-red:hover {
+    background-color: #a62020;
 }
 
 .sticky {

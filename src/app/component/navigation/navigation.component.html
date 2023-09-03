@@ -1,8 +1,9 @@
-<nav [ngClass]="{'navbar': true, 'sticky': isSticky}" class="navbar">
+<nav [@transitionAnimation] [ngClass]="{'navbar': true, 'sticky': isSticky}" class="navbar">
     <ul class="nav-list">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Groups</a></li>
-        <li><a href="#">Profile</a></li>
-        <li class="nav-right"><a href="#">Notifications</a></li>
+        <li><button (click)="toHome()" class="button">Home</button></li>
+        <li><button (click)="toGroups()" class="button">Groups</button></li>
+        <li><button (click)="toProfile()" class="button">Profile</button></li>
+        <li class="nav-right"><button (click)="toNotifications()" class="button">Notifications</button></li>
+        <li class="nav-right"><button (click)="logout()" class="button-red">Logout</button></li>
     </ul>
 </nav>

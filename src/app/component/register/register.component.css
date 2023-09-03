@@ -13,7 +13,8 @@ body {
 
 .registration-form {
   margin-top: 90px;
-  backdrop-filter: blur(9px);
+  /*backdrop-filter: blur(9px);*/
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   padding: 20px;

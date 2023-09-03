@@ -1,30 +1,40 @@
 import {animate, group, keyframes, state, style, transition, trigger} from "@angular/animations";
 
 export const transitionAnimation = trigger('transitionAnimation', [
-    state('in', style({
-        transform: 'translateX(0)'
-    })),
     transition('void => *', [
         animate(500, keyframes([
             style({
-                transform: 'translateX(-100px)',
-                offset: 0,
+                opacity: 0,
             }),
             style({
-                transform: 'translateX(-80px)',
-                offset: 0.2
+                opacity: 0.1,
             }),
             style({
-                transform: 'translateX(-50px)',
-                offset: 0.5
+                opacity: 0.2,
             }),
             style({
-                transform: 'translateX(-20px)',
-                offset: 0.8
+                opacity: 0.3,
             }),
             style({
-                transform: 'translateX(0px)',
-                offset: 1
+                opacity: 0.4,
+            }),
+            style({
+                opacity: 0.5,
+            }),
+            style({
+                opacity: 0.6,
+            }),
+            style({
+                opacity: 0.7,
+            }),
+            style({
+                opacity: 0.8,
+            }),
+            style({
+                opacity: 0.9,
+            }),
+            style({
+                opacity: 1,
             })
         ]))
     ])

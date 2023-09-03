@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    margin: 10px auto 0;
+    /*background: url('/assets/images/groops.jpg') no-repeat center center;*/
+    /*background-size: cover;*/
+    /*filter: blur(9px);*/
+}
+
+body {
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*min-height: 90vh;*/
+    /*height: 98vh;*/
+    background: url('/assets/images/groops.jpg') no-repeat center center;
+    background-size: cover;
+    /*filter: blur(9px);*/
+}
+
+/*.middle-section {*/
+/*  text-align: center;*/
+/*  background-color: rgba(0, 0, 0, 0.5);*/
+/*  padding: 20px;*/
+/*  border-radius: 10px;*/
+/*  margin-top: 180px;*/
+/*}*/
+
+.button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 15px;
+}
+
+.button:hover {
+    background-color: #1976d2;
+}

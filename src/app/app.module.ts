@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ConfirmEmailComponent } from './component/confirm-email/confirm-email.component';
 import { ConfirmPasswordComponent } from './component/confirm-password/confirm-password.component';
 import { NavigationComponent } from './component/navigation/navigation.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NavigationComponent } from './component/navigation/navigation.component
     ConfirmEmailComponent,
     ConfirmPasswordComponent,
     NavigationComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
