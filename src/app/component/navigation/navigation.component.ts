@@ -1,7 +1,7 @@
 import {Component, HostListener} from '@angular/core';
 import {transitionAnimation} from "../../animation/transition.animation";
 import {Router} from "@angular/router";
-import {GROOPS, GROUPS, HOME, NOTIFICATIONS, PROFILE} from "../../constants/app.constants";
+import {GROOPS, GROUPS, HOME, LOGIN, NOTIFICATIONS, PROFILE} from "../../constants/app.constants";
 import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
@@ -41,7 +41,9 @@ export class NavigationComponent {
     }
 
     logout() {
-        this.authService.logout().subscribe()
+        this.authService.logout().subscribe(() => {
+            this.router.navigate([`/${LOGIN}`]).then(r => console.log(`Navigating to ${LOGIN} page`));
+        })
     }
 
 }

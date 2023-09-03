@@ -5,7 +5,6 @@ import {transitionAnimation} from "../../animation/transition.animation";
   selector: 'app-confirm-password',
   templateUrl: './confirm-password.component.html',
   styleUrls: ['./confirm-password.component.css'],
-  encapsulation: ViewEncapsulation.None,
   animations: [transitionAnimation]
 })
 export class ConfirmPasswordComponent {

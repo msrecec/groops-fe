@@ -7,7 +7,6 @@ import {transitionAnimation} from "../../animation/transition.animation";
   selector: 'app-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.css'],
-  encapsulation: ViewEncapsulation.None,
   animations: [transitionAnimation]
 })
 export class BaseComponent {

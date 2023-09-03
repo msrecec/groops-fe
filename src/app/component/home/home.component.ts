@@ -5,7 +5,6 @@ import {transitionAnimation} from "../../animation/transition.animation";
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  encapsulation: ViewEncapsulation.None,
   animations: [transitionAnimation]
 })
 export class HomeComponent implements OnInit{

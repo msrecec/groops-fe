@@ -10,7 +10,6 @@ import {transitionAnimation} from "../../animation/transition.animation";
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    encapsulation: ViewEncapsulation.None,
     animations: [transitionAnimation]
 })
 export class LoginComponent {

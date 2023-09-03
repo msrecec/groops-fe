@@ -80,7 +80,6 @@ export class AuthService {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
-    this.router.navigate([`/${LOGIN}`]).then(r => console.log("Logging out..."));
     return new Observable();
   }
 

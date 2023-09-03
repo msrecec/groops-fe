@@ -6,11 +6,6 @@
   height: 98vh;
 }
 
-body {
-  background: url('/assets/images/groops.jpg') no-repeat center center;
-  background-size: cover;
-}
-
 .middle-section {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.5);

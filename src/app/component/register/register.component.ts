@@ -10,7 +10,6 @@ import {transitionAnimation} from "../../animation/transition.animation";
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  encapsulation: ViewEncapsulation.None,
   animations: [transitionAnimation]
 })
 export class RegisterComponent {
