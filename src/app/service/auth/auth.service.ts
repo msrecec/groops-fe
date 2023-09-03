@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   public logout() {
-    return this.http.delete<any>(`${this.authUrl}/logout`).pipe(
+    return this.http.delete<any>(`${this.authUrl}/logout`,{}).pipe(
       catchError(this.errorHandlerService.handleError),
       tap(() => {
         this.handleLogout().subscribe();
