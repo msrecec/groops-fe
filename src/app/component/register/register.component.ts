@@ -2,6 +2,8 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {UserService} from "../../service/user/user.service";
 import {Error} from "../../model/error.model";
 import {catchError, tap, throwError} from "rxjs";
+import {Router} from "@angular/router";
+import {CONFIRM_EMAIL, HOME, LOGIN} from "../../constants/app.constants";
 
 @Component({
   selector: 'app-register',
@@ -29,7 +31,7 @@ export class RegisterComponent {
   dobRequiredError: string = ""
 
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   register() {
@@ -47,7 +49,7 @@ export class RegisterComponent {
         catchError(err => this.showErrorMessage(err)),
       )
       .subscribe((val) => {
-        
+          this.router.navigate([`/${CONFIRM_EMAIL}`]).then(() => console.log(`Navigating to ${CONFIRM_EMAIL} page`));
       })
   }
 

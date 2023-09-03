@@ -4,8 +4,14 @@
       <div>
         <input [(ngModel)]="username" type="text" id="username" name="username" placeholder="username" required>
       </div>
+      <div *ngIf="usernameRequiredError.length != 0" style="color: red">
+        {{usernameRequiredError}}
+      </div>
       <div>
         <input [(ngModel)]="password" type="password" id="password" name="password" placeholder="password" required>
+      </div>
+      <div *ngIf="passwordRequiredError.length != 0" style="color: red">
+        {{passwordRequiredError}}
       </div>
       <button (click)="login()" type="submit" class="login-button">Login</button>
       <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>

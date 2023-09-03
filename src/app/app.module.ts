@@ -11,6 +11,8 @@ import {BaseComponent} from './component/base/base.component';
 import {RegisterComponent} from './component/register/register.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ConfirmEmailComponent } from './component/confirm-email/confirm-email.component';
+import { ConfirmPasswordComponent } from './component/confirm-password/confirm-password.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     HomeComponent,
     BaseComponent,
     RegisterComponent,
+    ConfirmEmailComponent,
+    ConfirmPasswordComponent,
   ],
   imports: [
     BrowserModule,

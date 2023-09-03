@@ -15,10 +15,10 @@ export class BaseComponent {
   }
 
   routeToLogin() {
-    this.router.navigate([`/${LOGIN}`]).then(() => console.log(`Navigating to ${LOGIN} homepage`));
+    this.router.navigate([`/${LOGIN}`]).then(() => console.log(`Navigating to ${LOGIN} page`));
   }
   routeToRegister() {
-    this.router.navigate([`/${REGISTER}`]).then(() => console.log(`Navigating to ${REGISTER} homepage`));
+    this.router.navigate([`/${REGISTER}`]).then(() => console.log(`Navigating to ${REGISTER} page`));
   }
 
 }

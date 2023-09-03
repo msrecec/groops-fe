@@ -26,7 +26,7 @@ export class AuthService {
         catchError(this.errorHandlerService.handleError),
         tap((resData) => {
           this.handleAuthentication(resData.exp);
-          this.router.navigate([`/${HOME}`]).then(() => console.log("Navigating to groops homepage"));
+          this.router.navigate([`/${HOME}`]).then(() => console.log(`Navigating to ${HOME} page`));
         })
       );
   }
@@ -68,7 +68,7 @@ export class AuthService {
     if (groopsExpString) {
       let exp = new Date(groopsExpString);
       return this.autoLogout(exp).pipe(tap(() => {
-        this.router.navigate([`/${GROOPS}`]).then(() => console.log("Navigating to groops homepage"));
+        this.router.navigate([`/${GROOPS}`]).then(() => console.log(`Navigating to ${HOME} page`));
       }));
     }
     return this.logout();

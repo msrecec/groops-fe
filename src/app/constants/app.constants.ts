@@ -4,3 +4,5 @@ export const LOGIN = 'login';
 export const REGISTER = 'register';
 export const HOME = 'home';
 export const BASE = '';
+export const CONFIRM_EMAIL = "confirm-email"
+export const CONFIRM_PASSWORD = "confirm-password"
