@@ -1,28 +1,56 @@
 <div class="background">
   <div class="container">
     <div class="registration-form">
-        <div>
-          <input [(ngModel)]="username" type="text" id="username" name="username" placeholder="username" required>
-        </div>
-        <div>
-          <input [(ngModel)]="email" type="email" id="email" name="email" placeholder="email" required>
-        </div>
-        <div>
-          <input [(ngModel)]="password" type="password" id="password" name="password" placeholder="password" required>
-        </div>
-        <div>
-          <input [(ngModel)]="firstName" type="text" id="firstName" name="firstName" placeholder="first name" required>
-        </div>
-        <div>
-          <input [(ngModel)]="lastName" type="text" id="lastName" name="lastName" placeholder="last name" required>
-        </div>
-        <div>
-          <input [(ngModel)]="dob" type="date" id="dob" name="dob" placeholder="date of birth" required>
-        </div>
-        <div>
-          <textarea [(ngModel)]="description" style="padding-top: 20px; padding-bottom: 20px; border-radius: 5px;" id="description" name="description" placeholder="description"></textarea>
-        </div>
-        <button (click)="register()" type="submit" class="registration-button">Register</button>
+      <div>
+        <input [(ngModel)]="username" type="text" id="username" name="username" placeholder="username" required>
+      </div>
+      <div *ngIf="usernameRequiredError.length != 0" style="color: red">
+        {{usernameRequiredError}}
+      </div>
+      <div *ngIf="usernameTakenError.length != 0" style="color: red">
+        {{usernameTakenError}}
+      </div>
+      <div>
+        <input [(ngModel)]="email" type="email" id="email" name="email" placeholder="email" required>
+      </div>
+      <div *ngIf="emailRequiredError.length != 0" style="color: red">
+        {{emailRequiredError}}
+      </div>
+      <div *ngIf="emailFormatError.length != 0" style="color: red">
+        {{emailFormatError}}
+      </div>
+      <div>
+        <input [(ngModel)]="password" type="password" id="password" name="password" placeholder="password" required>
+      </div>
+      <div *ngIf="passwordRequiredError.length != 0" style="color: red">
+        {{passwordRequiredError}}
+      </div>
+      <div *ngFor="let passwordValidationMessage of passwordValidationMessages" style="color: red">
+        {{passwordValidationMessage}}
+      </div>
+      <div>
+        <input [(ngModel)]="firstName" type="text" id="firstName" name="firstName" placeholder="first name" required>
+      </div>
+      <div *ngIf="firstNameRequiredError.length != 0" style="color: red">
+        {{firstNameRequiredError}}
+      </div>
+      <div>
+        <input [(ngModel)]="lastName" type="text" id="lastName" name="lastName" placeholder="last name" required>
+      </div>
+      <div *ngIf="lastNameRequiredError.length != 0" style="color: red">
+        {{lastNameRequiredError}}
+      </div>
+      <div>
+        <input [(ngModel)]="dob" type="date" id="dob" name="dob" placeholder="date of birth" required>
+      </div>
+      <div *ngIf="dobRequiredError.length != 0" style="color: red">
+        {{dobRequiredError}}
+      </div>
+      <div>
+        <textarea [(ngModel)]="description" style="padding-top: 20px; padding-bottom: 20px; border-radius: 5px;"
+                  id="description" name="description" placeholder="description"></textarea>
+      </div>
+      <button (click)="register()" type="submit" class="registration-button">Register</button>
     </div>
   </div>
 </div>

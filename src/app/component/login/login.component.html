@@ -8,6 +8,7 @@
         <input [(ngModel)]="password" type="password" id="password" name="password" placeholder="password" required>
       </div>
       <button (click)="login()" type="submit" class="login-button">Login</button>
+      <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>
     </form>
   </div>
 </div>
