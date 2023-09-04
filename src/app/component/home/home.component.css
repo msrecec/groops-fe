@@ -9,6 +9,7 @@
   border-radius: 10px;
   width: 80%;
   margin: 10px auto 0;
+  flex-direction: column;
   /*background: url('/assets/images/groops.jpg') no-repeat center center;*/
   /*background-size: cover;*/
   /*filter: blur(9px);*/
@@ -35,3 +36,30 @@
 .button:hover {
   background-color: #1976d2;
 }
+
+.scrollable-content {
+  flex: 1; /* Allow this div to grow and take up remaining vertical space */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; /* Transparent background */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(33, 150, 243, 0.5); /* Semi-transparent color for the handle */
+  border-radius: 5px; /* Rounded corners for the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(33, 150, 243, 0.8); /* Darker color on hover */
+}
+
