@@ -32,7 +32,7 @@ export class LoginComponent {
             catchError(err => this.showErrorMessage(err)),
             tap(
                 (value) => {
-                    console.log(`Successfully logged in with date ${value.exp}`)
+                    console.log(`Successfully logged in with date`)
                 }
             )
         ).subscribe();
@@ -47,7 +47,8 @@ export class LoginComponent {
             }
             if (errorRes.message != null) {
                 const msgSplit = errorRes.message.split(';')
-                for (let msg of msgSplit) {
+                for (let msgNonTrimmed of msgSplit) {
+                    const msg = msgNonTrimmed.trim()
                     if (msg === 'username is required') {
                         this.usernameRequiredError = 'username is required'
                         continue

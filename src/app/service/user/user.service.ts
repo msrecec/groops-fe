@@ -21,7 +21,7 @@ export class UserService implements OnInit {
     }
 
     public getCurrentUser(): Observable<User> {
-        return this.http.get<User>(`${this.usersUrl}/current-user`);
+        return this.http.get<User>(`${this.usersUrl}/current`);
     }
 
     public register(username: string, password: string, email: string, firstName: string, lastName: string, dateOfBirth: Date, description: string | null) {

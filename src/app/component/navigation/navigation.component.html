@@ -3,7 +3,8 @@
         <li><button (click)="toHome()" class="button">Home</button></li>
         <li><button (click)="toGroups()" class="button">Groups</button></li>
         <li><button (click)="toProfile()" class="button">Profile</button></li>
-        <li class="nav-right"><button (click)="toNotifications()" class="button">Notifications</button></li>
+        <li><button (click)="toNotifications()" class="button">Notifications</button></li>
+        <li *ngIf="isProfileOrEdit()" ><button (click)="toProfileEdit()" class="button-green">Edit profile</button></li>
         <li class="nav-right"><button (click)="logout()" class="button-red">Logout</button></li>
     </ul>
 </nav>

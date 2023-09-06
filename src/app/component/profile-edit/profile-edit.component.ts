@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserService} from "../../service/user/user.service";
 import {Router} from "@angular/router";
 import {catchError, throwError} from "rxjs";
@@ -11,6 +11,7 @@ import {Error} from "../../model/error.model";
   styleUrls: ['./profile-edit.component.css']
 })
 export class ProfileEditComponent {
+  profilePicture: string = ""
   username: string = ""
   email: string = ""
   password: string = ""
@@ -31,9 +32,18 @@ export class ProfileEditComponent {
 
 
   constructor(private userService: UserService, private router: Router) {
+    this.userService.getCurrentUser().pipe(catchError(err => this.showErrorMessage(err))).subscribe((user) => {
+      this.username = user.username.toString()
+      this.firstName = user.firstName.toString()
+      this.email = user.email.toString()
+      this.lastName = user.lastName.toString()
+      this.dob = user.dateOfBirth.toString()
+      this.description = user.description.toString()
+      this.profilePicture = user.profilePictureDownloadLink.toString()
+    })
   }
 
-  register() {
+  updateProfile() {
     this.usernameRequiredError = ""
     this.usernameTakenError = ""
     this.emailRequiredError = ""
@@ -43,13 +53,7 @@ export class ProfileEditComponent {
     this.firstNameRequiredError = ""
     this.lastNameRequiredError = ""
     this.dobRequiredError = ""
-    this.userService.register(this.username, this.password, this.email, this.firstName, this.lastName, new Date(this.dob), this.description)
-        .pipe(
-            catchError(err => this.showErrorMessage(err)),
-        )
-        .subscribe((val) => {
-          this.router.navigate([`/${CONFIRM_EMAIL}`]).then(() => console.log(`Navigating to ${CONFIRM_EMAIL} page`));
-        })
+    this.userService.getCurrentUser().pipe(catchError(err => this.showErrorMessage(err)),).subscribe()
   }
 
   private showErrorMessage(errorRes: Error) {

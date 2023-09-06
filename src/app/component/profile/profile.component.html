@@ -2,8 +2,11 @@
 <div [@transitionAnimation] class="container">
     <div class="profile-container">
         <div class="user-profile">
-            <div class="profile-picture">
-                <img src="assets/images/groops.jpg" alt="Profile Picture">
+            <div *ngIf="profilePicture.trim().toString() === '' " class="profile-picture">
+                <img src="assets/images/default-picture-profile.jpg" alt="Profile Picture">
+            </div>
+            <div *ngIf="profilePicture.trim().toString() !== '' " class="profile-picture">
+                <img src="{{profilePicture.toString()}}" alt="Profile Picture">
             </div>
             <div class="user-info">
                 <div class="username">

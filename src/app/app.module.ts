@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {LoginComponent} from './component/login/login.component';
 import {RouterOutlet} from "@angular/router";
 import {HomeComponent} from './component/home/home.component';
@@ -16,6 +16,8 @@ import { ConfirmPasswordComponent } from './component/confirm-password/confirm-p
 import { NavigationComponent } from './component/navigation/navigation.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { ProfileEditComponent } from './component/profile-edit/profile-edit.component';
+import {AuthInterceptor} from "./interceptor/auth.interceptor";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -30,16 +32,23 @@ import { ProfileEditComponent } from './component/profile-edit/profile-edit.comp
     ProfileComponent,
     ProfileEditComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    RouterOutlet,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        RouterOutlet,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgOptimizedImage
+    ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

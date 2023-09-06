@@ -1,49 +1,81 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {transitionAnimation} from "../../animation/transition.animation";
 import {Router} from "@angular/router";
-import {GROOPS, GROUPS, HOME, LOGIN, NOTIFICATIONS, PROFILE} from "../../constants/app.constants";
+import {GROOPS, GROUPS, HOME, LOGIN, NOTIFICATIONS, PROFILE, PROFILE_EDIT} from "../../constants/app.constants";
 import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
-    selector: 'app-navigation',
-    templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.css'],
-    animations: [transitionAnimation]
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.css'],
+  animations: [transitionAnimation]
 })
-export class NavigationComponent {
-    isSticky = false;
-    navbarHeight = 50;
+export class NavigationComponent implements OnInit {
+  isSticky = false;
+  navbarHeight = 50;
+  currentRoute = ''
 
 
-    constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService) {
 
+  }
+
+  ngOnInit(): void {
+    this.setDefaultRoute()
+  }
+
+  private setDefaultRoute() {
+    this.setCurrentRoute(null)
+  }
+
+  private setCurrentRoute(route: string | null) {
+    if (route !== null) {
+      this.currentRoute = route
+      return
     }
+    const routeTmp: string | null = this.router.url.split('/')[1]
+    this.currentRoute = routeTmp !== null ? routeTmp : ''
+  }
 
-    @HostListener('window:scroll', [])
-    onWindowScroll() {
-        this.isSticky = window.pageYOffset >= this.navbarHeight;
-    }
 
-    toHome() {
-        this.router.navigate([`/${HOME}`]).then(() => console.log(`Navigating to ${HOME} page`));
-    }
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isSticky = window.pageYOffset >= this.navbarHeight;
+  }
 
-    toProfile() {
-        this.router.navigate([`/${PROFILE}`]).then(() => console.log(`Navigating to ${PROFILE} page`));
-    }
+  toHome() {
+    this.router.navigate([`/${HOME}`]).then(() => this.handleNavigation(HOME));
 
-    toGroups() {
-        this.router.navigate([`/${GROUPS}`]).then(() => console.log(`Navigating to ${GROUPS} page`));
-    }
+  }
 
-    toNotifications() {
-        this.router.navigate([`/${NOTIFICATIONS}`]).then(() => console.log(`Navigating to ${NOTIFICATIONS} page`));
-    }
+  toProfile() {
+    this.router.navigate([`/${PROFILE}`]).then(() => this.handleNavigation(PROFILE));
+  }
 
-    logout() {
-        this.authService.logout().subscribe(() => {
-            this.router.navigate([`/${LOGIN}`]).then(r => console.log(`Navigating to ${LOGIN} page`));
-        })
-    }
+  toProfileEdit() {
+    this.router.navigate([`/${PROFILE_EDIT}`]).then(() => this.handleNavigation(PROFILE_EDIT));
+  }
 
+  toGroups() {
+    this.router.navigate([`/${GROUPS}`]).then(() => this.handleNavigation(GROUPS));
+  }
+
+  toNotifications() {
+    this.router.navigate([`/${NOTIFICATIONS}`]).then(() => this.handleNavigation(NOTIFICATIONS));
+  }
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate([`/${LOGIN}`]).then(r => this.handleNavigation(LOGIN));
+    })
+  }
+
+  isProfileOrEdit() {
+    return this.currentRoute === `${PROFILE}` || this.currentRoute === `${PROFILE_EDIT}`
+  }
+
+  private handleNavigation(route: string) {
+    console.log(`Navigating to ${route} page`)
+    this.setCurrentRoute(route)
+  }
 }
