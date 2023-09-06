@@ -16,9 +16,6 @@
     <div *ngIf="usernameTakenError.length != 0" style="color: red">
       {{usernameTakenError}}
     </div>
-    <div *ngIf="emailFormatError.length != 0" style="color: red">
-      {{emailFormatError}}
-    </div>
     <div *ngFor="let passwordValidationMessage of passwordValidationMessages" style="color: red">
       {{passwordValidationMessage}}
     </div>

@@ -1,19 +1,21 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../service/user/user.service";
 import {Router} from "@angular/router";
 import {catchError, throwError} from "rxjs";
 import {CONFIRM_EMAIL} from "../../constants/app.constants";
 import {Error} from "../../model/error.model";
+import {User} from "../../model/user.model";
+import {transitionAnimation} from "../../animation/transition.animation";
 
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.component.html',
-  styleUrls: ['./profile-edit.component.css']
+  styleUrls: ['./profile-edit.component.css'],
+  animations: [transitionAnimation]
 })
-export class ProfileEditComponent {
+export class ProfileEditComponent implements OnInit {
   profilePicture: string = ""
   username: string = ""
-  email: string = ""
   password: string = ""
   firstName: string = ""
   lastName: string = ""
@@ -32,10 +34,13 @@ export class ProfileEditComponent {
 
 
   constructor(private userService: UserService, private router: Router) {
+
+  }
+
+  ngOnInit(): void {
     this.userService.getCurrentUser().pipe(catchError(err => this.showErrorMessage(err))).subscribe((user) => {
       this.username = user.username.toString()
       this.firstName = user.firstName.toString()
-      this.email = user.email.toString()
       this.lastName = user.lastName.toString()
       this.dob = user.dateOfBirth.toString()
       this.description = user.description.toString()
@@ -53,7 +58,15 @@ export class ProfileEditComponent {
     this.firstNameRequiredError = ""
     this.lastNameRequiredError = ""
     this.dobRequiredError = ""
-    this.userService.getCurrentUser().pipe(catchError(err => this.showErrorMessage(err)),).subscribe()
+    this.userService.updateUser(this.username, this.firstName, this.lastName, new Date(this.dob), this.description !== null ? this.description : '')
+      .subscribe((user) => {
+        this.username = user.username.toString()
+        this.firstName = user.firstName.toString()
+        this.lastName = user.lastName.toString()
+        this.dob = user.dateOfBirth.toString()
+        this.description = user.description.toString()
+        this.profilePicture = user.profilePictureDownloadLink.toString()
+      });
   }
 
   private showErrorMessage(errorRes: Error) {
@@ -88,10 +101,6 @@ export class ProfileEditComponent {
             }
             case 'date of birth is required': {
               this.dobRequiredError = 'date of birth is required'
-              break
-            }
-            case 'email is required': {
-              this.emailRequiredError = 'email is required'
               break
             }
             case 'format must be a valid email': {

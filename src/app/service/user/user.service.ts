@@ -6,34 +6,44 @@ import {SERVER_API_URL} from "../../constants/app.constants";
 import {ErrorHandlerService} from "../error/error-handler.service";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class UserService implements OnInit {
-    currentUser: User | null | undefined
-    private usersUrl = `${SERVER_API_URL}/users`;
-    private registerURL: string = `${this.usersUrl}/register`;
+  currentUser: User | null | undefined
+  private usersUrl = `${SERVER_API_URL}/users`;
+  private registerURL: string = `${this.usersUrl}/register`;
 
-    constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService) {
-    }
+  constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService) {
+  }
 
-    ngOnInit(): void {
-        this.currentUser = null;
-    }
+  ngOnInit(): void {
+    this.currentUser = null;
+  }
 
-    public getCurrentUser(): Observable<User> {
-        return this.http.get<User>(`${this.usersUrl}/current`);
-    }
+  public getCurrentUser(): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}/current`);
+  }
 
-    public register(username: string, password: string, email: string, firstName: string, lastName: string, dateOfBirth: Date, description: string | null) {
-        return this.http.post<User>(this.registerURL, {
-            username: username,
-            password: password,
-            email: email,
-            firstName: firstName,
-            lastName: lastName,
-            dateOfBirth: dateOfBirth,
-            description: description
-        }).pipe(catchError(this.errorHandlerService.handleError))
-    }
+  public updateUser(username: string, firstName: string, lastName: string, dateOfBirth: Date, description: string): Observable<User> {
+    return this.http.put<User>(`${this.usersUrl}/current`, {
+      username,
+      firstName,
+      lastName,
+      dateOfBirth,
+      description
+    }).pipe(catchError(this.errorHandlerService.handleError));
+  }
+
+  public register(username: string, password: string, email: string, firstName: string, lastName: string, dateOfBirth: Date, description: string | null) {
+    return this.http.post<User>(this.registerURL, {
+      username: username,
+      password: password,
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      dateOfBirth: dateOfBirth,
+      description: description
+    }).pipe(catchError(this.errorHandlerService.handleError))
+  }
 
 }

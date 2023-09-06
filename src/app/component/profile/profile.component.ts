@@ -14,7 +14,6 @@ import {Error} from "../../model/error.model";
 })
 export class ProfileComponent implements OnInit {
   username: String = ''
-  email: String = ''
   firstName: String = ''
   lastName: String = ''
   dateOfBirth: Date = new Date()
@@ -28,7 +27,6 @@ export class ProfileComponent implements OnInit {
     this.userService.getCurrentUser().subscribe((user) => {
       this.username = user.username
       this.firstName = user.firstName
-      this.email = user.email
       this.lastName = user.lastName
       this.dateOfBirth = user.dateOfBirth
       this.description = user.description
