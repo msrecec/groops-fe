@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component} from '@angular/core';
 import {transitionAnimation} from "../../animation/transition.animation";
 
 @Component({
@@ -8,5 +8,6 @@ import {transitionAnimation} from "../../animation/transition.animation";
   animations: [transitionAnimation]
 })
 export class ConfirmEmailComponent {
+
 
 }

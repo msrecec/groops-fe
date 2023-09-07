@@ -12,3 +12,6 @@ export const CONFIRM_EMAIL = "confirm-email"
 export const CONFIRM_PASSWORD = "confirm-password"
 export const GROOPS_EXP = 'groops-exp';
 export const GROOPS_TOKEN = 'groops-token'
+export const EMAIL_CREATE = 'mail-create-confirmation'
+export const EMAIL_CHANGE = 'mail-change-confirmation'
+export const PASSWORD_CHANGE = 'password-change-confirmation'

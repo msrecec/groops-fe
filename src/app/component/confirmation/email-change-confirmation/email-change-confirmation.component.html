@@ -1,0 +1,9 @@
+<div class="background">
+    <div [@transitionAnimation] class="container">
+        <div (submit)="$event.preventDefault()" class="confirm-email-div">
+            <h1 style="color: #2196f3">Email confirmed</h1>
+            <button (click)="routeToLogin()" class="button login-button">Login</button>
+        </div>
+        <br>
+    </div>
+</div>

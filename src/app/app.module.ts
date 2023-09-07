@@ -19,6 +19,10 @@ import { ProfileEditComponent } from './component/profile-edit/profile-edit.comp
 import {AuthInterceptor} from "./interceptor/auth.interceptor";
 import {NgOptimizedImage} from "@angular/common";
 import { SpinningComponent } from './component/spinning/spinning.component';
+import { EmailCreateConfirmationComponent } from './component/confirmation/email-create-confirmation/email-create-confirmation.component';
+import { EmailChangeConfirmationComponent } from './component/confirmation/email-change-confirmation/email-change-confirmation.component';
+import { PasswordChangeConfirmationComponent } from './component/confirmation/password-change-confirmation/password-change-confirmation.component';
+import { PasswordForgotConfirmationComponent } from './component/confirmation/password-forgot-confirmation/password-forgot-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,10 @@ import { SpinningComponent } from './component/spinning/spinning.component';
     ProfileComponent,
     ProfileEditComponent,
     SpinningComponent,
+    EmailCreateConfirmationComponent,
+    EmailChangeConfirmationComponent,
+    PasswordChangeConfirmationComponent,
+    PasswordForgotConfirmationComponent,
   ],
     imports: [
         BrowserModule,

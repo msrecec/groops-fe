@@ -5,9 +5,9 @@ import {RouterModule, Routes} from "@angular/router";
 import {
   BASE,
   CONFIRM_EMAIL,
-  CONFIRM_PASSWORD,
+  CONFIRM_PASSWORD, EMAIL_CHANGE, EMAIL_CREATE,
   HOME,
-  LOGIN,
+  LOGIN, PASSWORD_CHANGE,
   PROFILE,
   PROFILE_EDIT,
   REGISTER
@@ -19,6 +19,15 @@ import {ConfirmEmailComponent} from "./component/confirm-email/confirm-email.com
 import {ConfirmPasswordComponent} from "./component/confirm-password/confirm-password.component";
 import {ProfileComponent} from "./component/profile/profile.component";
 import {ProfileEditComponent} from "./component/profile-edit/profile-edit.component";
+import {
+  EmailChangeConfirmationComponent
+} from "./component/confirmation/email-change-confirmation/email-change-confirmation.component";
+import {
+  EmailCreateConfirmationComponent
+} from "./component/confirmation/email-create-confirmation/email-create-confirmation.component";
+import {
+  PasswordChangeConfirmationComponent
+} from "./component/confirmation/password-change-confirmation/password-change-confirmation.component";
 
 
 
@@ -30,7 +39,10 @@ const routes: Routes = [
   { path: CONFIRM_EMAIL, component: ConfirmEmailComponent},
   { path: CONFIRM_PASSWORD, component: ConfirmPasswordComponent},
   { path: PROFILE, component: ProfileComponent},
-  { path: PROFILE_EDIT, component: ProfileEditComponent}
+  { path: PROFILE_EDIT, component: ProfileEditComponent},
+  { path: EMAIL_CHANGE, component: EmailChangeConfirmationComponent},
+  { path: EMAIL_CREATE, component: EmailCreateConfirmationComponent},
+  { path: PASSWORD_CHANGE, component: PasswordChangeConfirmationComponent}
 ];
 
 @NgModule({
