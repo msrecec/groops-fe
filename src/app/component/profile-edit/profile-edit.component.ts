@@ -7,6 +7,9 @@ import {Error} from "../../model/error.model";
 import {User} from "../../model/user.model";
 import {transitionAnimation} from "../../animation/transition.animation";
 import {HttpErrorResponse} from "@angular/common/http";
+import {UserCommand} from "../../command/user.command";
+import {UserUpdateFileCommand} from "../../command/user.update.file.command";
+import {UserUpdateCommand} from "../../command/user.update.command";
 
 @Component({
     selector: 'app-profile-edit',
@@ -56,14 +59,8 @@ export class ProfileEditComponent implements OnInit {
         this.dobRequiredError = ""
         this.isSpinning = true
         if (this.fileToUpload) {
-            this.userService.updateUserWithFile({
-                username: this.username,
-                firstName: this.firstName,
-                lastName: this.lastName,
-                dateOfBirth: new Date(this.dob),
-                description: this.description ? this.description : "",
-                file: this.fileToUpload
-            }).pipe(catchError((err) => {
+            const fileCommand: UserUpdateFileCommand = new UserUpdateFileCommand(this.username, this.firstName, this.lastName, new Date(this.dob), this.description ? this.description : "", this.fileToUpload)
+            this.userService.updateUserWithFile(fileCommand).pipe(catchError((err) => {
                 this.isSpinning = false;
                 return this.showErrorMessage(err)
             })).subscribe(() => {
@@ -72,16 +69,9 @@ export class ProfileEditComponent implements OnInit {
             })
             return
         }
+        const command: UserCommand = new UserCommand(this.username, this.firstName, this.lastName, new Date(this.dob), this.description ? this.description : "")
         this.isSpinning = true
-        this.userService.updateUserWithoutFile(
-            {
-                username: this.username,
-                firstName: this.firstName,
-                lastName: this.lastName,
-                dateOfBirth: new Date(this.dob),
-                description: this.description ? this.description : ""
-            }
-        ).pipe(catchError((err) => {
+        this.userService.updateUserWithoutFile(command).pipe(catchError((err) => {
             this.isSpinning = false;
             return this.showErrorMessage(err)
         })).subscribe(() => {

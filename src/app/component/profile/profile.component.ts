@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   lastName: String = ''
   dateOfBirth: Date = new Date()
   description: String = ''
-  profilePicture: String = ''
+  profilePicture: String | null = ''
 
   constructor(private userService: UserService) {
   }

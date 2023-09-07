@@ -1,9 +1,9 @@
 export class UserCommand {
-    private username: string;
-    private firstName: string;
-    private lastName: string;
-    private dateOfBirth: Date
-    private description: string | null
+    username: string;
+    firstName: string;
+    lastName: string;
+    dateOfBirth: Date
+    description: string | null
 
 
     constructor(username: string, firstName: string, lastName: string, dateOfBirth: Date, description: string | null) {

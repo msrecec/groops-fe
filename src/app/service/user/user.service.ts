@@ -6,6 +6,8 @@ import {GROOPS_TOKEN, SERVER_API_URL} from "../../constants/app.constants";
 import {ErrorHandlerService} from "../error/error-handler.service";
 import {Error} from "../../model/error.model";
 import {UserCreateCommand} from "../../command/user.create.command";
+import {UserUpdateFileCommand} from "../../command/user.update.file.command";
+import {UserUpdateCommand} from "../../command/user.update.command";
 
 @Injectable({
     providedIn: 'root'
@@ -27,18 +29,7 @@ export class UserService implements OnInit {
         return this.http.get<User>(`${this.usersUrl}/current`);
     }
 
-    public updateUserWithFile(command: {
-        username: string,
-        firstName: string,
-        lastName: string,
-        dateOfBirth: Date,
-        description: string,
-        file: File
-    }) {
-        const token = localStorage.getItem(GROOPS_TOKEN);
-        if (token === null) {
-            throw new HttpErrorResponse({error: new Error(false, "Token missing", 404)});
-        }
+    public updateUserWithFile(command: UserUpdateFileCommand) {
         const formData: FormData = new FormData();
         formData.append('file', command.file);
 
@@ -50,13 +41,7 @@ export class UserService implements OnInit {
         return this.http.post(`${this.usersUrl}/current/upload-profile`, formData);
     }
 
-    public updateUserWithoutFile(command: {
-        username: string,
-        firstName: string,
-        lastName: string,
-        dateOfBirth: Date,
-        description: string
-    }) {
+    public updateUserWithoutFile(command: UserUpdateCommand) {
         return this.http.put(`${this.usersUrl}/current`, command);
     }
 
