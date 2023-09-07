@@ -59,7 +59,7 @@ export class ProfileEditComponent implements OnInit {
         this.dobRequiredError = ""
         this.isSpinning = true
         if (this.fileToUpload) {
-            const fileCommand: UserUpdateFileCommand = new UserUpdateFileCommand(this.username, this.firstName, this.lastName, new Date(this.dob), this.description ? this.description : "", this.fileToUpload)
+            const fileCommand: UserUpdateFileCommand = new UserUpdateFileCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description ? this.description.trim() : "", this.fileToUpload)
             this.userService.updateUserWithFile(fileCommand).pipe(catchError((err) => {
                 this.isSpinning = false;
                 return this.showErrorMessage(err)
@@ -69,7 +69,7 @@ export class ProfileEditComponent implements OnInit {
             })
             return
         }
-        const command: UserCommand = new UserCommand(this.username, this.firstName, this.lastName, new Date(this.dob), this.description ? this.description : "")
+        const command: UserCommand = new UserCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description ? this.description.trim() : "")
         this.isSpinning = true
         this.userService.updateUserWithoutFile(command).pipe(catchError((err) => {
             this.isSpinning = false;

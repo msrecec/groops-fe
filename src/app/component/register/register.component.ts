@@ -46,7 +46,7 @@ export class RegisterComponent {
         this.firstNameRequiredError = ""
         this.lastNameRequiredError = ""
         this.dobRequiredError = ""
-        const command: UserCreateCommand = new UserCreateCommand(this.username, this.firstName, this.lastName, new Date(this.dob), this.description, this.email, this.password)
+        const command: UserCreateCommand = new UserCreateCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description !== null ? this.description.trim() : null, this.email.trim(), this.password.trim())
         this.userService.register(command).pipe(catchError(err => this.showErrorMessage(err))).subscribe(() => {
             this.toConfirmMail()
         })
