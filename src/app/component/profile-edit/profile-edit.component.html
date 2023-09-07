@@ -5,8 +5,11 @@
       <img class="profile-edit-img" src="assets/images/default-picture-profile.jpg" alt="Profile Picture">
     </div>
     <div *ngIf="profilePicture.trim().toString() !== '' " class="profile-picture-container">
-      <img class="profile-edit-img" src="{{profilePicture.toString()}}" alt="Profile Picture">
+      <img *ngIf="localUrl === null" class="profile-edit-img" [src]="profilePicture.toString()" alt="Profile Picture">
+      <img *ngIf="localUrl !== null" [src]="localUrl" class="profile-edit-img" alt="New profile Picture">
     </div>
+    <input type="file" (change)="showPreviewImageAndSetFile($event)" #fileSelect id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*" style="display:none;" />
+    <button type="submit" (click)="fileSelect.click()" class="profile-picture-edit-button">Choose picture</button>
     <div>
       <input [(ngModel)]="username" type="text" id="username" name="username" placeholder="username" required>
     </div>

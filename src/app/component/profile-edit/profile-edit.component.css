@@ -23,7 +23,7 @@
 
 .profile-edit-img {
   border: 2px solid #000; /* Square border */
-  height: 380px;
+  height: 320px;
   overflow: hidden; /* Crop the image to fit the container */
   border-radius: 10%; /* Create a circular border */
 }
@@ -72,6 +72,17 @@
   color: white;
   border: none;
   padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.profile-picture-edit-button {
+  background-color: #40c730;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 5px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
