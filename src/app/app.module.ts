@@ -18,6 +18,7 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { ProfileEditComponent } from './component/profile-edit/profile-edit.component';
 import {AuthInterceptor} from "./interceptor/auth.interceptor";
 import {NgOptimizedImage} from "@angular/common";
+import { SpinningComponent } from './component/spinning/spinning.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {NgOptimizedImage} from "@angular/common";
     NavigationComponent,
     ProfileComponent,
     ProfileEditComponent,
+    SpinningComponent,
   ],
     imports: [
         BrowserModule,

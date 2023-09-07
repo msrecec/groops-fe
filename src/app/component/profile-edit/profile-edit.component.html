@@ -46,5 +46,6 @@
                   id="description" name="description" placeholder="description"></textarea>
     </div>
     <button (click)="updateProfile()" type="submit" class="profile-edit-button">Update</button>
+    <app-spinning *ngIf="isSpinning"></app-spinning>
   </div>
 </div>

@@ -28,13 +28,13 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     // add content type
-    if (!request.headers.has('Content-Type')) {
-      request = request.clone({
-        setHeaders: {
-          'Content-Type': 'application/json'
-        }
-      });
-    }
+    // if (!request.headers.has('Content-Type')) {
+    //   request = request.clone({
+    //     setHeaders: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   });
+    // }
     return next.handle(request);
   }
 

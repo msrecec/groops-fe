@@ -1,11 +1,12 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../service/user/user.service";
 import {Router} from "@angular/router";
-import {catchError, throwError} from "rxjs";
+import {catchError, finalize, map, Observable, throwError} from "rxjs";
 import {CONFIRM_EMAIL, PROFILE} from "../../constants/app.constants";
 import {Error} from "../../model/error.model";
 import {User} from "../../model/user.model";
 import {transitionAnimation} from "../../animation/transition.animation";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
     selector: 'app-profile-edit',
@@ -33,6 +34,7 @@ export class ProfileEditComponent implements OnInit {
     dobRequiredError: string = ""
     fileToUpload: File | null = null
     localUrl: any[] | null = null;
+    isSpinning = false
 
     constructor(private userService: UserService, private router: Router) {
 
@@ -52,9 +54,46 @@ export class ProfileEditComponent implements OnInit {
         this.firstNameRequiredError = ""
         this.lastNameRequiredError = ""
         this.dobRequiredError = ""
-        this.userService.updateUser(this.username, this.firstName, this.lastName, new Date(this.dob), this.description !== null ? this.description : '', this.fileToUpload)
-            .pipe(catchError(err => this.showErrorMessage(err)))
-            .subscribe(() => this.toProfile());
+        this.isSpinning = true
+        if (this.fileToUpload) {
+            // setTimeout(() => {
+            // }, 500)
+            this.userService.updateUserWithFile({
+                username: this.username,
+                firstName: this.firstName,
+                lastName: this.lastName,
+                dateOfBirth: new Date(this.dob),
+                description: this.description ? this.description : "",
+                file: this.fileToUpload
+            }).then(() => {
+                this.isSpinning = false
+                this.toProfile()
+            }).catch(err => {
+                this.isSpinning = false;
+                console.error("something bad happened")
+                console.error(err)
+                if (err instanceof HttpErrorResponse) {
+                    this.showErrorMessage(err)
+                }
+            })
+            return
+        }
+        this.isSpinning = true
+        this.userService.updateUserWithoutFile(
+            {
+                username: this.username,
+                firstName: this.firstName,
+                lastName: this.lastName,
+                dateOfBirth: new Date(this.dob),
+                description: this.description ? this.description : ""
+            }
+        ).pipe(catchError((err) => {
+            this.isSpinning = false;
+            return this.showErrorMessage(err)
+        })).subscribe(() => {
+            this.isSpinning = false
+            this.toProfile()
+        })
     }
 
     private editProfileComponents(user: User) {
@@ -87,8 +126,12 @@ export class ProfileEditComponent implements OnInit {
     }
 
 
-    private showErrorMessage(errorRes: Error) {
+    private showErrorMessage(error: HttpErrorResponse) {
         let errorMessage = 'An unknown error occurred';
+        if (!error) {
+            return new Observable<never>()
+        }
+        const errorRes = error.error
 
         if (errorRes != null) {
             this.errorToggle = true
