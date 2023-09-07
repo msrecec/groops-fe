@@ -10,7 +10,7 @@ import {GROOPS_TOKEN, SERVER_API_URL} from "../constants/app.constants";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    skipRoutes: string[] = []
+    skipRoutes: string[] = ["api/groops/users/current/upload-profile"]
 
     constructor() {
     }
@@ -28,8 +28,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 }
             });
         }
-
-        if (request.url.includes(""))
 
         // add content type
         if (!request.headers.has('Content-Type') && this.notInRoutes(request.url)) {

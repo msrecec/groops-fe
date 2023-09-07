@@ -56,8 +56,6 @@ export class ProfileEditComponent implements OnInit {
         this.dobRequiredError = ""
         this.isSpinning = true
         if (this.fileToUpload) {
-            // setTimeout(() => {
-            // }, 500)
             this.userService.updateUserWithFile({
                 username: this.username,
                 firstName: this.firstName,
@@ -65,16 +63,12 @@ export class ProfileEditComponent implements OnInit {
                 dateOfBirth: new Date(this.dob),
                 description: this.description ? this.description : "",
                 file: this.fileToUpload
-            }).then(() => {
+            }).pipe(catchError((err) => {
+                this.isSpinning = false;
+                return this.showErrorMessage(err)
+            })).subscribe(() => {
                 this.isSpinning = false
                 this.toProfile()
-            }).catch(err => {
-                this.isSpinning = false;
-                console.error("something bad happened")
-                console.error(err)
-                if (err instanceof HttpErrorResponse) {
-                    this.showErrorMessage(err)
-                }
             })
             return
         }
