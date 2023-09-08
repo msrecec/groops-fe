@@ -5,8 +5,11 @@
             <div *ngIf="!profilePicture " class="profile-picture">
                 <img src="assets/images/default-picture-profile.jpg" alt="Profile Picture">
             </div>
-            <div *ngIf="profilePicture " class="profile-picture">
-                <img src="{{profilePicture.toString()}}" alt="Profile Picture">
+            <div *ngIf="profilePicture" class="profile-picture">
+                <img style="display: none" #profilePictureRef (load)="onLoad(profilePictureRef)" src="{{profilePicture.toString()}}" alt="Profile Picture">
+            </div>
+            <div *ngIf="profilePicture && profilePictureThumbnail && !imageLoaded" class="profile-picture">
+                <img style="filter: blur(9px)" src="{{profilePictureThumbnail.toString()}}" alt="Thumbnail Profile Picture">
             </div>
             <div class="user-info">
                 <div class="username">

@@ -18,7 +18,9 @@ import {UserUpdateCommand} from "../../command/user.update.command";
     animations: [transitionAnimation]
 })
 export class ProfileEditComponent implements OnInit {
+    imgLoaded = false;
     profilePicture: string = ""
+    profilePictureThumbnail: string = ""
     username: string = ""
     password: string = ""
     firstName: string = ""
@@ -45,6 +47,11 @@ export class ProfileEditComponent implements OnInit {
 
     ngOnInit(): void {
         this.userService.getCurrentUser().subscribe((user) => this.editProfileComponents(user))
+    }
+
+    onLoad(image: HTMLImageElement) {
+        image.setAttribute('style', 'display: block')
+        this.imgLoaded = true
     }
 
     updateProfile() {
@@ -87,6 +94,7 @@ export class ProfileEditComponent implements OnInit {
         this.dob = user.dateOfBirth.toString()
         this.description = user.description.toString()
         this.profilePicture = user.profilePictureDownloadLink ? user.profilePictureDownloadLink.toString() : ''
+        this.profilePictureThumbnail = user.profilePictureThumbnailDownloadLink ? user.profilePictureThumbnailDownloadLink.toString() : ''
     }
 
     private toProfile() {

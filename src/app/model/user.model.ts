@@ -8,9 +8,10 @@ export class User {
   private _dateOfBirth: Date;
   private _description: String;
   private _profilePictureDownloadLink: String;
+  private _profilePictureThumbnailDownloadLink: String;
 
 
-  constructor(id: Number, username: String, password: String, email: String, firstName: String, lastName: String, dateOfBirth: Date, description: String, profilePictureDownloadLink: String) {
+  constructor(id: Number, username: String, password: String, email: String, firstName: String, lastName: String, dateOfBirth: Date, description: String, profilePictureDownloadLink: String, profilePictureThumbnailDownloadLink: String) {
     this._id = id;
     this._username = username;
     this._password = password;
@@ -20,6 +21,7 @@ export class User {
     this._dateOfBirth = dateOfBirth;
     this._description = description;
     this._profilePictureDownloadLink = profilePictureDownloadLink;
+    this._profilePictureThumbnailDownloadLink = profilePictureThumbnailDownloadLink;
   }
 
 
@@ -93,5 +95,14 @@ export class User {
 
   set profilePictureDownloadLink(value: String) {
     this._profilePictureDownloadLink = value;
+  }
+
+
+  get profilePictureThumbnailDownloadLink(): String {
+    return this._profilePictureThumbnailDownloadLink;
+  }
+
+  set profilePictureThumbnailDownloadLink(value: String) {
+    this._profilePictureThumbnailDownloadLink = value;
   }
 }

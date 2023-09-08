@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {transitionAnimation} from "../../animation/transition.animation";
 import {UserService} from "../../service/user/user.service";
 import {Router} from "@angular/router";
@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit {
   dateOfBirth: Date = new Date()
   description: String = ''
   profilePicture: String | null = ''
+  profilePictureThumbnail: String | null = ''
+  imageLoaded = false
 
   constructor(private userService: UserService) {
   }
@@ -31,6 +33,13 @@ export class ProfileComponent implements OnInit {
       this.dateOfBirth = user.dateOfBirth
       this.description = user.description
       this.profilePicture = user.profilePictureDownloadLink
+      this.profilePictureThumbnail = user.profilePictureThumbnailDownloadLink
     })
   }
+
+  onLoad(image: HTMLImageElement) {
+    image.setAttribute('style', 'display: block')
+    this.imageLoaded = true
+  }
+
 }
