@@ -20,12 +20,14 @@
                 </div>
             </div>
             <button (click)="changePassword()" type="submit" class="registration-button">Update password</button>
+            <div *ngIf="passwordErrorToggle" style="color: red">{{errorMessage}}</div>
         </div>
         <div class="registration-form2">
             <div>
                 <input [(ngModel)]="email" type="email" id="email" name="email" placeholder="change email" required>
             </div>
             <button (click)="changeEmail()" type="submit" class="registration-button">Update email</button>
+            <div *ngIf="emailErrorToggle" style="color: red">{{errorMessage}}</div>
             <div *ngIf="emailRequiredError.length != 0" style="color: red">
                 {{emailRequiredError}}
             </div>

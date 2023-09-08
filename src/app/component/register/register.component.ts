@@ -23,6 +23,7 @@ export class RegisterComponent {
     dob: string = ""
     description: string | null = null
     errorToggle: Boolean = false
+    errorMessage: string = ''
     usernameRequiredError: string = ""
     usernameTakenError: string = ""
     emailRequiredError: string = ""
@@ -49,6 +50,7 @@ export class RegisterComponent {
         this.firstNameRequiredError = ""
         this.lastNameRequiredError = ""
         this.dobRequiredError = ""
+        this.errorToggle = false
         const command: UserCreateCommand = new UserCreateCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description !== null ? this.description.trim() : null, this.email.trim(), this.password1.trim(), this.password2.trim())
         this.userService.register(command).pipe(catchError(err => this.showErrorMessage(err))).subscribe(() => {
             this.toConfirmMail()
@@ -111,6 +113,9 @@ export class RegisterComponent {
                         case 'second password is required': {
                             this.password2RequiredError = 'password is required'
                             break
+                        }
+                        default: {
+                            this.errorMessage = message
                         }
                     }
                 }

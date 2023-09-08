@@ -16,7 +16,8 @@ import {AuthService} from "../../../service/auth/auth.service";
 })
 export class AccountEditComponent {
     heightSet300 = false
-    errorToggle: Boolean = false
+    emailErrorToggle: Boolean = false
+    passwordErrorToggle: Boolean = false
     errorMessage: String = "Something went wrong"
     email: string = ""
     password1: string = ""
@@ -37,7 +38,10 @@ export class AccountEditComponent {
         this.passwordRequiredError1 = ""
         this.passwordRequiredError2 = ""
         this.passwordValidationMessages = []
-        this.userService.changePassword(this.password1, this.password2).pipe(catchError(err => this.handleShowErrorMessage(err))).subscribe(() => {
+        this.emailErrorToggle = false
+        this.passwordErrorToggle = false
+        this.errorMessage = 'Something went wrong'
+        this.userService.changePassword(this.password1, this.password2).pipe(catchError(err => this.handleShowErrorMessage(err, false))).subscribe(() => {
             this.toConfirmPassword()
         })
     }
@@ -48,7 +52,10 @@ export class AccountEditComponent {
         this.passwordRequiredError1 = ""
         this.passwordRequiredError2 = ""
         this.passwordValidationMessages = []
-        this.userService.changeEmail(this.email).pipe(catchError(err => this.handleShowErrorMessage(err))).subscribe(() => {
+        this.emailErrorToggle = false
+        this.passwordErrorToggle = false
+        this.errorMessage = 'Something went wrong'
+        this.userService.changeEmail(this.email).pipe(catchError(err => this.handleShowErrorMessage(err, true))).subscribe(() => {
             this.toConfirmMail()
         })
     }
@@ -56,19 +63,19 @@ export class AccountEditComponent {
     private toConfirmMail() {
         this.router.navigate([`/${CONFIRM_EMAIL}`]).then(() => console.log(`Navigating to ${CONFIRM_EMAIL} page`))
             .then(() => {
-                this.authService.logout().subscribe()
+                this.authService.logoutNoRoute().subscribe()
             })
     }
 
     private toConfirmPassword() {
         this.router.navigate([`/${CONFIRM_PASSWORD}`]).then(() => console.log(`Navigating to ${CONFIRM_PASSWORD} page`))
             .then(() => {
-                this.authService.logout().subscribe()
+                this.authService.logoutNoRoute().subscribe()
             });
     }
 
-    private handleShowErrorMessage(errorRes: Error) {
-        const obs = this.showErrorMessage(errorRes)
+    private handleShowErrorMessage(errorRes: Error, email: boolean) {
+        const obs = this.showErrorMessage(errorRes, email)
         const el = document.getElementById('accountEditPasswordValidationMessagesForm')
         if (!el) {
             return obs
@@ -85,13 +92,10 @@ export class AccountEditComponent {
         return obs
     }
 
-    private showErrorMessage(errorRes: Error) {
+    private showErrorMessage(errorRes: Error, email: boolean) {
         let errorMessage = 'An unknown error occurred';
 
         if (errorRes != null && errorRes.status != null) {
-            if (errorRes.status === 401 || errorRes.status === 403 || errorRes.status === 400) {
-                this.errorToggle = true
-            }
             if (errorRes.message != null) {
                 const msgSplit = errorRes.message.split(';')
                 for (let msgNonTrimmed of msgSplit) {
@@ -130,6 +134,11 @@ export class AccountEditComponent {
                     if (msg === 'You must verify password') {
                         this.router.navigate([`/${CONFIRM_PASSWORD}`]).then(() => console.log(`Navigating to ${CONFIRM_PASSWORD} page`));
                         return throwError(() => errorMessage);
+                    }
+                    if (email) {
+                        this.emailErrorToggle = true
+                    } else {
+                        this.passwordErrorToggle = true
                     }
                     this.errorMessage = msg
                 }

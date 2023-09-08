@@ -57,6 +57,7 @@
                   id="description" name="description" placeholder="description"></textarea>
       </div>
       <button (click)="register()" type="submit" class="registration-button">Register</button>
+      <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>
     </div>
   </div>
 </div>

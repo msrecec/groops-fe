@@ -59,6 +59,15 @@ export class AuthService {
     )
   }
 
+  public logoutNoRoute() {
+    return this.http.delete<any>(`${this.authUrl}/logout`, {}).pipe(
+      catchError(this.errorHandlerService.handleError),
+      tap(() => {
+        this.handleLogoutNoRoute()
+      })
+    )
+  }
+
   private getDecodedAccessToken(token: string): Token {
     try {
       if (!token.startsWith(this.tokenPrefix)) {
@@ -92,6 +101,15 @@ export class AuthService {
       }));
     }
     return this.logout();
+  }
+
+  private handleLogoutNoRoute() {
+    this.clearToken();
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+    return console.log(`Navigating to ${LOGIN} page`);
   }
 
   private async handleLogout() {
