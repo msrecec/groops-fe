@@ -86,7 +86,7 @@ export class ProfileEditComponent implements OnInit {
         this.lastName = user.lastName.toString()
         this.dob = user.dateOfBirth.toString()
         this.description = user.description.toString()
-        this.profilePicture = user.profilePictureDownloadLink.toString()
+        this.profilePicture = user.profilePictureDownloadLink ? user.profilePictureDownloadLink.toString() : ''
     }
 
     private toProfile() {
