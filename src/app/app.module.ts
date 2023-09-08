@@ -23,6 +23,7 @@ import { EmailCreateConfirmationComponent } from './component/confirmation/email
 import { EmailChangeConfirmationComponent } from './component/confirmation/email-change-confirmation/email-change-confirmation.component';
 import { PasswordChangeConfirmationComponent } from './component/confirmation/password-change-confirmation/password-change-confirmation.component';
 import { PasswordForgotConfirmationComponent } from './component/confirmation/password-forgot-confirmation/password-forgot-confirmation.component';
+import { PasswordForgotChangeComponent } from './component/confirmation/password-forgot-change/password-forgot-change.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { PasswordForgotConfirmationComponent } from './component/confirmation/pa
     EmailChangeConfirmationComponent,
     PasswordChangeConfirmationComponent,
     PasswordForgotConfirmationComponent,
+    PasswordForgotChangeComponent,
   ],
     imports: [
         BrowserModule,

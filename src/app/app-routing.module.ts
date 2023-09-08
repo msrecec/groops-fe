@@ -7,7 +7,7 @@ import {
   CONFIRM_EMAIL,
   CONFIRM_PASSWORD, EMAIL_CHANGE, EMAIL_CREATE,
   HOME,
-  LOGIN, PASSWORD_CHANGE,
+  LOGIN, PASSWORD_CHANGE, PASSWORD_FORGOT, PASSWORD_FORGOT_CHANGE,
   PROFILE,
   PROFILE_EDIT,
   REGISTER
@@ -28,6 +28,12 @@ import {
 import {
   PasswordChangeConfirmationComponent
 } from "./component/confirmation/password-change-confirmation/password-change-confirmation.component";
+import {
+  PasswordForgotConfirmationComponent
+} from "./component/confirmation/password-forgot-confirmation/password-forgot-confirmation.component";
+import {
+  PasswordForgotChangeComponent
+} from "./component/confirmation/password-forgot-change/password-forgot-change.component";
 
 
 
@@ -42,7 +48,9 @@ const routes: Routes = [
   { path: PROFILE_EDIT, component: ProfileEditComponent},
   { path: EMAIL_CHANGE, component: EmailChangeConfirmationComponent},
   { path: EMAIL_CREATE, component: EmailCreateConfirmationComponent},
-  { path: PASSWORD_CHANGE, component: PasswordChangeConfirmationComponent}
+  { path: PASSWORD_CHANGE, component: PasswordChangeConfirmationComponent},
+  { path: PASSWORD_FORGOT, component: PasswordForgotConfirmationComponent},
+  { path: PASSWORD_FORGOT_CHANGE, component: PasswordForgotChangeComponent}
 ];
 
 @NgModule({

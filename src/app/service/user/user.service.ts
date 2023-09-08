@@ -16,7 +16,7 @@ export class UserService implements OnInit {
     currentUser: User | null | undefined
     private usersUrl = `${SERVER_API_URL}/users`;
     private registerURL: string = `${this.usersUrl}/register`;
-    localUrl: any[] = [];
+    private forgotPasswordURL: string = `${SERVER_API_URL}/templates/forgot-password/confirm`;
 
     constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService) {
     }
@@ -27,6 +27,14 @@ export class UserService implements OnInit {
 
     public getCurrentUser(): Observable<User> {
         return this.http.get<User>(`${this.usersUrl}/current`);
+    }
+
+    public confirmPassword(password1: string, password2: string, token: string): Observable<any> {
+        const header = new HttpHeaders({'authorization-x-password-forgot': atob(token)})
+        // header.set('authorization-x-password-forgot', token)
+        return this.http.post<User>(this.forgotPasswordURL, {password1: password1, password2: password2}, {
+            headers: header
+        }).pipe(catchError(this.errorHandlerService.handleError))
     }
 
     public updateUserWithFile(command: UserUpdateFileCommand) {
