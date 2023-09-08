@@ -61,10 +61,6 @@ export class NavigationComponent implements OnInit {
     this.router.navigate([`/${PROFILE}`]).then(() => this.handleNavigation(PROFILE));
   }
 
-  toProfileEdit() {
-    this.router.navigate([`/${PROFILE_EDIT}`]).then(() => this.handleNavigation(PROFILE_EDIT));
-  }
-
   toGroups() {
     this.router.navigate([`/${GROUPS}`]).then(() => this.handleNavigation(GROUPS));
   }

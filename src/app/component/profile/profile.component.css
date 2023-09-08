@@ -67,3 +67,17 @@
 strong {
   font-weight: bold;
 }
+
+
+.button-green {
+  text-decoration: none;
+  color: white;
+  background-color: #40c730;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+.button-green:hover {
+  background-color: #4da85a;
+}

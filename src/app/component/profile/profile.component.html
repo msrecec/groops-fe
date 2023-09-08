@@ -28,6 +28,7 @@
                     <strong>Description:</strong> {{description}}
                 </div>
             </div>
+            <button *ngIf="isCurrent()" (click)="toProfileEdit()" class="button-green">Edit profile</button>
         </div>
     </div>
 </div>
