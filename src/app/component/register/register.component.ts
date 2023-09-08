@@ -16,7 +16,8 @@ import {UserCreateCommand} from "../../command/user.create.command";
 export class RegisterComponent {
     username: string = ""
     email: string = ""
-    password: string = ""
+    password1: string = ""
+    password2: string = ""
     firstName: string = ""
     lastName: string = ""
     dob: string = ""
@@ -26,7 +27,8 @@ export class RegisterComponent {
     usernameTakenError: string = ""
     emailRequiredError: string = ""
     emailFormatError: string = ""
-    passwordRequiredError: string = ""
+    password1RequiredError: string = ""
+    password2RequiredError: string = ""
     passwordValidationMessages: String[] = []
     firstNameRequiredError: string = ""
     lastNameRequiredError: string = ""
@@ -41,12 +43,13 @@ export class RegisterComponent {
         this.usernameTakenError = ""
         this.emailRequiredError = ""
         this.emailFormatError = ""
-        this.passwordRequiredError = ""
+        this.password1RequiredError = ""
+        this.password2RequiredError = ""
         this.passwordValidationMessages = []
         this.firstNameRequiredError = ""
         this.lastNameRequiredError = ""
         this.dobRequiredError = ""
-        const command: UserCreateCommand = new UserCreateCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description !== null ? this.description.trim() : null, this.email.trim(), this.password.trim())
+        const command: UserCreateCommand = new UserCreateCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description !== null ? this.description.trim() : null, this.email.trim(), this.password1.trim(), this.password2.trim())
         this.userService.register(command).pipe(catchError(err => this.showErrorMessage(err))).subscribe(() => {
             this.toConfirmMail()
         })
@@ -69,7 +72,10 @@ export class RegisterComponent {
                 let errorMessages = errorRes.message.split(';')
                 for (let message of errorMessages) {
                     const messageTrimmed = message.trim()
-                    if (message.includes("Password")) {
+                    if (message.includes("*") || message.includes("Password validation failed")) {
+                        continue
+                    }
+                    if (message.includes("Password") || message.includes("Passwords")) {
                         this.passwordValidationMessages.push(message)
                         continue
                     }
@@ -98,8 +104,12 @@ export class RegisterComponent {
                             this.emailFormatError = 'format must be a valid email'
                             break
                         }
-                        case 'password is required': {
-                            this.passwordRequiredError = 'password is required'
+                        case 'first password is required': {
+                            this.password1RequiredError = 'password is required'
+                            break
+                        }
+                        case 'second password is required': {
+                            this.password2RequiredError = 'password is required'
                             break
                         }
                     }
