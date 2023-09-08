@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
-  height: 98.4vh;
+  min-height: 98.3vh;
+  height: 100%;
 }
 
 .registration-form {
