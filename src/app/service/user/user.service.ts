@@ -15,6 +15,8 @@ import {UserUpdateCommand} from "../../command/user.update.command";
 export class UserService implements OnInit {
     currentUser: User | null | undefined
     private usersUrl = `${SERVER_API_URL}/users`;
+    private changePasswordURL = `${SERVER_API_URL}/users/change-password`;
+    private changeEmailURL = `${SERVER_API_URL}/users/change-mail`;
     private registerURL: string = `${this.usersUrl}/register`;
     private forgotPasswordURL: string = `${SERVER_API_URL}/templates/forgot-password/confirm`;
 
@@ -31,7 +33,6 @@ export class UserService implements OnInit {
 
     public confirmPassword(password1: string, password2: string, token: string): Observable<any> {
         const header = new HttpHeaders({'authorization-x-password-forgot': atob(token)})
-        // header.set('authorization-x-password-forgot', token)
         return this.http.post<User>(this.forgotPasswordURL, {password1: password1, password2: password2}, {
             headers: header
         }).pipe(catchError(this.errorHandlerService.handleError))
@@ -55,6 +56,14 @@ export class UserService implements OnInit {
 
     public register(command: UserCreateCommand) {
         return this.http.post<User>(this.registerURL, command).pipe(catchError(this.errorHandlerService.handleError))
+    }
+
+    public changePassword(password1: string, password2: string) {
+        return this.http.put<User>(this.changePasswordURL, {password1: password1, password2: password2}).pipe(catchError(this.errorHandlerService.handleError))
+    }
+
+    public changeEmail(email: string) {
+        return this.http.put<User>(this.changeEmailURL, {email: email}).pipe(catchError(this.errorHandlerService.handleError))
     }
 
 }

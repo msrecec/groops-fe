@@ -1,7 +1,16 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {transitionAnimation} from "../../animation/transition.animation";
 import {Router} from "@angular/router";
-import {GROOPS, GROUPS, HOME, LOGIN, NOTIFICATIONS, PROFILE, PROFILE_EDIT} from "../../constants/app.constants";
+import {
+  ACCOUNT_EDIT,
+  GROOPS,
+  GROUPS,
+  HOME,
+  LOGIN,
+  NOTIFICATIONS,
+  PROFILE,
+  PROFILE_EDIT
+} from "../../constants/app.constants";
 import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
@@ -62,6 +71,10 @@ export class NavigationComponent implements OnInit {
 
   toNotifications() {
     this.router.navigate([`/${NOTIFICATIONS}`]).then(() => this.handleNavigation(NOTIFICATIONS));
+  }
+
+  toAccountEdit() {
+    this.router.navigate([`/${ACCOUNT_EDIT}`]).then(() => this.handleNavigation(ACCOUNT_EDIT));
   }
 
   logout() {

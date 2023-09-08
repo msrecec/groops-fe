@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {LoginComponent} from "./component/login/login.component";
 import {RouterModule, Routes} from "@angular/router";
 import {
+  ACCOUNT_EDIT,
   BASE,
   CONFIRM_EMAIL,
   CONFIRM_PASSWORD, EMAIL_CHANGE, EMAIL_CREATE,
@@ -34,6 +35,7 @@ import {
 import {
   PasswordForgotChangeComponent
 } from "./component/confirmation/password-forgot-change/password-forgot-change.component";
+import {AccountEditComponent} from "./component/account-edit/account-edit/account-edit.component";
 
 
 
@@ -50,7 +52,8 @@ const routes: Routes = [
   { path: EMAIL_CREATE, component: EmailCreateConfirmationComponent},
   { path: PASSWORD_CHANGE, component: PasswordChangeConfirmationComponent},
   { path: PASSWORD_FORGOT, component: PasswordForgotConfirmationComponent},
-  { path: PASSWORD_FORGOT_CHANGE, component: PasswordForgotChangeComponent}
+  { path: PASSWORD_FORGOT_CHANGE, component: PasswordForgotChangeComponent},
+  { path: ACCOUNT_EDIT, component: AccountEditComponent}
 ];
 
 @NgModule({

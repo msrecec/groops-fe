@@ -1,49 +1,37 @@
-<!--<app-navigation></app-navigation>-->
-<!--<div [@transitionAnimation] class="container">-->
-<!--    <div class="profile-edit-form">-->
-<!--        <div>-->
-<!--            <input [(ngModel)]="email" type="email" id="email" name="email" placeholder="email" required>-->
-<!--        </div>-->
-<!--        <div *ngIf="usernameRequiredError.length != 0" style="color: red">-->
-<!--            {{usernameRequiredError}}-->
-<!--        </div>-->
-<!--        <div *ngIf="usernameTakenError.length != 0" style="color: red">-->
-<!--            {{usernameTakenError}}-->
-<!--        </div>-->
-<!--        <div *ngFor="let passwordValidationMessage of passwordValidationMessages" style="color: red">-->
-<!--            {{passwordValidationMessage}}-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input [(ngModel)]="password1" type="password" id="password1" name="password1" placeholder="enter password"-->
-<!--                   required>-->
-<!--        </div>-->
-<!--        <div *ngIf="firstNameRequiredError.length != 0" style="color: red">-->
-<!--            {{firstNameRequiredError}}-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input [(ngModel)]="password2" type="password" id="password2" name="password2" placeholder="enter password again"-->
-<!--                   required>-->
-<!--        </div>-->
-<!--        <div *ngIf="firstNameRequiredError.length != 0" style="color: red">-->
-<!--            {{firstNameRequiredError}}-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input [(ngModel)]="lastName" type="text" id="lastName" name="lastName" placeholder="last name" required>-->
-<!--        </div>-->
-<!--        <div *ngIf="lastNameRequiredError.length != 0" style="color: red">-->
-<!--            {{lastNameRequiredError}}-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input [(ngModel)]="dob" type="date" id="dob" name="dob" placeholder="date of birth" required>-->
-<!--        </div>-->
-<!--        <div *ngIf="dobRequiredError.length != 0" style="color: red">-->
-<!--            {{dobRequiredError}}-->
-<!--        </div>-->
-<!--        <div>-->
-<!--        <textarea [(ngModel)]="description" style="padding-top: 20px; padding-bottom: 20px; border-radius: 5px;"-->
-<!--                  id="description" name="description" placeholder="description"></textarea>-->
-<!--        </div>-->
-<!--        <button (click)="updateProfile()" type="submit" class="profile-edit-button">Update</button>-->
-<!--        <app-spinning *ngIf="isSpinning"></app-spinning>-->
-<!--    </div>-->
-<!--</div>-->
+<app-navigation></app-navigation>
+<div class="background">
+    <div [@transitionAnimation] class="container">
+        <div id="accountEditPasswordValidationMessagesForm" class="registration-form1">
+            <div>
+                <input [(ngModel)]="password1" type="password" id="password1" name="password1" placeholder="enter to change password" required>
+            </div>
+            <div *ngIf="passwordRequiredError1.length != 0" style="color: red">
+                {{passwordRequiredError1}}
+            </div>
+            <div>
+                <input [(ngModel)]="password2" type="password" id="password2" name="password2" placeholder="enter again" required>
+            </div>
+            <div *ngIf="passwordRequiredError2.length != 0" style="color: red">
+                {{passwordRequiredError2}}
+            </div>
+            <div *ngIf="passwordValidationMessages.length !== 0">
+                <div *ngFor="let passwordValidationMessage of passwordValidationMessages" style="color: red">
+                    {{passwordValidationMessage}}
+                </div>
+            </div>
+            <button (click)="changePassword()" type="submit" class="registration-button">Update password</button>
+        </div>
+        <div class="registration-form2">
+            <div>
+                <input [(ngModel)]="email" type="email" id="email" name="email" placeholder="change email" required>
+            </div>
+            <button (click)="changeEmail()" type="submit" class="registration-button">Update email</button>
+            <div *ngIf="emailRequiredError.length != 0" style="color: red">
+                {{emailRequiredError}}
+            </div>
+            <div *ngIf="emailFormatError.length != 0" style="color: red">
+                {{emailFormatError}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -39,12 +39,15 @@
 
 /* Style the profile picture */
 .profile-picture {
+  width: 600px;
+  /*height: 55vh;*/
   border: 2px solid #000; /* Square border */
   overflow: hidden; /* Crop the image to fit the container */
   border-radius: 10%; /* Create a circular border */
 }
 
 .profile-picture img {
+  width: 100%;
   height: 50vh;
   object-fit: cover; /* Ensure the entire image fits */
 }
