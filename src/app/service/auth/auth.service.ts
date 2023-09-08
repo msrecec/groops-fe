@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GROOPS, GROOPS_EXP, GROOPS_TOKEN, HOME, LOGIN, SERVER_API_URL} from "../../constants/app.constants";
+import {GROOPS_EXP, GROOPS_TOKEN, HOME, LOGIN, SERVER_API_URL} from "../../constants/app.constants";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import jwt_decode from 'jwt-decode';
@@ -97,7 +97,7 @@ export class AuthService {
     if (groopsExpString) {
       let exp = new Date(groopsExpString);
       return this.autoLogout(exp).pipe(tap(() => {
-        this.router.navigate([`/${GROOPS}`]).then(() => console.log(`Navigating to ${HOME} page`));
+        this.router.navigate([`/${HOME}`]).then(() => console.log(`Navigating to ${HOME} page`));
       }));
     }
     return this.logout();

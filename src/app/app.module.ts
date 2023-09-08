@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {LoginComponent} from './component/login/login.component';
-import {RouterOutlet} from "@angular/router";
+import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {HomeComponent} from './component/home/home.component';
 import {BaseComponent} from './component/base/base.component';
 import {RegisterComponent} from './component/register/register.component';
@@ -25,6 +25,7 @@ import { PasswordChangeConfirmationComponent } from './component/confirmation/pa
 import { PasswordForgotConfirmationComponent } from './component/confirmation/password-forgot-confirmation/password-forgot-confirmation.component';
 import { PasswordForgotChangeComponent } from './component/confirmation/password-forgot-change/password-forgot-change.component';
 import { AccountEditComponent } from './component/account-edit/account-edit/account-edit.component';
+import { GroupListComponentComponent } from './component/group/group-list-component/group-list-component.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AccountEditComponent } from './component/account-edit/account-edit/acco
     PasswordForgotConfirmationComponent,
     PasswordForgotChangeComponent,
     AccountEditComponent,
+    GroupListComponentComponent,
   ],
     imports: [
         BrowserModule,
@@ -54,7 +56,9 @@ import { AccountEditComponent } from './component/account-edit/account-edit/acco
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        RouterLinkActive,
+        RouterLink
     ],
   providers: [
     {

@@ -1,9 +1,8 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {transitionAnimation} from "../../animation/transition.animation";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Route, Router, UrlSegment} from "@angular/router";
 import {
   ACCOUNT_EDIT,
-  GROOPS,
   GROUPS,
   HOME,
   LOGIN,
@@ -24,13 +23,13 @@ export class NavigationComponent implements OnInit {
   navbarHeight = 50;
   currentRoute = ''
 
-
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
     this.setDefaultRoute()
+    this.route.snapshot.url
   }
 
   private setDefaultRoute() {
@@ -52,31 +51,30 @@ export class NavigationComponent implements OnInit {
     this.isSticky = window.pageYOffset >= this.navbarHeight;
   }
 
-  toHome() {
-    this.router.navigate([`/${HOME}`]).then(() => this.handleNavigation(HOME));
-
-  }
-
-  toProfile() {
-    this.router.navigate([`/${PROFILE}`]).then(() => this.handleNavigation(PROFILE));
-  }
-
-  toGroups() {
-    this.router.navigate([`/${GROUPS}`]).then(() => this.handleNavigation(GROUPS));
-  }
-
-  toNotifications() {
-    this.router.navigate([`/${NOTIFICATIONS}`]).then(() => this.handleNavigation(NOTIFICATIONS));
-  }
-
-  toAccountEdit() {
-    this.router.navigate([`/${ACCOUNT_EDIT}`]).then(() => this.handleNavigation(ACCOUNT_EDIT));
-  }
-
   logout() {
     this.authService.logout().subscribe(() => {
       this.router.navigate([`/${LOGIN}`]).then(r => this.handleNavigation(LOGIN));
     })
+  }
+
+  isHome() {
+    return this.route.snapshot.url[0].path.includes(HOME);
+  }
+
+  isProfile() {
+    return this.route.snapshot.url[0].path.includes(PROFILE);
+  }
+
+  isGroups() {
+    return this.route.snapshot.url[0].path.includes(GROUPS);
+  }
+
+  isAccountEdit() {
+    return this.route.snapshot.url[0].path.includes(ACCOUNT_EDIT);
+  }
+
+  isNotifications() {
+    return this.route.snapshot.url[0].path.includes(NOTIFICATIONS);
   }
 
   isProfileOrEdit() {
@@ -87,4 +85,11 @@ export class NavigationComponent implements OnInit {
     console.log(`Navigating to ${route} page`)
     this.setCurrentRoute(route)
   }
+
+  protected readonly HOME = HOME;
+  protected readonly GROUPS = GROUPS;
+  protected readonly PROFILE_EDIT = PROFILE_EDIT;
+  protected readonly PROFILE = PROFILE;
+  protected readonly NOTIFICATIONS = NOTIFICATIONS;
+  protected readonly ACCOUNT_EDIT = ACCOUNT_EDIT;
 }

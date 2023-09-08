@@ -60,6 +60,17 @@
 .nav-list .button:hover {
     background-color: #1976d2;
 }
+
+.button-active {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background-color: #065bab;
+}
+
 .nav-list .button-green:hover {
     background-color: #4da85a;
 }
