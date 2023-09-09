@@ -64,7 +64,7 @@ export class NavigationComponent implements OnInit {
   }
 
   isGroups() {
-    return this.route.snapshot.url[0].path === GROUPS;
+    return this.route.snapshot.url[0].path === GROUPS && this.route.snapshot.paramMap.get("id") === null
   }
 
   inGroupDomain() {
@@ -89,6 +89,10 @@ export class NavigationComponent implements OnInit {
 
   isMy() {
     return this.groupService.isMyGroups()
+  }
+
+  myGroups() {
+    return this.isMy() ? 'My Groups' : 'All groups'
   }
 
   my() {

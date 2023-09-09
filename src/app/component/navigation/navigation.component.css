@@ -108,3 +108,17 @@ input[type="text"] {
 .search-button:hover {
     background-color: #0056b3;
 }
+
+.button-green {
+    text-decoration: none;
+    color: white;
+    background-color: #40c730;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    margin: 3px
+}
+.button-green:hover {
+    background-color: #4da85a;
+}

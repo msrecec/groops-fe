@@ -21,6 +21,10 @@ export class GroupService {
         return this.myGroups;
     }
 
+    public resetMy() {
+        this.myGroups = true
+    }
+
     public my() {
         this.myGroups = !this.myGroups
     }
@@ -47,6 +51,26 @@ export class GroupService {
 
     public createGroupWithoutFile(name: string): Observable<Group> {
         return this.http.post<Group>(`${this.groupURL}`, {name: name});
+    }
+
+    public updateGroupWithFile(id: string, name: string, file: File): Observable<Group> {
+        const formData: FormData = new FormData();
+        formData.append('file', file);
+
+        const blob = new Blob([JSON.stringify({name: name})], {
+            type: 'application/json',
+        });
+        formData.append('command', blob);
+
+        return this.http.put<Group>(`${this.groupURL}/${id}/profile-picture`, formData);
+    }
+
+    public updateGroupWithoutFile(id: string, name: string): Observable<Group> {
+        return this.http.put<Group>(`${this.groupURL}/${id}`, {name: name});
+    }
+
+    public delete(id: string) {
+        return this.http.delete(`${this.groupURL}/${id}`)
     }
 
 }

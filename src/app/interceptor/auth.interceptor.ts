@@ -10,7 +10,7 @@ import {
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    skipRoutes: string[] = ["api/groops/users/current/upload-profile", "api/groops/groups/profile-picture"]
+    skipRoutes: string[] = ["api/groops/users/current/upload-profile", "api/groops/groups/profile-picture", "profile-picture"]
 
     constructor() {
     }

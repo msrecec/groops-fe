@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {PROFILE_EDIT} from "../../../constants/app.constants";
+import {GROUP_DELETE, GROUP_EDIT, GROUPS, PROFILE_EDIT} from "../../../constants/app.constants";
 import {transitionAnimation} from "../../../animation/transition.animation";
 import {GroupService} from "../../../service/group/group.service";
 import {catchError, tap, throwError} from "rxjs";
@@ -47,7 +47,7 @@ export class GroupComponent implements OnInit {
                 this.groupService.getGroupRolesForCurrentUserById(group.id.toString()).pipe(
                     catchError((err: HttpErrorResponse) => {
                         if (err.status === 404) {
-                            console.log('You are not a member of this group')
+                            console.error('You are not a member of this group')
                         }
                         return throwError(() => err.message)
                     })
@@ -62,7 +62,12 @@ export class GroupComponent implements OnInit {
 
 
     toGroupEdit() {
-        this.router.navigate([`/${PROFILE_EDIT}`]).then(() => this.handleNavigation(PROFILE_EDIT));
+        const groupId = this.route.snapshot.paramMap.get("id")
+        if (!groupId) {
+            console.error('Missing group id')
+            return
+        }
+        this.router.navigate([`/${GROUPS}/edit`, groupId]).then(() => this.handleNavigation(`/${GROUP_EDIT}`));
     }
 
     isAdmin() {
@@ -83,6 +88,15 @@ export class GroupComponent implements OnInit {
 
     leaveGroup() {
 
+    }
+
+    deleteGroup() {
+        const groupId = this.route.snapshot.paramMap.get("id")
+        if (!groupId) {
+            console.error('Missing group id')
+            return
+        }
+        this.router.navigate([`/${GROUPS}/delete`, groupId]).then(() => this.handleNavigation(`/${GROUP_DELETE} : ${groupId}`));
     }
 
     requestJoiningGroup() {

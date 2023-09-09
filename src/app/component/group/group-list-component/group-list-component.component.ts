@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {transitionAnimation} from "../../../animation/transition.animation";
+import {GroupService} from "../../../service/group/group.service";
 
 @Component({
   selector: 'app-group-list-component',
@@ -7,6 +8,13 @@ import {transitionAnimation} from "../../../animation/transition.animation";
   styleUrls: ['./group-list-component.component.css'],
   animations: [transitionAnimation]
 })
-export class GroupListComponentComponent {
+export class GroupListComponentComponent implements OnInit{
+
+  constructor(private groupService: GroupService) {
+  }
+
+  ngOnInit(): void {
+    this.groupService.resetMy()
+  }
 
 }

@@ -19,9 +19,10 @@
                 </div>
             </div>
             <div style="flex-direction: row">
-                <button *ngIf="isAdmin()" (click)="toGroupEdit()" class="button-green">Edit group</button>
-                <button *ngIf="isMember()" (click)="toGroupPosts()" class="button-green">Posts</button>
-                <button *ngIf="isMember()" (click)="leaveGroup()" class="button-green">Leave</button>
+                <button *ngIf="isMember()" (click)="toGroupPosts()" class="button-blue">Posts</button>
+                <button *ngIf="isAdmin()" (click)="toGroupEdit()" class="button-green">Edit</button>
+                <button *ngIf="isMember()" (click)="leaveGroup()" class="button-red">Leave</button>
+                <button *ngIf="isAdmin()" (click)="deleteGroup()" class="button-red">Delete</button>
                 <button *ngIf="!isMember() && !hasRequestedJoin()" (click)="requestJoiningGroup()" class="button-green">Join</button>
                 <button *ngIf="!isMember() && hasRequestedJoin()" disabled class="button-green">Pending join</button>
             </div>
