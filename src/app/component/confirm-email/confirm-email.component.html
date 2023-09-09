@@ -2,6 +2,9 @@
     <div [@transitionAnimation] class="container">
         <div (submit)="$event.preventDefault()" class="confirm-email-div">
             <h1 style="color: #2196f3">Please confirm email</h1>
+            <div>
+                <button (click)="resend()" class="login-button">Resend</button>
+            </div>
         </div>
     </div>
 </div>
