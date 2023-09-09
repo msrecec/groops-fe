@@ -15,8 +15,9 @@ import {UserUpdateCommand} from "../../command/user.update.command";
 export class UserService implements OnInit {
     currentUser: User | null | undefined
     private usersUrl = `${SERVER_API_URL}/users`;
-    private changePasswordURL = `${SERVER_API_URL}/users/change-password`;
-    private changeEmailURL = `${SERVER_API_URL}/users/change-mail`;
+    private userForgotPasswordURL = `${this.usersUrl}/forgot-password`;
+    private changePasswordURL = `${this.usersUrl}/change-password`;
+    private changeEmailURL = `${this.usersUrl}/change-mail`;
     private registerURL: string = `${this.usersUrl}/register`;
     private forgotPasswordURL: string = `${SERVER_API_URL}/templates/forgot-password/confirm`;
 
@@ -56,6 +57,11 @@ export class UserService implements OnInit {
 
     public register(command: UserCreateCommand) {
         return this.http.post<User>(this.registerURL, command).pipe(catchError(this.errorHandlerService.handleError))
+    }
+
+    public forgotPassword(username: string) {
+        return this.http.post<any>(this.userForgotPasswordURL, {username: username})
+            .pipe(catchError(this.errorHandlerService.handleError))
     }
 
     public changePassword(password1: string, password2: string) {

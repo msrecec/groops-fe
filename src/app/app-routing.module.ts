@@ -8,7 +8,7 @@ import {
   CONFIRM_EMAIL,
   CONFIRM_PASSWORD, EMAIL_CHANGE, EMAIL_CREATE, GROUP, GROUP_CREATE, GROUPS,
   HOME,
-  LOGIN, PASSWORD_CHANGE, PASSWORD_FORGOT, PASSWORD_FORGOT_CHANGE,
+  LOGIN, PASSWORD_CHANGE, PASSWORD_FORGOT, PASSWORD_FORGOT_CHANGE, PASSWORD_FORGOT_USER,
   PROFILE,
   PROFILE_EDIT,
   REGISTER
@@ -39,6 +39,7 @@ import {AccountEditComponent} from "./component/account-edit/account-edit/accoun
 import {GroupListComponentComponent} from "./component/group/group-list-component/group-list-component.component";
 import {GroupCreateComponent} from "./component/group/group-create/group-create.component";
 import {GroupComponent} from "./component/group/group/group.component";
+import {PasswordForgotComponent} from "./component/confirmation/password-forgot/password-forgot.component";
 
 
 
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: PASSWORD_CHANGE, component: PasswordChangeConfirmationComponent},
   { path: PASSWORD_FORGOT, component: PasswordForgotConfirmationComponent},
   { path: PASSWORD_FORGOT_CHANGE, component: PasswordForgotChangeComponent},
+  { path: PASSWORD_FORGOT_USER, component: PasswordForgotComponent},
   { path: ACCOUNT_EDIT, component: AccountEditComponent},
   { path: GROUPS, component: GroupListComponentComponent},
   { path: GROUP_CREATE, component: GroupCreateComponent},

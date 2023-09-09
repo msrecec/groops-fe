@@ -2,7 +2,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {AuthService} from "../../service/auth/auth.service";
 import {catchError, tap, throwError} from "rxjs";
 import {Error} from "../../model/error.model";
-import {CONFIRM_EMAIL, CONFIRM_PASSWORD, REGISTER} from "../../constants/app.constants";
+import {CONFIRM_EMAIL, CONFIRM_PASSWORD, PASSWORD_FORGOT_USER, REGISTER} from "../../constants/app.constants";
 import {Router} from "@angular/router";
 import {transitionAnimation} from "../../animation/transition.animation";
 
@@ -73,4 +73,5 @@ export class LoginComponent {
         return throwError(() => errorMessage);
     }
 
+    protected readonly PASSWORD_FORGOT_USER = PASSWORD_FORGOT_USER;
 }
