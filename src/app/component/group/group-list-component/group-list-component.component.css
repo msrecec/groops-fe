@@ -1,15 +1,14 @@
 .container {
     display: flex;
-    align-items: center;
     /*justify-content: center;*/
-    min-height: 80.1vh;
+    min-height: 85.1vh;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
     width: 80%;
     margin: 10px auto 0;
-    flex-direction: column;
+    flex-direction: row;
     /*background: url('/assets/images/groops.jpg') no-repeat center center;*/
     /*background-size: cover;*/
     /*filter: blur(9px);*/

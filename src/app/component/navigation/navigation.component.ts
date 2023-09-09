@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {transitionAnimation} from "../../animation/transition.animation";
 import {ActivatedRoute, Route, Router, UrlSegment} from "@angular/router";
 import {
@@ -22,6 +22,7 @@ export class NavigationComponent implements OnInit {
   isSticky = false;
   navbarHeight = 50;
   currentRoute = ''
+  @Input() fetch: string = ''
 
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute) {
 
@@ -62,7 +63,7 @@ export class NavigationComponent implements OnInit {
   }
 
   isProfile() {
-    return this.route.snapshot.url[0].path.includes(PROFILE);
+    return this.route.snapshot.url[0].path.includes(PROFILE) && !this.route.snapshot.url[0].path.includes(PROFILE_EDIT);
   }
 
   isGroups() {

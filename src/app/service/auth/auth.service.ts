@@ -14,6 +14,7 @@ export class AuthService {
   private authUrl = `${SERVER_API_URL}/authentication`;
   private tokenExpirationTimer: any;
   private tokenPrefix = 'Bearer '
+  private justLoggedIn = true
 
   constructor(private http: HttpClient, private router: Router, private errorHandlerService: ErrorHandlerService) {
   }
@@ -22,12 +23,19 @@ export class AuthService {
     return this.http.get<any>(`${this.authUrl}/nop`)
   }
 
+  public hasJustLoggedIn() {
+    const justLoggedInTemp = this.justLoggedIn;
+    this.justLoggedIn = false
+    return justLoggedInTemp
+  }
+
   public login(username: string, password: string) {
     return this.http.post<{ token: String }>(`${this.authUrl}/login`, {username, password})
       .pipe(
         catchError(this.errorHandlerService.handleError),
         tap((resData) => {
           this.handleAuthentication(resData.token.trim());
+          this.justLoggedIn = true
           this.router.navigate([`/${HOME}`]).then(() => console.log(`Navigating to ${HOME} page`));
         })
       );

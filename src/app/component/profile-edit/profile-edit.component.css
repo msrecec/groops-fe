@@ -27,6 +27,7 @@
   height: 320px;
   overflow: hidden; /* Crop the image to fit the container */
   border-radius: 10%; /* Create a circular border */
+  object-fit: cover; /* Ensure the entire image fits */
 }
 
 .button {

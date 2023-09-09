@@ -1,7 +1,7 @@
 <app-navigation></app-navigation>
 <div class="background">
-    <div [@transitionAnimation] class="container">
-        <div id="accountEditPasswordValidationMessagesForm" class="registration-form1">
+    <div class="container">
+        <div [@transitionAnimation] id="accountEditPasswordValidationMessagesForm" class="registration-form1">
             <div>
                 <input [(ngModel)]="password1" type="password" id="password1" name="password1" placeholder="enter to change password" required>
             </div>
@@ -22,11 +22,11 @@
             <button (click)="changePassword()" type="submit" class="registration-button">Update password</button>
             <div *ngIf="passwordErrorToggle" style="color: red">{{errorMessage}}</div>
         </div>
-        <div class="registration-form2">
+        <div [@transitionAnimation] class="registration-form2">
             <div>
                 <input [(ngModel)]="email" type="email" id="email" name="email" placeholder="change email" required>
             </div>
-            <button (click)="changeEmail()" type="submit" class="registration-button">Update email</button>
+            <button (click)="changeEmail()" type="submit" class="registration-button">Enter to change email</button>
             <div *ngIf="emailErrorToggle" style="color: red">{{errorMessage}}</div>
             <div *ngIf="emailRequiredError.length != 0" style="color: red">
                 {{emailRequiredError}}

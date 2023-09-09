@@ -1,3 +1,5 @@
 <app-navigation></app-navigation>
-<div [@transitionAnimation] class="container scrollable-content">
+<div *ngIf="justLoggedIn" [@transitionAnimation] class="container scrollable-content">
+</div>
+<div *ngIf="!justLoggedIn" class="container scrollable-content">
 </div>
