@@ -10,7 +10,7 @@ import {GROOPS_TOKEN, SERVER_API_URL} from "../constants/app.constants";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    skipRoutes: string[] = ["api/groops/users/current/upload-profile"]
+    skipRoutes: string[] = ["api/groops/users/current/upload-profile", "api/groops/groups/profile-picture"]
 
     constructor() {
     }

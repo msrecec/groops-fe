@@ -21,9 +21,7 @@ export class GroupCreateComponent {
   imgLoaded = false;
   profilePicture: string = ""
   profilePictureThumbnail: string = ""
-  username: string = ""
-  dob: string = ""
-  description: string | null = null
+  name: string = ""
   errorToggle: Boolean = false
   usernameRequiredError: string = ""
   usernameTakenError: string = ""
@@ -45,7 +43,7 @@ export class GroupCreateComponent {
     this.usernameTakenError = ""
     this.isSpinning = true
     if (this.fileToUpload) {
-      this.groupService.createGroupWithFile(this.username.trim()).pipe(catchError((err) => {
+      this.groupService.createGroupWithFile(this.name.trim(), this.fileToUpload).pipe(catchError((err) => {
         this.isSpinning = false;
         return this.showErrorMessage(err)
       })).subscribe(() => {
@@ -54,9 +52,7 @@ export class GroupCreateComponent {
       })
       return
     }
-    const command: UserCommand = new UserCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description ? this.description.trim() : "")
-    this.isSpinning = true
-    this.userService.updateUserWithoutFile(command).pipe(catchError((err) => {
+    this.groupService.createGroupWithoutFile(this.name).pipe(catchError((err) => {
       this.isSpinning = false;
       return this.showErrorMessage(err)
     })).subscribe(() => {
@@ -66,7 +62,7 @@ export class GroupCreateComponent {
   }
 
   private editProfileComponents(user: User) {
-    this.username = user.username.toString()
+    this.name = user.username.toString()
     this.profilePicture = user.profilePictureDownloadLink ? user.profilePictureDownloadLink.toString() : ''
     this.profilePictureThumbnail = user.profilePictureThumbnailDownloadLink ? user.profilePictureThumbnailDownloadLink.toString() : ''
   }

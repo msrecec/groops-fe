@@ -93,4 +93,5 @@ export class NavigationComponent implements OnInit {
   protected readonly PROFILE = PROFILE;
   protected readonly NOTIFICATIONS = NOTIFICATIONS;
   protected readonly ACCOUNT_EDIT = ACCOUNT_EDIT;
+  protected readonly GROUP_CREATE = GROUP_CREATE;
 }
