@@ -1,0 +1,33 @@
+<app-navigation></app-navigation>
+<div class="container">
+    <div [@transitionAnimation] class="profile-edit-form">
+        <div *ngIf="(!profilePicture || profilePicture.trim().toString() === '') && localUrl === null "
+             class="profile-picture-container">
+            <img class="profile-edit-img" src="assets/images/groups.jpg" alt="Profile Picture">
+        </div>
+        <div *ngIf="profilePicture && profilePicture.trim().toString() !== '' || localUrl !== null "
+             class="profile-picture-container">
+            <img style="display: none" #profilePictureEditRef (load)="onLoad(profilePictureEditRef)" *ngIf="localUrl === null" class="profile-edit-img"
+                 [src]="profilePicture.toString()"
+                 alt="Profile Picture">
+            <img style="filter: blur(9px)" *ngIf="!imgLoaded && localUrl === null" class="profile-edit-img"
+                 [src]="profilePictureThumbnail.toString()"
+                 alt="Thumbnail Profile Picture">
+            <img *ngIf="localUrl !== null" [src]="localUrl" class="profile-edit-img" alt="New profile Picture">
+        </div>
+        <input type="file" (change)="showPreviewImageAndSetFile($event)" #fileSelect id="fileUpload" name="fileUpload"
+               multiple="multiple" accept="image/*" style="display:none;"/>
+        <button type="submit" (click)="fileSelect.click()" class="profile-picture-edit-button">Choose picture</button>
+        <div>
+            <input [(ngModel)]="username" type="text" id="username" name="username" placeholder="group name" required>
+        </div>
+        <div *ngIf="usernameRequiredError.length != 0" style="color: red">
+            {{usernameRequiredError}}
+        </div>
+        <div *ngIf="usernameTakenError.length != 0" style="color: red">
+            {{usernameTakenError}}
+        </div>
+        <button (click)="updateProfile()" type="submit" class="profile-edit-button">Create</button>
+        <app-spinning *ngIf="isSpinning"></app-spinning>
+    </div>
+</div>

@@ -26,6 +26,7 @@ import { PasswordForgotConfirmationComponent } from './component/confirmation/pa
 import { PasswordForgotChangeComponent } from './component/confirmation/password-forgot-change/password-forgot-change.component';
 import { AccountEditComponent } from './component/account-edit/account-edit/account-edit.component';
 import { GroupListComponentComponent } from './component/group/group-list-component/group-list-component.component';
+import { GroupCreateComponent } from './component/group/group-create/group-create.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { GroupListComponentComponent } from './component/group/group-list-compon
     PasswordForgotChangeComponent,
     AccountEditComponent,
     GroupListComponentComponent,
+    GroupCreateComponent,
   ],
     imports: [
         BrowserModule,

@@ -2,7 +2,7 @@ import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {transitionAnimation} from "../../animation/transition.animation";
 import {ActivatedRoute, Route, Router, UrlSegment} from "@angular/router";
 import {
-  ACCOUNT_EDIT,
+  ACCOUNT_EDIT, GROUP_CREATE,
   GROUPS,
   HOME,
   LOGIN,
@@ -62,20 +62,20 @@ export class NavigationComponent implements OnInit {
     return this.route.snapshot.url[0].path.includes(HOME);
   }
 
-  isProfile() {
-    return this.route.snapshot.url[0].path.includes(PROFILE) && !this.route.snapshot.url[0].path.includes(PROFILE_EDIT);
-  }
-
   isGroups() {
-    return this.route.snapshot.url[0].path.includes(GROUPS);
+    return this.route.snapshot.url[0].path === GROUPS;
   }
 
   isAccountEdit() {
-    return this.route.snapshot.url[0].path.includes(ACCOUNT_EDIT);
+    return this.route.snapshot.url[0].path === ACCOUNT_EDIT;
   }
 
   isNotifications() {
-    return this.route.snapshot.url[0].path.includes(NOTIFICATIONS);
+    return this.route.snapshot.url[0].path === NOTIFICATIONS;
+  }
+
+  isGroupCreate() {
+    return this.route.snapshot.url[0].path === GROUP_CREATE;
   }
 
   isProfileOrEdit() {
