@@ -27,7 +27,8 @@
         <div *ngIf="usernameTakenError.length != 0" style="color: red">
             {{usernameTakenError}}
         </div>
-        <button (click)="updateProfile()" type="submit" class="profile-edit-button">Create</button>
+        <button (click)="createGroup()" type="submit" class="profile-edit-button">Create</button>
+        <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>
         <app-spinning *ngIf="isSpinning"></app-spinning>
     </div>
 </div>

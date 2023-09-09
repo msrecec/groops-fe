@@ -54,6 +54,7 @@
                   id="description" name="description" placeholder="description"></textarea>
         </div>
         <button (click)="updateProfile()" type="submit" class="profile-edit-button">Update</button>
+        <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>
         <app-spinning *ngIf="isSpinning"></app-spinning>
     </div>
 </div>

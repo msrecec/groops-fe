@@ -1,32 +1,52 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {SERVER_API_URL} from "../../constants/app.constants";
 import {UserUpdateFileCommand} from "../../command/user.update.file.command";
 import {UserUpdateCommand} from "../../command/user.update.command";
+import {Group} from "../../model/group.model";
+import {GroupRoles} from "../../model/group.roles.model";
+import {Observable} from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class GroupService {
-  private groupURL = `${SERVER_API_URL}/groups`
+    private groupURL = `${SERVER_API_URL}/groups`
+    private myGroups = false;
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
+    public isMyGroups() {
+        return this.myGroups;
+    }
 
-  public createGroupWithFile(name: string, file: File) {
-    const formData: FormData = new FormData();
-    formData.append('file', file);
+    public my() {
+        this.myGroups = !this.myGroups
+    }
 
-    const blob = new Blob([JSON.stringify({name: name})], {
-      type: 'application/json',
-    });
-    formData.append('command', blob);
+    public getGroupById(id: string): Observable<Group> {
+        return this.http.get<Group>(`${this.groupURL}/${id}`);
+    }
 
-    return this.http.post(`${this.groupURL}/profile-picture`, formData);
-  }
+    public getGroupRolesForCurrentUserById(id: string) {
+        return this.http.get<GroupRoles>(`${this.groupURL}/${id}/authorities`);
+    }
 
-  public createGroupWithoutFile(name: string) {
-    return this.http.post(`${this.groupURL}`, {name: name});
-  }
+    public createGroupWithFile(name: string, file: File): Observable<Group> {
+        const formData: FormData = new FormData();
+        formData.append('file', file);
+
+        const blob = new Blob([JSON.stringify({name: name})], {
+            type: 'application/json',
+        });
+        formData.append('command', blob);
+
+        return this.http.post<Group>(`${this.groupURL}/profile-picture`, formData);
+    }
+
+    public createGroupWithoutFile(name: string): Observable<Group> {
+        return this.http.post<Group>(`${this.groupURL}`, {name: name});
+    }
 
 }

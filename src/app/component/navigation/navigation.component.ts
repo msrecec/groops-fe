@@ -11,6 +11,7 @@ import {
   PROFILE_EDIT
 } from "../../constants/app.constants";
 import {AuthService} from "../../service/auth/auth.service";
+import {GroupService} from "../../service/group/group.service";
 
 @Component({
   selector: 'app-navigation',
@@ -24,7 +25,7 @@ export class NavigationComponent implements OnInit {
   currentRoute = ''
   @Input() fetch: string = ''
 
-  constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute) {
+  constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute, private groupService: GroupService) {
 
   }
 
@@ -66,6 +67,10 @@ export class NavigationComponent implements OnInit {
     return this.route.snapshot.url[0].path === GROUPS;
   }
 
+  inGroupDomain() {
+    return this.isGroupCreate() || this.isGroups()
+  }
+
   isAccountEdit() {
     return this.route.snapshot.url[0].path === ACCOUNT_EDIT;
   }
@@ -80,6 +85,14 @@ export class NavigationComponent implements OnInit {
 
   isProfileOrEdit() {
     return this.currentRoute === `${PROFILE}` || this.currentRoute === `${PROFILE_EDIT}`
+  }
+
+  isMy() {
+    return this.groupService.isMyGroups()
+  }
+
+  my() {
+    this.groupService.my()
   }
 
   private handleNavigation(route: string) {

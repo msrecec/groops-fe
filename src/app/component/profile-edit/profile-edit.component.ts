@@ -28,6 +28,7 @@ export class ProfileEditComponent implements OnInit {
     dob: string = ""
     description: string | null = null
     errorToggle: Boolean = false
+    errorMessage: string = ''
     usernameRequiredError: string = ""
     usernameTakenError: string = ""
     emailRequiredError: string = ""
@@ -65,6 +66,7 @@ export class ProfileEditComponent implements OnInit {
         this.lastNameRequiredError = ""
         this.dobRequiredError = ""
         this.isSpinning = true
+        this.errorToggle = false
         if (this.fileToUpload) {
             const fileCommand: UserUpdateFileCommand = new UserUpdateFileCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description ? this.description.trim() : "", this.fileToUpload)
             this.userService.updateUserWithFile(fileCommand).pipe(catchError((err) => {
@@ -165,6 +167,7 @@ export class ProfileEditComponent implements OnInit {
                             break
                         }
                     }
+                    this.errorMessage = messageTrimmed
                 }
                 return throwError(() => new Error(false, errorRes.message, errorRes.status))
             }

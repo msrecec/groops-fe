@@ -6,7 +6,7 @@ import {
   ACCOUNT_EDIT,
   BASE,
   CONFIRM_EMAIL,
-  CONFIRM_PASSWORD, EMAIL_CHANGE, EMAIL_CREATE, GROUP_CREATE, GROUPS,
+  CONFIRM_PASSWORD, EMAIL_CHANGE, EMAIL_CREATE, GROUP, GROUP_CREATE, GROUPS,
   HOME,
   LOGIN, PASSWORD_CHANGE, PASSWORD_FORGOT, PASSWORD_FORGOT_CHANGE,
   PROFILE,
@@ -38,6 +38,7 @@ import {
 import {AccountEditComponent} from "./component/account-edit/account-edit/account-edit.component";
 import {GroupListComponentComponent} from "./component/group/group-list-component/group-list-component.component";
 import {GroupCreateComponent} from "./component/group/group-create/group-create.component";
+import {GroupComponent} from "./component/group/group/group.component";
 
 
 
@@ -57,7 +58,8 @@ const routes: Routes = [
   { path: PASSWORD_FORGOT_CHANGE, component: PasswordForgotChangeComponent},
   { path: ACCOUNT_EDIT, component: AccountEditComponent},
   { path: GROUPS, component: GroupListComponentComponent},
-  { path: GROUP_CREATE, component: GroupCreateComponent}
+  { path: GROUP_CREATE, component: GroupCreateComponent},
+  { path: GROUP, component: GroupComponent}
 ];
 
 @NgModule({

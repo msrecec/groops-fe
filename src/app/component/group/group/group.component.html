@@ -1,0 +1,30 @@
+<app-navigation></app-navigation>
+<div class="container">
+    <div [@transitionAnimation] class="profile-container">
+        <div class="user-profile">
+            <div *ngIf="!profilePicture " class="profile-picture">
+                <img src="assets/images/groops.jpg" alt="Profile Picture">
+            </div>
+            <div *ngIf="profilePicture" class="profile-picture">
+                <img style="display: none" #profilePictureRef (load)="onLoad(profilePictureRef)"
+                     src="{{profilePicture.toString()}}" alt="Profile Picture">
+            </div>
+            <div *ngIf="profilePicture && profilePictureThumbnail && !imageLoaded" class="profile-picture">
+                <img style="filter: blur(9px)" src="{{profilePictureThumbnail.toString()}}"
+                     alt="Thumbnail Profile Picture">
+            </div>
+            <div class="user-info">
+                <div class="username">
+                    <strong>Name:</strong> {{name}}
+                </div>
+            </div>
+            <div style="flex-direction: row">
+                <button *ngIf="isAdmin()" (click)="toGroupEdit()" class="button-green">Edit group</button>
+                <button *ngIf="isMember()" (click)="toGroupPosts()" class="button-green">Posts</button>
+                <button *ngIf="isMember()" (click)="leaveGroup()" class="button-green">Leave</button>
+                <button *ngIf="!isMember() && !hasRequestedJoin()" (click)="requestJoiningGroup()" class="button-green">Join</button>
+                <button *ngIf="!isMember() && hasRequestedJoin()" disabled class="button-green">Pending join</button>
+            </div>
+        </div>
+    </div>
+</div>

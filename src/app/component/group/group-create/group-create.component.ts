@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../service/user/user.service";
 import {Router} from "@angular/router";
 import {UserUpdateFileCommand} from "../../../command/user.update.file.command";
 import {catchError, Observable, throwError} from "rxjs";
 import {UserCommand} from "../../../command/user.command";
 import {User} from "../../../model/user.model";
-import {PROFILE} from "../../../constants/app.constants";
+import {GROUP, GROUPS, PROFILE} from "../../../constants/app.constants";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Error} from "../../../model/error.model";
 import {transitionAnimation} from "../../../animation/transition.animation";
@@ -17,7 +17,7 @@ import {GroupService} from "../../../service/group/group.service";
   styleUrls: ['./group-create.component.css'],
   animations: [transitionAnimation]
 })
-export class GroupCreateComponent {
+export class GroupCreateComponent implements OnInit {
   imgLoaded = false;
   profilePicture: string = ""
   profilePictureThumbnail: string = ""
@@ -25,6 +25,7 @@ export class GroupCreateComponent {
   errorToggle: Boolean = false
   usernameRequiredError: string = ""
   usernameTakenError: string = ""
+  errorMessage: string = ""
   fileToUpload: File | null = null
   localUrl: any[] | null = null;
   isSpinning = false
@@ -33,31 +34,37 @@ export class GroupCreateComponent {
 
   }
 
+  ngOnInit(): void {
+  }
+
+
+
   onLoad(image: HTMLImageElement) {
     image.setAttribute('style', 'display: block')
     this.imgLoaded = true
   }
 
-  updateProfile() {
+  createGroup() {
     this.usernameRequiredError = ""
     this.usernameTakenError = ""
     this.isSpinning = true
+    this.errorToggle = false
     if (this.fileToUpload) {
       this.groupService.createGroupWithFile(this.name.trim(), this.fileToUpload).pipe(catchError((err) => {
         this.isSpinning = false;
         return this.showErrorMessage(err)
-      })).subscribe(() => {
+      })).subscribe((group) => {
         this.isSpinning = false
-        this.toProfile()
+        this.toGroupById(group.id)
       })
       return
     }
     this.groupService.createGroupWithoutFile(this.name).pipe(catchError((err) => {
       this.isSpinning = false;
       return this.showErrorMessage(err)
-    })).subscribe(() => {
+    })).subscribe((group) => {
       this.isSpinning = false
-      this.toProfile()
+      this.toGroupById(group.id)
     })
   }
 
@@ -67,8 +74,8 @@ export class GroupCreateComponent {
     this.profilePictureThumbnail = user.profilePictureThumbnailDownloadLink ? user.profilePictureThumbnailDownloadLink.toString() : ''
   }
 
-  private toProfile() {
-    this.router.navigate([`/${PROFILE}`]).then(() => this.handleNavigation(PROFILE));
+  private toGroupById(id: number) {
+    this.router.navigate([`/${GROUPS}`, id]).then(() => this.handleNavigation(GROUP));
   }
 
   private handleNavigation(route: string) {
@@ -111,6 +118,7 @@ export class GroupCreateComponent {
               break
             }
           }
+          this.errorMessage = message
         }
         return throwError(() => new Error(false, errorRes.message, errorRes.status))
       }
