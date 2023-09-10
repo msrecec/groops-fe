@@ -1,4 +1,5 @@
 export const SERVER_API_URL = 'http://localhost:8080/api/groops';
+export const SERVER_WS_URL = 'ws://localhost:8080/api/groops/ws/secured';
 export const LOGIN = 'login';
 export const REGISTER = 'register';
 export const HOME = 'home';
