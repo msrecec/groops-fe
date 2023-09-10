@@ -3,7 +3,7 @@ import {transitionAnimation} from "../../../animation/transition.animation";
 import {GroupService} from "../../../service/group/group.service";
 import {Group} from "../../../model/group.model";
 import {ErrorHandlerService} from "../../../service/error/error-handler.service";
-import {catchError} from "rxjs";
+import {catchError, tap} from "rxjs";
 import {GROUP, GROUPS} from "../../../constants/app.constants";
 import {Router} from "@angular/router";
 
@@ -16,6 +16,7 @@ import {Router} from "@angular/router";
 export class GroupListComponentComponent implements OnInit {
     groups: Group[] = []
     memberSet: Set<number> = new Set<number>
+    joinSet: Set<number> = new Set<number>
     isHere = true
     search: string | null = null
 
@@ -27,6 +28,7 @@ export class GroupListComponentComponent implements OnInit {
         this.isHere = false
         this.groupService.resetMy()
         this.memberSet = new Set<number>()
+        this.joinSet = new Set<number>()
         this.groupService.search(null, !this.groupService.isMy())
             .pipe(catchError(this.errorHandlerService.handleError))
             .subscribe(groups => {
@@ -36,6 +38,9 @@ export class GroupListComponentComponent implements OnInit {
                     if (group.my) {
                         this.memberSet.add(group.id)
                     }
+                    if (group.sentJoin) {
+                        this.joinSet.add(group.id)
+                    }
                 }
             })
     }
@@ -44,6 +49,7 @@ export class GroupListComponentComponent implements OnInit {
         this.search = null
         this.isHere = false
         this.memberSet = new Set<number>()
+        this.joinSet = new Set<number>()
         this.groupService.search(null, !my)
             .pipe(catchError(this.errorHandlerService.handleError))
             .subscribe(groups => {
@@ -53,6 +59,9 @@ export class GroupListComponentComponent implements OnInit {
                     if (group.my) {
                         this.memberSet.add(group.id)
                     }
+                    if (group.sentJoin) {
+                        this.joinSet.add(group.id)
+                    }
                 }
             })
     }
@@ -60,6 +69,7 @@ export class GroupListComponentComponent implements OnInit {
     handleSearchEvent(search: string | null) {
         this.isHere = false
         this.memberSet = new Set<number>()
+        this.joinSet = new Set<number>()
         this.groupService.search(search, !this.groupService.isMy())
             .pipe(catchError(this.errorHandlerService.handleError))
             .subscribe(groups => {
@@ -69,12 +79,29 @@ export class GroupListComponentComponent implements OnInit {
                     if (group.my) {
                         this.memberSet.add(group.id)
                     }
+                    if (group.sentJoin) {
+                        this.joinSet.add(group.id)
+                    }
                 }
             })
     }
 
-    requestJoiningGroup() {
+    requestJoiningGroup(id: number) {
+        this.groupService.join(id.toString())
+            .pipe(tap(() => {
+                this.joinSet.add(id)
+                }),
+                catchError(this.errorHandlerService.handleError))
+            .subscribe()
+    }
 
+    cancelRequestJoiningGroup(id: number) {
+        this.groupService.cancelJoin(id.toString())
+            .pipe(tap(() => {
+                this.joinSet.delete(id)
+                }),
+                catchError(this.errorHandlerService.handleError))
+            .subscribe()
     }
 
     toGroupById(id: number) {
@@ -92,8 +119,8 @@ export class GroupListComponentComponent implements OnInit {
         return this.memberSet.has(id)
     }
 
-    hasRequestedJoin() {
-        return false
+    hasRequestedJoin(id: number) {
+        return this.joinSet.has(id)
     }
 
     toGroupPosts() {

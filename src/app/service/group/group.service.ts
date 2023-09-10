@@ -84,4 +84,12 @@ export class GroupService {
         return this.http.delete(`${this.groupURL}/leave/${id}`)
     }
 
+    public join(id: string) {
+        return this.http.post(`${this.groupURL}/${id}/request`, {})
+    }
+
+    public cancelJoin(id: string) {
+        return this.http.delete(`${this.groupURL}/${id}/request`)
+    }
+
 }

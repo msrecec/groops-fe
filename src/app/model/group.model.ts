@@ -4,14 +4,16 @@ export class Group {
     private _profilePictureDownloadLink: String;
     private _profilePictureThumbnailDownloadLink: String;
     private _my: boolean | null;
+    private _sentJoin: boolean | null;
 
 
-    constructor(id: number, name: String, profilePictureDownloadLink: String, profilePictureThumbnailDownloadLink: String, my: boolean | null) {
+    constructor(id: number, name: String, profilePictureDownloadLink: String, profilePictureThumbnailDownloadLink: String, my: boolean | null, sentJoin: boolean | null) {
         this._id = id;
         this._name = name;
         this._profilePictureDownloadLink = profilePictureDownloadLink;
         this._profilePictureThumbnailDownloadLink = profilePictureThumbnailDownloadLink;
         this._my = my
+        this._sentJoin = sentJoin
     }
 
 
@@ -54,5 +56,14 @@ export class Group {
 
     set my(value: boolean | null) {
         this._my = value;
+    }
+
+
+    get sentJoin(): boolean | null {
+        return this._sentJoin;
+    }
+
+    set sentJoin(value: boolean | null) {
+        this._sentJoin = value;
     }
 }

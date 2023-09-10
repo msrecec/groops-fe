@@ -13,8 +13,8 @@
                  alt="New profile Picture">
             <div class="container-data-col">
                 <div class="data" style="color: white">{{group.name}}</div>
-                <div class="data"><button *ngIf="!isMember(group.id) && !hasRequestedJoin() && isHere" (click)="requestJoiningGroup()" class="button-green">Join</button></div>
-                <div class="data"><button *ngIf="!isMember(group.id) && hasRequestedJoin() && isHere" disabled class="button-blue">Pending join</button></div>
+                <div *ngIf="!isMember(group.id) && !hasRequestedJoin(group.id) && isHere" class="data"><button (click)="requestJoiningGroup(group.id)" class="button-green">Join</button></div>
+                <div *ngIf="!isMember(group.id) && hasRequestedJoin(group.id) && isHere" class="data"><button (click)="cancelRequestJoiningGroup(group.id)" class="button-blue">Pending join</button></div>
             </div>
         </div>
     </div>
