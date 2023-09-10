@@ -31,6 +31,7 @@ import { GroupComponent } from './component/group/group/group.component';
 import { PasswordForgotComponent } from './component/confirmation/password-forgot/password-forgot.component';
 import { GroupEditComponent } from './component/group/group-edit/group-edit.component';
 import { GroupDeleteComponent } from './component/group/group-delete/group-delete.component';
+import { GroupLeaveComponent } from './component/group/group-leave/group-leave.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { GroupDeleteComponent } from './component/group/group-delete/group-delet
     PasswordForgotComponent,
     GroupEditComponent,
     GroupDeleteComponent,
+    GroupLeaveComponent,
   ],
     imports: [
         BrowserModule,

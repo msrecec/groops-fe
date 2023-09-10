@@ -73,4 +73,8 @@ export class GroupService {
         return this.http.delete(`${this.groupURL}/${id}`)
     }
 
+    public leave(id: string) {
+        return this.http.delete(`${this.groupURL}/leave/${id}`)
+    }
+
 }

@@ -122,3 +122,17 @@ input[type="text"] {
 .button-green:hover {
     background-color: #4da85a;
 }
+
+.button-grey {
+    text-decoration: none;
+    color: white;
+    background-color: #8099b4;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    margin: 3px
+}
+.button-grey:hover {
+    background-color: #617485;
+}

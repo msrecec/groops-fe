@@ -7,6 +7,7 @@ export const PROFILE_EDIT = 'profile-edit';
 export const GROUPS = 'groups';
 export const GROUP = `${GROUPS}/:id`;
 export const GROUP_DELETE = `${GROUPS}/delete/:id`;
+export const GROUP_LEAVE = `${GROUPS}/leave/:id`;
 export const GROUP_EDIT = `${GROUPS}/edit/:id`;
 export const NOTIFICATIONS = 'notifications';
 export const BASE = '';

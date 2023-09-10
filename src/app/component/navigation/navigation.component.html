@@ -6,7 +6,7 @@
         <li><button routerLink="/{{NOTIFICATIONS}}" [ngClass]="{'button-active': isNotifications(), 'button': !isNotifications()}">Notifications</button></li>
         <li><button routerLink="/{{ACCOUNT_EDIT}}" [ngClass]="{'button-active': isAccountEdit(), 'button': !isAccountEdit()}">Account</button></li>
         <li><button routerLink="/{{GROUP_CREATE}}" [ngClass]="{'button-active': isGroupCreate(), 'button': !isGroupCreate()}"  class="button">Create Group</button></li>
-        <li [@transitionAnimation] *ngIf="isGroups()" ><button (click)="my()" [ngClass]="{'button': isMy(), 'button-green': !isMy()}">{{myGroups()}}</button></li>
+        <li [@transitionAnimation] *ngIf="isGroups()" ><button (click)="my()" [ngClass]="{'button': isMy(), 'button-grey': !isMy()}">{{myGroups()}}</button></li>
         <li [@transitionAnimation] *ngIf="isGroups()">
             <div class="search-container">
                 <input type="text" placeholder="Search..." id="search-input"/>

@@ -87,7 +87,12 @@ export class GroupComponent implements OnInit {
     }
 
     leaveGroup() {
-
+        const groupId = this.route.snapshot.paramMap.get("id")
+        if (!groupId) {
+            console.error('Missing group id')
+            return
+        }
+        this.router.navigate([`/${GROUPS}/leave`, groupId]).then(() => this.handleNavigation(`/${GROUP_DELETE} : ${groupId}`));
     }
 
     deleteGroup() {

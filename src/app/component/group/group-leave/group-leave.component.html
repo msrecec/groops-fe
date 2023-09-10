@@ -1,0 +1,13 @@
+<app-navigation></app-navigation>
+<div class="container">
+    <div [@transitionAnimation] class="profile-container">
+        <h1 style="color: #2196f3">Are you sure ?</h1>
+        <div>
+            <div>
+                <button (click)="cancel()" class="button-green">Cancel</button>
+                <button (click)="leave()" class="button-red">Leave group</button>
+            </div>
+        </div>
+        <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>
+    </div>
+</div>
