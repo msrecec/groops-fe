@@ -24,6 +24,8 @@ export class NavigationComponent implements OnInit {
   navbarHeight = 50;
   currentRoute = ''
   @Output() toggleMyEvent = new EventEmitter<boolean>();
+  @Output() toggleSearchEvent = new EventEmitter<string | null>();
+  @Input() search: string | null = null;
 
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute, private groupService: GroupService) {
 
@@ -96,8 +98,13 @@ export class NavigationComponent implements OnInit {
   }
 
   toggleMy() {
+    this.search = null
     this.groupService.toggleMy()
     this.toggleMyEvent.emit(this.groupService.isMy());
+  }
+
+  toggleSearch() {
+    this.toggleSearchEvent.emit(this.search);
   }
 
   private handleNavigation(route: string) {

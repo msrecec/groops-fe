@@ -9,7 +9,7 @@
         <li [@transitionAnimation] *ngIf="isGroups()" ><button (click)="toggleMy()" [ngClass]="{'button': isMy(), 'button-grey': !isMy()}">{{myGroups()}}</button></li>
         <li [@transitionAnimation] *ngIf="isGroups()">
             <div class="search-container">
-                <input type="text" placeholder="Search..." id="search-input"/>
+                <input (keydown.enter)="toggleSearch()" [(ngModel)]="search" type="text" placeholder="Search..." id="search-input"/>
             </div>
         </li>
         <li class="nav-right"><button (click)="logout()" class="button-red">Logout</button></li>

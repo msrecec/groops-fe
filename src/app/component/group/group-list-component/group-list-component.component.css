@@ -55,10 +55,13 @@
 
 
 .container-groups {
+    width: 1440px;
     display: flex;
     /*width: 500px;*/
     height: 100%;
     margin: 0 auto;
+    flex: 1; /* Allow this div to grow and take up remaining vertical space */
+    overflow-x: hidden; /* Enable vertical scrolling */
     flex-wrap: wrap; /* This property makes items wrap to a new row */
     justify-content: flex-start; /* Align items to the start of the container (left) */
     align-items: flex-start; /* Align items to the start of the container (top) */
@@ -72,7 +75,7 @@
     justify-content: flex-start; /* Align items to the start of the container (left) */
     align-items: flex-start; /* Align items to the start of the container (top) */
     flex-direction: column;
-    margin: 0 auto 0 10px;
+    margin: 0 auto 0 40px;
 }
 
 .container-data-row {
@@ -94,6 +97,24 @@
 }
 
 .registration-form {
+    height: 100px;
+    width: 300px;
+    /*backdrop-filter: blur(9px);*/
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    margin: 10px;
+}
+
+.registration-form:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.registration-form-no-shade {
     height: 100px;
     width: 300px;
     /*backdrop-filter: blur(9px);*/
@@ -137,8 +158,8 @@
 
 .profile-edit-img {
     border: 2px solid #000; /* Square border */
-    height: 90px;
-    width: 90px;
+    height: 110px;
+    width: 110px;
     overflow: hidden; /* Crop the image to fit the container */
     border-radius: 10%; /* Create a circular border */
     object-fit: cover; /* Ensure the entire image fits */
@@ -153,7 +174,8 @@
     border-radius: 5px;
     cursor: pointer;
     border: none;
-    margin: 3px
+    margin: 3px;
+    width: 100px;
 }
 .button-green:hover {
     background-color: #4da85a;

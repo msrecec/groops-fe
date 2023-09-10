@@ -4,6 +4,8 @@ import {GroupService} from "../../../service/group/group.service";
 import {Group} from "../../../model/group.model";
 import {ErrorHandlerService} from "../../../service/error/error-handler.service";
 import {catchError} from "rxjs";
+import {GROUP, GROUPS} from "../../../constants/app.constants";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-group-list-component',
@@ -14,15 +16,21 @@ import {catchError} from "rxjs";
 export class GroupListComponentComponent implements OnInit {
     groups: Group[] = []
     memberSet: Set<number> = new Set<number>
+    isHere = true
+    search: string | null = null
 
-    constructor(private groupService: GroupService, private errorHandlerService: ErrorHandlerService) {
+    constructor(private groupService: GroupService, private errorHandlerService: ErrorHandlerService, private router: Router) {
     }
 
     ngOnInit(): void {
+        this.search = null
+        this.isHere = false
         this.groupService.resetMy()
+        this.memberSet = new Set<number>()
         this.groupService.search(null, !this.groupService.isMy())
             .pipe(catchError(this.errorHandlerService.handleError))
             .subscribe(groups => {
+                this.isHere = true
                 this.groups = groups
                 for (let group of groups) {
                     if (group.my) {
@@ -33,9 +41,29 @@ export class GroupListComponentComponent implements OnInit {
     }
 
     handleToggleMyEvent(my: boolean) {
+        this.search = null
+        this.isHere = false
+        this.memberSet = new Set<number>()
         this.groupService.search(null, !my)
             .pipe(catchError(this.errorHandlerService.handleError))
             .subscribe(groups => {
+                this.isHere = true
+                this.groups = groups
+                for (let group of groups) {
+                    if (group.my) {
+                        this.memberSet.add(group.id)
+                    }
+                }
+            })
+    }
+
+    handleSearchEvent(search: string | null) {
+        this.isHere = false
+        this.memberSet = new Set<number>()
+        this.groupService.search(search, !this.groupService.isMy())
+            .pipe(catchError(this.errorHandlerService.handleError))
+            .subscribe(groups => {
+                this.isHere = true
                 this.groups = groups
                 for (let group of groups) {
                     if (group.my) {
@@ -49,12 +77,23 @@ export class GroupListComponentComponent implements OnInit {
 
     }
 
+    toGroupById(id: number) {
+        if (!this.isMember(id)) {
+            return;
+        }
+        this.router.navigate([`/${GROUPS}`, id]).then(() => this.handleNavigation(GROUP));
+    }
+
+    private handleNavigation(route: string) {
+        console.log(`Navigating to ${route} page`)
+    }
+
     isMember(id: number) {
         return this.memberSet.has(id)
     }
 
     hasRequestedJoin() {
-        return true
+        return false
     }
 
     toGroupPosts() {
