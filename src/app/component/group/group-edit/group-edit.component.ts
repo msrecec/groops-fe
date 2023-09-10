@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GroupService} from "../../../service/group/group.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, Observable, throwError} from "rxjs";
@@ -15,7 +15,7 @@ import {Group} from "../../../model/group.model";
     styleUrls: ['./group-edit.component.css'],
     animations: [transitionAnimation]
 })
-export class GroupEditComponent {
+export class GroupEditComponent implements OnInit{
     imgLoaded = false;
     profilePicture: string = ""
     profilePictureThumbnail: string = ""

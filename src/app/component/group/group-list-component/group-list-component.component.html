@@ -1,6 +1,15 @@
 <app-navigation></app-navigation>
 <div class="container scrollable-content">
-    <div [@transitionAnimation] class="registration-form">
-        Hello there
+    <div [@transitionAnimation] class="registration-form" *ngFor="let group of groups">
+        <div>{{group.name}}</div>
+        <div>{{group.profilePictureThumbnailDownloadLink}}</div>
+        <div>
+            <img *ngIf="group.profilePictureThumbnailDownloadLink" src="{{group.profilePictureThumbnailDownloadLink}}"
+                 class="profile-edit-img"
+                 alt="New profile Picture">
+            </div>
+            <img *ngIf="!group.profilePictureThumbnailDownloadLink" src="assets/images/groops.jpg"
+                 class="profile-edit-img"
+                 alt="New profile Picture">
     </div>
 </div>

@@ -3,13 +3,15 @@ export class Group {
     private _name: String;
     private _profilePictureDownloadLink: String;
     private _profilePictureThumbnailDownloadLink: String;
+    private _my: boolean | null;
 
 
-    constructor(id: number, name: String, profilePictureDownloadLink: String, profilePictureThumbnailDownloadLink: String) {
+    constructor(id: number, name: String, profilePictureDownloadLink: String, profilePictureThumbnailDownloadLink: String, my: boolean | null) {
         this._id = id;
         this._name = name;
         this._profilePictureDownloadLink = profilePictureDownloadLink;
         this._profilePictureThumbnailDownloadLink = profilePictureThumbnailDownloadLink;
+        this._my = my
     }
 
 
@@ -43,5 +45,14 @@ export class Group {
 
     set profilePictureThumbnailDownloadLink(value: String) {
         this._profilePictureThumbnailDownloadLink = value;
+    }
+
+
+    get my(): boolean | null {
+        return this._my;
+    }
+
+    set my(value: boolean | null) {
+        this._my = value;
     }
 }

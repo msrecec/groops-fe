@@ -12,12 +12,12 @@ import {Observable} from "rxjs";
 })
 export class GroupService {
     private groupURL = `${SERVER_API_URL}/groups`
-    private myGroups = false;
+    private myGroups = true;
 
     constructor(private http: HttpClient) {
     }
 
-    public isMyGroups() {
+    public isMy() {
         return this.myGroups;
     }
 
@@ -25,8 +25,15 @@ export class GroupService {
         this.myGroups = true
     }
 
-    public my() {
+    public toggleMy() {
         this.myGroups = !this.myGroups
+    }
+
+    public search(name: string | null, my: boolean | null) {
+        return this.http.post<Group[]>(`${this.groupURL}/search`, {
+            name: name,
+            my: my
+        });
     }
 
     public getGroupById(id: string): Observable<Group> {

@@ -88,15 +88,15 @@ export class NavigationComponent implements OnInit {
   }
 
   isMy() {
-    return this.groupService.isMyGroups()
+    return this.groupService.isMy()
   }
 
   myGroups() {
     return this.isMy() ? 'My Groups' : 'All groups'
   }
 
-  my() {
-    this.groupService.my()
+  toggleMy() {
+    this.groupService.toggleMy()
   }
 
   private handleNavigation(route: string) {
