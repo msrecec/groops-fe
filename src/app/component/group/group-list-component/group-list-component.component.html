@@ -1,15 +1,21 @@
-<app-navigation></app-navigation>
+<app-navigation (toggleMyEvent)="handleToggleMyEvent($event)" ></app-navigation>
 <div class="container scrollable-content">
-    <div [@transitionAnimation] class="registration-form" *ngFor="let group of groups">
-        <div>{{group.name}}</div>
-        <div>{{group.profilePictureThumbnailDownloadLink}}</div>
-        <div>
-            <img *ngIf="group.profilePictureThumbnailDownloadLink" src="{{group.profilePictureThumbnailDownloadLink}}"
-                 class="profile-edit-img"
-                 alt="New profile Picture">
+    <div class="container-groups">
+        <div [@transitionAnimation] class="registration-form" *ngFor="let group of groups">
+            <div>
+                <img *ngIf="group.profilePictureThumbnailDownloadLink"
+                     src="{{group.profilePictureThumbnailDownloadLink}}"
+                     class="profile-edit-img"
+                     alt="New profile Picture">
             </div>
             <img *ngIf="!group.profilePictureThumbnailDownloadLink" src="assets/images/groops.jpg"
                  class="profile-edit-img"
                  alt="New profile Picture">
+            <div class="container-data-col">
+                <div class="data" style="color: white">{{group.name}}</div>
+                <div class="data"><button *ngIf="!isMember(group.id) && !hasRequestedJoin()" (click)="requestJoiningGroup()" class="button-green">Join</button></div>
+                <div class="data"><button *ngIf="!isMember(group.id) && hasRequestedJoin()" disabled class="button-blue">Pending join</button></div>
+            </div>
+        </div>
     </div>
 </div>

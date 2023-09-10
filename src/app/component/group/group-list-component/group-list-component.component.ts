@@ -13,6 +13,7 @@ import {catchError} from "rxjs";
 })
 export class GroupListComponentComponent implements OnInit {
     groups: Group[] = []
+    memberSet: Set<number> = new Set<number>
 
     constructor(private groupService: GroupService, private errorHandlerService: ErrorHandlerService) {
     }
@@ -23,7 +24,41 @@ export class GroupListComponentComponent implements OnInit {
             .pipe(catchError(this.errorHandlerService.handleError))
             .subscribe(groups => {
                 this.groups = groups
+                for (let group of groups) {
+                    if (group.my) {
+                        this.memberSet.add(group.id)
+                    }
+                }
             })
+    }
+
+    handleToggleMyEvent(my: boolean) {
+        this.groupService.search(null, !my)
+            .pipe(catchError(this.errorHandlerService.handleError))
+            .subscribe(groups => {
+                this.groups = groups
+                for (let group of groups) {
+                    if (group.my) {
+                        this.memberSet.add(group.id)
+                    }
+                }
+            })
+    }
+
+    requestJoiningGroup() {
+
+    }
+
+    isMember(id: number) {
+        return this.memberSet.has(id)
+    }
+
+    hasRequestedJoin() {
+        return true
+    }
+
+    toGroupPosts() {
+
     }
 
 }

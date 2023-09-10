@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {transitionAnimation} from "../../animation/transition.animation";
 import {ActivatedRoute, Route, Router, UrlSegment} from "@angular/router";
 import {
@@ -23,7 +23,7 @@ export class NavigationComponent implements OnInit {
   isSticky = false;
   navbarHeight = 50;
   currentRoute = ''
-  @Input() fetch: string = ''
+  @Output() toggleMyEvent = new EventEmitter<boolean>();
 
   constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute, private groupService: GroupService) {
 
@@ -97,6 +97,7 @@ export class NavigationComponent implements OnInit {
 
   toggleMy() {
     this.groupService.toggleMy()
+    this.toggleMyEvent.emit(this.groupService.isMy());
   }
 
   private handleNavigation(route: string) {
