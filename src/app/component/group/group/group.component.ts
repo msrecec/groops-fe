@@ -1,6 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {GROUP_DELETE, GROUP_EDIT, GROUP_LEAVE, GROUPS, PROFILE_EDIT} from "../../../constants/app.constants";
+import {
+  GROUP_DELETE,
+  GROUP_EDIT,
+  GROUP_LEAVE,
+  GROUP_REQUESTS,
+  GROUPS,
+  PROFILE_EDIT
+} from "../../../constants/app.constants";
 import {transitionAnimation} from "../../../animation/transition.animation";
 import {GroupService} from "../../../service/group/group.service";
 import {catchError, tap, throwError} from "rxjs";
@@ -94,6 +101,12 @@ export class GroupComponent implements OnInit {
 
   toGroupJoinRequests() {
     console.log("Navigating to group join requests")
+    const groupId = this.route.snapshot.paramMap.get("id")
+    if (!groupId) {
+      console.error('Missing group id')
+      return
+    }
+    this.router.navigate([`/${GROUP_REQUESTS.replace(":id", groupId)}`]).then(() => this.handleNavigation(`/${GROUP_REQUESTS}`));
   }
 
   isAdmin() {

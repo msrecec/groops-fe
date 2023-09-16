@@ -51,6 +51,7 @@ import { PostComponent } from './component/post/post.component';
 import { PostEditComponent } from './component/post-edit/post-edit.component';
 import { MembersComponent } from './component/members/members.component';
 import { NotificationsComponent } from './component/notifications/notifications.component';
+import { RequestsComponent } from './component/group/requests/requests.component';
 
 @NgModule({
     declarations: [
@@ -85,6 +86,7 @@ import { NotificationsComponent } from './component/notifications/notifications.
         PostEditComponent,
         MembersComponent,
         NotificationsComponent,
+        RequestsComponent,
     ],
     imports: [
         BrowserModule,

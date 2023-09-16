@@ -1,0 +1,28 @@
+<app-navigation></app-navigation>
+<div class="container scrollable-content">
+  <div class="container-groups">
+    <div [@transitionAnimation] class="registration-form"  *ngFor="let user of users">
+      <div >
+        <img *ngIf="user.profilePictureThumbnailDownloadLink"
+             src="{{user.profilePictureThumbnailDownloadLink}}"
+             class="profile-edit-img"
+             alt="New profile Picture">
+      </div>
+      <img *ngIf="!user.profilePictureThumbnailDownloadLink" src="assets/images/default-picture-profile.jpg"
+           class="profile-edit-img"
+           alt="New profile Picture">
+      <div class="container-data-col">
+        <div class="data" style="color: white">{{user.username}}</div>
+        <div  class="data"><button (click)="accept(user.id)" class="button-green">Accept</button></div>
+        <div  class="data"><button (click)="deny(user.id)" class="button-red">Reject</button></div>
+      </div>
+      <div class="data-2" >
+        <select style="width: 120px" id="dropdown" [(ngModel)]="selectedOption">
+          <option value="ROLE_USER">User</option>
+          <option value="ROLE_LURKER">Lurker</option>
+          <option value="ROLE_ADMIN">Admin</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

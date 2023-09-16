@@ -13,6 +13,7 @@ export const GROUP_LEAVE = `${GROUP}/leave`;
 export const GROUP_EDIT = `${GROUP}/edit`;
 export const GROUP_POSTS = `${GROUP}/posts`;
 export const POST_CREATE = `${GROUP}/post-create`;
+export const GROUP_REQUESTS = `${GROUP}/requests`;
 export const NOTIFICATIONS = 'notifications';
 export const BASE = '';
 export const CONFIRM_EMAIL = "confirm-email"

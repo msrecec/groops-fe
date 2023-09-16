@@ -7,6 +7,7 @@ import {Group} from "../../model/group.model";
 import {GroupRoles} from "../../model/group.roles.model";
 import {Observable} from "rxjs";
 import {User} from "../../model/user.model";
+import {RoleEnum} from "../../model/enum/role.constants";
 
 @Injectable({
     providedIn: 'root'
@@ -111,6 +112,14 @@ export class GroupService {
 
     public getAllRequestsByGroupId(id: string) {
       return this.http.get<User[]>(`${this.groupURL}/${id}/request`)
+    }
+
+    public acceptGroupRequest(groupId: string, userId: string, role: RoleEnum) {
+      return this.http.put<any>(`${this.groupURL}/${groupId}/request/user/${userId}`, {role: role})
+    }
+
+    public rejectGroupRequest(groupId: string, userId: string) {
+      return this.http.delete<any>(`${this.groupURL}/${groupId}/request/user/${userId}`)
     }
 
 }
