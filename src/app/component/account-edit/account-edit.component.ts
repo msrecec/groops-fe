@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {UserService} from "../../../service/user/user.service";
+import {UserService} from "../../service/user/user.service";
 import {Router} from "@angular/router";
-import {UserCreateCommand} from "../../../command/user.create.command";
+import {UserCreateCommand} from "../../command/user.create.command";
 import {catchError, throwError} from "rxjs";
-import {CONFIRM_EMAIL, CONFIRM_PASSWORD} from "../../../constants/app.constants";
-import {Error} from "../../../model/error.model";
-import {transitionAnimation} from "../../../animation/transition.animation";
-import {AuthService} from "../../../service/auth/auth.service";
+import {ACCOUNT_DELETE_CONFIRM, CONFIRM_EMAIL, CONFIRM_PASSWORD} from "../../constants/app.constants";
+import {Error} from "../../model/error.model";
+import {transitionAnimation} from "../../animation/transition.animation";
+import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
     selector: 'app-account-edit',
@@ -58,6 +58,10 @@ export class AccountEditComponent {
         this.userService.changeEmail(this.email).pipe(catchError(err => this.handleShowErrorMessage(err, true))).subscribe(() => {
             this.toConfirmMail()
         })
+    }
+
+    toDeleteConfirm() {
+        this.router.navigate([`/${ACCOUNT_DELETE_CONFIRM}`]).then(() => console.log(`Navigating to ${ACCOUNT_DELETE_CONFIRM} page`))
     }
 
     private toConfirmMail() {

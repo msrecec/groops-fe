@@ -34,7 +34,7 @@ import {
 import {
     PasswordForgotChangeComponent
 } from './component/confirmation/password-forgot-change/password-forgot-change.component';
-import {AccountEditComponent} from './component/account-edit/account-edit/account-edit.component';
+import {AccountEditComponent} from './component/account-edit/account-edit.component';
 import {GroupListComponentComponent} from './component/group/group-list-component/group-list-component.component';
 import {GroupCreateComponent} from './component/group/group-create/group-create.component';
 import {GroupComponent} from './component/group/group/group.component';
@@ -45,6 +45,12 @@ import {GroupLeaveComponent} from './component/group/group-leave/group-leave.com
 import {PostsComponent} from './component/posts/posts.component';
 import {RxStompService} from "./stomp/rx-stomp.service";
 import {rxStompServiceFactory} from "./stomp/rx-stomp-service-factory";
+import { AccountEditDeleteComponent } from './component/account-edit-delete/account-edit-delete.component';
+import { PostCreateComponent } from './component/post-create/post-create.component';
+import { PostComponent } from './component/post/post.component';
+import { PostEditComponent } from './component/post-edit/post-edit.component';
+import { MembersComponent } from './component/members/members.component';
+import { NotificationsComponent } from './component/notifications/notifications.component';
 
 @NgModule({
     declarations: [
@@ -73,6 +79,12 @@ import {rxStompServiceFactory} from "./stomp/rx-stomp-service-factory";
         GroupDeleteComponent,
         GroupLeaveComponent,
         PostsComponent,
+        AccountEditDeleteComponent,
+        PostCreateComponent,
+        PostComponent,
+        PostEditComponent,
+        MembersComponent,
+        NotificationsComponent,
     ],
     imports: [
         BrowserModule,

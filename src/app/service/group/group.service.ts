@@ -60,6 +60,22 @@ export class GroupService {
         return this.http.post<Group>(`${this.groupURL}`, {name: name});
     }
 
+    public createPostWithFile(text: string, file: File): Observable<Group> {
+        const formData: FormData = new FormData();
+        formData.append('file', file);
+
+        const blob = new Blob([JSON.stringify({text: text})], {
+            type: 'application/json',
+        });
+        formData.append('command', blob);
+
+        return this.http.post<Group>(`${this.groupURL}/post/media`, formData);
+    }
+
+    public createPostWithoutFile(text: string): Observable<Group> {
+        return this.http.post<Group>(`${this.groupURL}/post`, {text: text});
+    }
+
     public updateGroupWithFile(id: string, name: string, file: File): Observable<Group> {
         const formData: FormData = new FormData();
         formData.append('file', file);

@@ -35,5 +35,15 @@
                 {{emailFormatError}}
             </div>
         </div>
+        <div [@transitionAnimation] class="registration-form3">
+            <button (click)="toDeleteConfirm()" type="submit" class="registration-button-red">Delete profile</button>
+            <div *ngIf="emailErrorToggle" style="color: red">{{errorMessage}}</div>
+            <div *ngIf="emailRequiredError.length != 0" style="color: red">
+                {{emailRequiredError}}
+            </div>
+            <div *ngIf="emailFormatError.length != 0" style="color: red">
+                {{emailFormatError}}
+            </div>
+        </div>
     </div>
 </div>

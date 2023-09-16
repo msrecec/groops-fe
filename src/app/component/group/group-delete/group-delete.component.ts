@@ -39,7 +39,7 @@ export class GroupDeleteComponent {
             console.error("Missing id")
             return
         }
-        this.router.navigate([`${GROUPS}`, id]).then(() => console.log(`Navigating to ${GROUPS} : ${id} page`))
+        this.router.navigate([`${GROUP.replace(":id", id)}`]).then(() => console.log(`Navigating to ${GROUPS} : ${id} page`))
     }
 
 

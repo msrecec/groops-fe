@@ -38,8 +38,7 @@ export class AuthService {
                 tap((resData) => {
                     this.handleAuthentication(resData.token.trim());
                     this.justLoggedIn = true
-                    this.router.navigate([`/${HOME}`]).then();
-                    // console.log(`Navigating to ${HOME} page`)
+                    this.router.navigate([`/${HOME}`]).then(() => console.log(`Navigating to ${HOME} page`));
                     this.connect()
                 })
             );
@@ -84,6 +83,16 @@ export class AuthService {
             console.error('Error while connecting to websockets')
             console.error(error)
         }
+    }
+
+    public disconnect() {
+        if (!this.rxStompService.connected()) {
+            console.error('Already disconnected')
+            return
+        }
+        this.rxStompService.deactivate().then(() => {
+            console.log('Deactivating ws connection')
+        })
     }
 
     private handleAuthentication(token: String) {

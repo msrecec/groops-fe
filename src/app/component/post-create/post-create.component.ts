@@ -9,15 +9,14 @@ import {PROFILE} from "../../constants/app.constants";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Error} from "../../model/error.model";
 import {transitionAnimation} from "../../animation/transition.animation";
-import {GroupService} from "../../service/group/group.service";
 
 @Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css'],
+  selector: 'app-post-create',
+  templateUrl: './post-create.component.html',
+  styleUrls: ['./post-create.component.css'],
   animations: [transitionAnimation]
 })
-export class PostsComponent {
+export class PostCreateComponent {
   imgLoaded = false;
   profilePicture: string = ""
   profilePictureThumbnail: string = ""
@@ -26,7 +25,7 @@ export class PostsComponent {
   firstName: string = ""
   lastName: string = ""
   dob: string = ""
-  description: string = ""
+  description: string | null = null
   errorToggle: Boolean = false
   errorMessage: string = ''
   usernameRequiredError: string = ""
@@ -42,7 +41,7 @@ export class PostsComponent {
   localUrl: any[] | null = null;
   isSpinning = false
 
-  constructor(private userService: UserService, private router: Router, private groupService: GroupService) {
+  constructor(private userService: UserService, private router: Router) {
 
   }
 
@@ -68,8 +67,8 @@ export class PostsComponent {
     this.isSpinning = true
     this.errorToggle = false
     if (this.fileToUpload) {
-      // const fileCommand: UserUpdateFileCommand = new UserUpdateFileCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description ? this.description.trim() : "", this.fileToUpload)
-      this.groupService.createPostWithFile(this.description, this.fileToUpload).pipe(catchError((err) => {
+      const fileCommand: UserUpdateFileCommand = new UserUpdateFileCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description ? this.description.trim() : "", this.fileToUpload)
+      this.userService.updateUserWithFile(fileCommand).pipe(catchError((err) => {
         this.isSpinning = false;
         return this.showErrorMessage(err)
       })).subscribe(() => {
@@ -167,7 +166,7 @@ export class PostsComponent {
               break
             }
             case 'Text must not be blank': {
-              this.passwordRequiredError = 'Text must not be blank'
+              this.firstNameRequiredError = 'Text must not be blank'
               break
             }
           }

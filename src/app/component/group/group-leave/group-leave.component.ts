@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {GroupService} from "../../../service/group/group.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, Observable, throwError} from "rxjs";
-import {GROUPS} from "../../../constants/app.constants";
+import {GROUP, GROUPS} from "../../../constants/app.constants";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Error} from "../../../model/error.model";
 import {transitionAnimation} from "../../../animation/transition.animation";
@@ -39,7 +39,7 @@ export class GroupLeaveComponent {
       console.error("Missing id")
       return
     }
-    this.router.navigate([`${GROUPS}`, id]).then(() => console.log(`Navigating to ${GROUPS} : ${id} page`))
+    this.router.navigate([`${GROUP.replace(":id", id)}`]).then(() => console.log(`Navigating to ${GROUPS} : ${id} page`))
   }
 
 

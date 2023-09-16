@@ -18,6 +18,7 @@ export class UserService implements OnInit {
     private userForgotPasswordURL = `${this.usersUrl}/forgot-password`;
     private changePasswordURL = `${this.usersUrl}/change-password`;
     private changeEmailURL = `${this.usersUrl}/change-mail`;
+    private deleteAccountURL = `${this.usersUrl}/current`;
     private registerURL: string = `${this.usersUrl}/register`;
     private forgotPasswordURL: string = `${SERVER_API_URL}/templates/forgot-password/confirm`;
 
@@ -70,6 +71,10 @@ export class UserService implements OnInit {
 
     public changeEmail(email: string) {
         return this.http.put<User>(this.changeEmailURL, {email: email}).pipe(catchError(this.errorHandlerService.handleError))
+    }
+
+    public deleteAccount() {
+        return this.http.delete<any>(this.deleteAccountURL)
     }
 
 }

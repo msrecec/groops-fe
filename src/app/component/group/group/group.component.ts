@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {GROUP_DELETE, GROUP_EDIT, GROUPS, PROFILE_EDIT} from "../../../constants/app.constants";
+import {GROUP_DELETE, GROUP_EDIT, GROUP_LEAVE, GROUPS, PROFILE_EDIT} from "../../../constants/app.constants";
 import {transitionAnimation} from "../../../animation/transition.animation";
 import {GroupService} from "../../../service/group/group.service";
 import {catchError, tap, throwError} from "rxjs";
@@ -67,7 +67,7 @@ export class GroupComponent implements OnInit {
             console.error('Missing group id')
             return
         }
-        this.router.navigate([`/${GROUPS}/edit`, groupId]).then(() => this.handleNavigation(`/${GROUP_EDIT}`));
+        this.router.navigate([`/${GROUP_EDIT.replace(":id", groupId)}`]).then(() => this.handleNavigation(`/${GROUP_EDIT}`));
     }
 
     isAdmin() {
@@ -92,7 +92,7 @@ export class GroupComponent implements OnInit {
             console.error('Missing group id')
             return
         }
-        this.router.navigate([`/${GROUPS}/leave`, groupId]).then(() => this.handleNavigation(`/${GROUP_DELETE} : ${groupId}`));
+        this.router.navigate([`/${GROUP_LEAVE.replace(":id", groupId)}`]).then(() => this.handleNavigation(`/${GROUP_LEAVE} : ${groupId}`));
     }
 
     deleteGroup() {
@@ -101,7 +101,7 @@ export class GroupComponent implements OnInit {
             console.error('Missing group id')
             return
         }
-        this.router.navigate([`/${GROUPS}/delete`, groupId]).then(() => this.handleNavigation(`/${GROUP_DELETE} : ${groupId}`));
+        this.router.navigate([`/${GROUP_DELETE.replace(":id", groupId)}`]).then(() => this.handleNavigation(`/${GROUP_DELETE} : ${groupId}`));
     }
 
     requestJoiningGroup() {

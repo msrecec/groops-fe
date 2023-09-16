@@ -108,7 +108,7 @@ export class GroupListComponentComponent implements OnInit {
         if (!this.isMember(id)) {
             return;
         }
-        this.router.navigate([`/${GROUPS}`, id]).then(() => this.handleNavigation(GROUP));
+        this.router.navigate([`/${GROUP.replace(":id", (id ? id.toString() : ""))}`]).then(() => this.handleNavigation(`/${GROUPS}/${id}/posts`));
     }
 
     private handleNavigation(route: string) {

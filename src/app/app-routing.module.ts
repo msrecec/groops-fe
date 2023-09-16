@@ -3,12 +3,26 @@ import { CommonModule } from '@angular/common';
 import {LoginComponent} from "./component/login/login.component";
 import {RouterModule, Routes} from "@angular/router";
 import {
+  ACCOUNT_DELETE_CONFIRM,
   ACCOUNT_EDIT,
   BASE,
   CONFIRM_EMAIL,
-  CONFIRM_PASSWORD, EMAIL_CHANGE, EMAIL_CREATE, GROUP, GROUP_CREATE, GROUP_DELETE, GROUP_EDIT, GROUP_LEAVE, GROUPS,
+  CONFIRM_PASSWORD,
+  EMAIL_CHANGE,
+  EMAIL_CREATE,
+  GROUP,
+  GROUP_CREATE,
+  GROUP_DELETE,
+  GROUP_EDIT,
+  GROUP_LEAVE,
+  GROUP_POSTS,
+  GROUPS,
   HOME,
-  LOGIN, PASSWORD_CHANGE, PASSWORD_FORGOT, PASSWORD_FORGOT_CHANGE, PASSWORD_FORGOT_USER,
+  LOGIN,
+  PASSWORD_CHANGE,
+  PASSWORD_FORGOT,
+  PASSWORD_FORGOT_CHANGE,
+  PASSWORD_FORGOT_USER, POST_CREATE,
   PROFILE,
   PROFILE_EDIT,
   REGISTER
@@ -35,7 +49,7 @@ import {
 import {
   PasswordForgotChangeComponent
 } from "./component/confirmation/password-forgot-change/password-forgot-change.component";
-import {AccountEditComponent} from "./component/account-edit/account-edit/account-edit.component";
+import {AccountEditComponent} from "./component/account-edit/account-edit.component";
 import {GroupListComponentComponent} from "./component/group/group-list-component/group-list-component.component";
 import {GroupCreateComponent} from "./component/group/group-create/group-create.component";
 import {GroupComponent} from "./component/group/group/group.component";
@@ -43,6 +57,9 @@ import {PasswordForgotComponent} from "./component/confirmation/password-forgot/
 import {GroupEditComponent} from "./component/group/group-edit/group-edit.component";
 import {GroupDeleteComponent} from "./component/group/group-delete/group-delete.component";
 import {GroupLeaveComponent} from "./component/group/group-leave/group-leave.component";
+import {AccountEditDeleteComponent} from "./component/account-edit-delete/account-edit-delete.component";
+import {PostsComponent} from "./component/posts/posts.component";
+import {PostCreateComponent} from "./component/post-create/post-create.component";
 
 
 
@@ -67,7 +84,10 @@ const routes: Routes = [
   { path: GROUPS, component: GroupListComponentComponent},
   { path: GROUP_CREATE, component: GroupCreateComponent},
   { path: GROUP_DELETE, component: GroupDeleteComponent},
-  { path: GROUP_LEAVE, component: GroupLeaveComponent}
+  { path: GROUP_LEAVE, component: GroupLeaveComponent},
+  { path: ACCOUNT_DELETE_CONFIRM, component: AccountEditDeleteComponent},
+  { path: GROUP_POSTS, component: PostsComponent},
+  { path: POST_CREATE, component: PostCreateComponent}
 ];
 
 @NgModule({

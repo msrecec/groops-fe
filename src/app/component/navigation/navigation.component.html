@@ -2,12 +2,13 @@
     <ul class="nav-list">
         <li><button routerLink="/{{HOME}}" [ngClass]="{'button-active': isHome(), 'button': !isHome()}">Home</button></li>
         <li><button routerLink="/{{GROUPS}}" [ngClass]="{'button-active': isGroups(), 'button': !isGroups()}">Groups</button></li>
-        <li><button routerLink="/{{PROFILE}}" [ngClass]="{'button-active': isProfileOrEdit(), 'button': !isProfileOrEdit()}">Profile</button></li>
+        <li><button routerLink="/{{PROFILE}}" [ngClass]="{'button-active': isProfile(), 'button': !isProfile()}">Profile</button></li>
         <li><button routerLink="/{{NOTIFICATIONS}}" [ngClass]="{'button-active': isNotifications(), 'button': !isNotifications()}">Notifications</button></li>
         <li><button routerLink="/{{ACCOUNT_EDIT}}" [ngClass]="{'button-active': isAccountEdit(), 'button': !isAccountEdit()}">Account</button></li>
         <li><button routerLink="/{{GROUP_CREATE}}" [ngClass]="{'button-active': isGroupCreate(), 'button': !isGroupCreate()}"  class="button">Create Group</button></li>
-        <li [@transitionAnimation] *ngIf="isGroups()" ><button (click)="toggleMy()" [ngClass]="{'button': isMy(), 'button-grey': !isMy()}">{{myGroups()}}</button></li>
-        <li [@transitionAnimation] *ngIf="isGroups()">
+        <li *ngIf="isSubrouteOfGroup()" ><button (click)="toGroup()" [ngClass]="{'button-active': isGroup(), 'button': !isGroup()}" >Group</button></li>
+        <li [@transitionAnimation] *ngIf="isGroups() && !isGroupCreate()" ><button (click)="toggleMy()" [ngClass]="{'button': isMy(), 'button-grey': !isMy()}">{{myGroups()}}</button></li>
+        <li [@transitionAnimation] *ngIf="isGroups() && !isGroupCreate()">
             <div class="search-container">
                 <input (keydown.enter)="toggleSearch()" [(ngModel)]="search" type="text" placeholder="Search..." id="search-input"/>
             </div>
