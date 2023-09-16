@@ -6,6 +6,7 @@ import {UserUpdateCommand} from "../../command/user.update.command";
 import {Group} from "../../model/group.model";
 import {GroupRoles} from "../../model/group.roles.model";
 import {Observable} from "rxjs";
+import {User} from "../../model/user.model";
 
 @Injectable({
     providedIn: 'root'
@@ -106,6 +107,10 @@ export class GroupService {
 
     public cancelJoin(id: string) {
         return this.http.delete(`${this.groupURL}/${id}/request`)
+    }
+
+    public getAllRequestsByGroupId(id: string) {
+      return this.http.get<User[]>(`${this.groupURL}/${id}/request`)
     }
 
 }

@@ -8,6 +8,7 @@ import {ErrorHandlerService} from "../../../service/error/error-handler.service"
 import {Role} from "../../../model/role.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {RoleEnum} from "../../../model/enum/role.constants";
+import {User} from "../../../model/user.model";
 
 @Component({
   selector: 'app-group',
@@ -22,6 +23,7 @@ export class GroupComponent implements OnInit {
   profilePictureThumbnail: String | null = '';
   imageLoaded = false;
   sentJoin: boolean | null = false
+  users: User[] = []
 
   constructor(private groupService: GroupService, private router: Router, private route: ActivatedRoute, private errorHandlerService: ErrorHandlerService) {
   }
@@ -58,6 +60,20 @@ export class GroupComponent implements OnInit {
             console.error('You are a member but you have no roles, thats weird')
           }
           this.role = groupRoles.roles[0]
+          const groupId = this.route.snapshot.paramMap.get("id")
+          if (!groupId) {
+            console.error('Missing group id')
+            return
+          }
+          if (this.role.role !== RoleEnum.ROLE_ADMIN) {
+            return;
+          }
+          this.groupService.getAllRequestsByGroupId(groupId).pipe(
+            catchError(this.errorHandlerService.handleError)
+          ).subscribe((users) => {
+            console.log('Got this many requests ' + users.length)
+            this.users = users
+          })
         })
       })
   }
