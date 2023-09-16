@@ -47,6 +47,15 @@ export class GroupEditComponent implements OnInit{
         this.imgLoaded = true
     }
 
+  cancel() {
+    const id = this.route.snapshot.paramMap.get("id")
+    if (!id) {
+      console.error("Missing id")
+      return
+    }
+    this.router.navigate([`${GROUP.replace(":id", id)}`]).then(() => console.log(`Navigating to ${GROUPS} : ${id} page`))
+  }
+
     createGroup() {
         this.usernameRequiredError = ""
         this.usernameTakenError = ""

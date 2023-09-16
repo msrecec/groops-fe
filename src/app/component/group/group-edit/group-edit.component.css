@@ -84,7 +84,7 @@
     color: white;
     border: none;
     padding: 10px 20px;
-    margin-top: 5px;
+    margin: 3px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
@@ -92,4 +92,8 @@
 
 .profile-edit-button:hover {
     background-color: #1976d2;
+}
+
+.profile-picture-edit-button:hover {
+  background-color: #4da85a;
 }
