@@ -72,8 +72,20 @@ export class GroupComponent implements OnInit {
     this.router.navigate([`/${GROUP_EDIT.replace(":id", groupId)}`]).then(() => this.handleNavigation(`/${GROUP_EDIT}`));
   }
 
+  toGroupMembers() {
+    console.log("Navigating to group members")
+  }
+
+  toGroupJoinRequests() {
+    console.log("Navigating to group join requests")
+  }
+
   isAdmin() {
     return this.role?.role === RoleEnum.ROLE_ADMIN;
+  }
+
+  isUser() {
+    return this.role?.role === RoleEnum.ROLE_USER;
   }
 
   hasRole() {
