@@ -75,7 +75,8 @@ export class GroupCreateComponent implements OnInit {
   }
 
   private toGroupById(id: number) {
-    this.router.navigate([`/${GROUPS}`, id]).then(() => this.handleNavigation(GROUP));
+    const idString = id.toString()
+    this.router.navigate([`/${GROUP.replace(":id", idString)}`]).then(() => this.handleNavigation(GROUP));
   }
 
   private handleNavigation(route: string) {
