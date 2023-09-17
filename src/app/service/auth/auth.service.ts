@@ -8,6 +8,7 @@ import {ErrorHandlerService} from "../error/error-handler.service";
 import {Token} from "../../model/token.model";
 import {RxStompService} from "../../stomp/rx-stomp.service";
 import {myRxStompConfig} from "../../stomp/rx-stomp-config.config";
+import {Notification} from "../../model/notification.model";
 
 @Injectable({
     providedIn: 'root'
@@ -17,12 +18,29 @@ export class AuthService {
     private tokenExpirationTimer: any;
     private tokenPrefix = 'Bearer '
     private justLoggedIn = true
+    private notificationCount = 0
 
     constructor(private http: HttpClient, private router: Router, private errorHandlerService: ErrorHandlerService, private rxStompService: RxStompService) {
     }
 
     private nop() {
         return this.http.get<any>(`${this.authUrl}/nop`)
+    }
+
+    public getNotificationCount() {
+        return this.notificationCount
+    }
+
+    public refreshNotificationCount() {
+        this.http.get<{ count: number }>(`${this.authUrl}/notifications/unread`).pipe(
+            catchError(this.errorHandlerService.handleError)
+        ).subscribe((count => {
+            this.notificationCount = count.count
+        }))
+    }
+
+    public getNotifications() {
+        return this.http.get<Notification[]>(`${this.authUrl}/notifications`)
     }
 
     public hasJustLoggedIn() {
@@ -60,9 +78,9 @@ export class AuthService {
         this.rxStompService.connected$.subscribe(() => {
             console.log(`Subscribing for notifications for user: ${tokenModel.id}`)
             this.rxStompService.stompClient.subscribe(`/ws/secured/notifications/user/${tokenModel.id}`, (msg) => {
-                console.dir(msg)
-                console.log("Message body:")
-                console.log(msg.body)
+                console.log(`Got notification for user ${tokenModel.id}`)
+                console.log(msg)
+                this.refreshNotificationCount()
             }, {
                 Authorization: token
             })

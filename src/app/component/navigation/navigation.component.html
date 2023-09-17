@@ -3,7 +3,7 @@
         <li><button routerLink="/{{HOME}}" [ngClass]="{'button-active': isHome(), 'button': !isHome()}">Home</button></li>
         <li><button routerLink="/{{GROUPS}}" [ngClass]="{'button-active': isGroups(), 'button': !isGroups()}">Groups</button></li>
         <li><button routerLink="/{{PROFILE}}" [ngClass]="{'button-active': isProfile(), 'button': !isProfile()}">Profile</button></li>
-        <li><button routerLink="/{{NOTIFICATIONS}}" [ngClass]="{'button-active': isNotifications(), 'button': !isNotifications()}">Notifications</button></li>
+        <li><button routerLink="/{{NOTIFICATIONS}}" [ngClass]="{'button-active': isNotifications(), 'button': !isNotifications()}">Notifications <span *ngIf="getNotificationCount() !== 0" style="color:red"><b>{{getNotificationCount()}}</b></span></button></li>
         <li><button routerLink="/{{ACCOUNT_EDIT}}" [ngClass]="{'button-active': isAccountEdit(), 'button': !isAccountEdit()}">Account</button></li>
         <li><button routerLink="/{{GROUP_CREATE}}" [ngClass]="{'button-active': isGroupCreate(), 'button': !isGroupCreate()}"  class="button">Create Group</button></li>
         <li [@transitionAnimation] *ngIf="isSubrouteOfGroup()" ><button (click)="toGroup()" [ngClass]="{'button-active': isGroup(), 'button': !isGroup()}" >Group</button></li>

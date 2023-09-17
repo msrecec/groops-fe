@@ -51,6 +51,10 @@ export class NavigationComponent implements OnInit {
         this.canCreatePosts()
     }
 
+    getNotificationCount() {
+        return this.authService.getNotificationCount()
+    }
+
     private setDefaultRoute() {
         this.setCurrentRoute(null)
     }

@@ -1,1 +1,12 @@
-<p>notifications works!</p>
+<app-navigation></app-navigation>
+<div class="container scrollable-content">
+    <div class="container-groups">
+        <div (click)="route(notification)" [@transitionAnimation] class="registration-form"
+             *ngFor="let notification of notifications">
+            <div class="container-data-col">
+                <div class="data" style="color: white">{{notification.message}}</div>
+                <div *ngIf="!notification.read" class="data" style="color: red">New</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -18,7 +18,7 @@ import {
   GROUP_POSTS, GROUP_REQUESTS,
   GROUPS,
   HOME,
-  LOGIN,
+  LOGIN, NOTIFICATIONS,
   PASSWORD_CHANGE,
   PASSWORD_FORGOT,
   PASSWORD_FORGOT_CHANGE,
@@ -64,6 +64,7 @@ import {RequestsComponent} from "./component/group/requests/requests.component";
 import {MembersComponent} from "./component/group/members/members.component";
 import {PostComponent} from "./component/post/post.component";
 import {PostSingleComponent} from "./component/post-single/post-single.component";
+import {NotificationsComponent} from "./component/notifications/notifications.component";
 
 
 
@@ -94,7 +95,8 @@ const routes: Routes = [
   { path: POST_CREATE, component: PostCreateComponent},
   { path: GROUP_REQUESTS, component: RequestsComponent},
   { path: GROUP_MEMBERS, component: MembersComponent},
-  { path: POST, component: PostSingleComponent}
+  { path: POST, component: PostSingleComponent},
+  { path: NOTIFICATIONS, component: NotificationsComponent}
 ];
 
 @NgModule({
