@@ -65,6 +65,18 @@ export class GroupService {
       return this.http.delete<any>(`${this.groupURL}/${id}/post/${postId}`)
     }
 
+    public getPostsMySearch(my: boolean, groupId: string | null) {
+      let obj
+      if(groupId) {
+        const temp = {groupId:Number.parseInt(groupId), my: my}
+        obj = temp
+      } else {
+        const temp = {my: my}
+        obj = temp
+      }
+      return this.http.post<Post[]>(`${this.groupURL}/posts/search`, obj)
+    }
+
     public dislike(id: string, postId: string): Observable<any> {
       return this.http.delete<any>(`${this.groupURL}/${id}/post/${postId}/like`, {});
     }

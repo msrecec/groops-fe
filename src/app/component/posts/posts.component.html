@@ -1,6 +1,8 @@
-<app-navigation></app-navigation>
-<div [@transitionAnimation] class="container scrollable-content">
-  <div class="container-groups">
-
-  </div>
+<app-navigation [showGroupPosts]="true" (toggleMyPostsEvent)="handleToggleMyPostsEvent($event)"></app-navigation>
+<div class="container scrollable-content">
+    <div *ngIf="showPosts" class="profile-container-3">
+        <div [@transitionAnimation] *ngFor="let post of posts" class="profile-container-3">
+            <app-post postId="{{post.id}}" groupId="{{groupId}}"></app-post>
+        </div>
+    </div>
 </div>

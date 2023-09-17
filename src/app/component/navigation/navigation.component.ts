@@ -27,6 +27,7 @@ import {RoleEnum} from "../../model/enum/role.constants";
 })
 export class NavigationComponent implements OnInit {
     isSticky = false;
+    toggleMyPosts = false;
     navbarHeight = 50;
     currentRoute = ''
     groupToggle = false;
@@ -34,9 +35,11 @@ export class NavigationComponent implements OnInit {
     @Output() toggleGroupEvent = new EventEmitter<boolean>();
     @Output() toggleMyEvent = new EventEmitter<boolean>();
     @Output() toggleSearchEvent = new EventEmitter<string | null>();
+    @Output() toggleMyPostsEvent = new EventEmitter<boolean>();
     @Input() search: string | null = null;
     @Input() groupButtonShow: boolean = false;
     @Input() createPostButtonShow: boolean = false;
+    @Input() showGroupPosts: boolean = false;
 
     constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute, private groupService: GroupService, private errorHandlerService: ErrorHandlerService) {
 
@@ -61,6 +64,10 @@ export class NavigationComponent implements OnInit {
         this.currentRoute = routeTmp !== null ? routeTmp : ''
     }
 
+    getMyPosts() {
+      return this.toggleMyPosts ? "All posts" : "My posts"
+    }
+
 
     @HostListener('window:scroll', [])
     onWindowScroll() {
@@ -80,6 +87,11 @@ export class NavigationComponent implements OnInit {
         return
       }
       this.router.navigate([`/${GROUP.replace(":id", id)}`]).then(r => this.handleNavigation(GROUP));
+    }
+
+    emitMyPostsToggle() {
+      this.toggleMyPosts = !this.toggleMyPosts
+      this.toggleMyPostsEvent.emit(this.toggleMyPosts)
     }
 
     toPosts() {

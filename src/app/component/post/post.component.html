@@ -16,6 +16,7 @@
   <input type="file" (change)="showPreviewImageAndSetFile($event)" #fileSelect id="fileUpload" name="fileUpload"
          multiple="multiple" accept="image/*" style="display:none;"/>
   <div>
+    <div style="color: white" *ngIf="post && post.user.username"><b>{{post?.user?.username}}</b></div>
     <div style="padding-top: 20px; padding-bottom: 20px; border-radius: 5px; width: 200px; color: white"
          id="description">{{text}}</div>
   </div>
@@ -31,7 +32,7 @@
   <br>
   <span (click)="expandCommentsToggle()" class="comment" style="color: white">{{post?.commentCount}} comments</span>
   <app-comment *ngIf="showComments" [comments]="comments"></app-comment>
-  <app-comment-add (addedComment)="onCommentAddHandler()" *ngIf="postId" postId="{{postId}}"></app-comment-add>
+  <app-comment-add *ngIf="postId && showComments && (role === RoleEnum.ROLE_ADMIN || role === RoleEnum.ROLE_USER)" (addedComment)="onCommentAddHandler()" postId="{{postId}}"></app-comment-add>
 </div>
 
 
