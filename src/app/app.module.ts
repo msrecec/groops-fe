@@ -49,7 +49,7 @@ import { AccountEditDeleteComponent } from './component/account-edit-delete/acco
 import { PostCreateComponent } from './component/post-create/post-create.component';
 import { PostComponent } from './component/post/post.component';
 import { PostEditComponent } from './component/post-edit/post-edit.component';
-import { MembersComponent } from './component/members/members.component';
+import { MembersComponent } from './component/group/members/members.component';
 import { NotificationsComponent } from './component/notifications/notifications.component';
 import { RequestsComponent } from './component/group/requests/requests.component';
 

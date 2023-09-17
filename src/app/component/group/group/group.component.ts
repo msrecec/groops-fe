@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {
   GROUP_DELETE,
   GROUP_EDIT,
-  GROUP_LEAVE,
+  GROUP_LEAVE, GROUP_MEMBERS,
   GROUP_REQUESTS,
   GROUPS,
   PROFILE_EDIT
@@ -97,6 +97,12 @@ export class GroupComponent implements OnInit {
 
   toGroupMembers() {
     console.log("Navigating to group members")
+    const groupId = this.route.snapshot.paramMap.get("id")
+    if (!groupId) {
+      console.error('Missing group id')
+      return
+    }
+    this.router.navigate([`/${GROUP_MEMBERS.replace(":id", groupId)}`]).then(() => this.handleNavigation(`/${GROUP_MEMBERS}`));
   }
 
   toGroupJoinRequests() {

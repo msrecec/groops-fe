@@ -1,0 +1,27 @@
+<app-navigation></app-navigation>
+<div class="container scrollable-content">
+  <div class="container-groups">
+    <div [@transitionAnimation] class="registration-form"  *ngFor="let user of users">
+      <div >
+        <img *ngIf="user.profilePictureThumbnailDownloadLink"
+             src="{{user.profilePictureThumbnailDownloadLink}}"
+             class="profile-edit-img"
+             alt="New profile Picture">
+      </div>
+      <img *ngIf="!user.profilePictureThumbnailDownloadLink" src="assets/images/default-picture-profile.jpg"
+           class="profile-edit-img"
+           alt="New profile Picture">
+      <div class="container-data-col">
+        <div class="data" style="color: white">{{user.username}}</div>
+        <div *ngIf="user.role !== RoleEnum.ROLE_ADMIN || currentlyChaningRoles.has(user.id)" class="data"><button (click)="changeRole(user.id, user.role)" class="button-green">Change role</button></div>
+      </div>
+      <div *ngIf="user.role !== RoleEnum.ROLE_ADMIN || currentlyChaningRoles.has(user.id)" class="data-2" >
+        <select (change)="currentlyChaningRoles.add(user.id)" style="width: 120px" id="dropdown" [(ngModel)]="user.role">
+          <option value="ROLE_USER">User</option>
+          <option value="ROLE_LURKER">Lurker</option>
+          <option value="ROLE_ADMIN">Admin</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

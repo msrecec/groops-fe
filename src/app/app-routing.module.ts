@@ -14,7 +14,7 @@ import {
   GROUP_CREATE,
   GROUP_DELETE,
   GROUP_EDIT,
-  GROUP_LEAVE,
+  GROUP_LEAVE, GROUP_MEMBERS,
   GROUP_POSTS, GROUP_REQUESTS,
   GROUPS,
   HOME,
@@ -61,6 +61,7 @@ import {AccountEditDeleteComponent} from "./component/account-edit-delete/accoun
 import {PostsComponent} from "./component/posts/posts.component";
 import {PostCreateComponent} from "./component/post-create/post-create.component";
 import {RequestsComponent} from "./component/group/requests/requests.component";
+import {MembersComponent} from "./component/group/members/members.component";
 
 
 
@@ -89,7 +90,8 @@ const routes: Routes = [
   { path: ACCOUNT_DELETE_CONFIRM, component: AccountEditDeleteComponent},
   { path: GROUP_POSTS, component: PostsComponent},
   { path: POST_CREATE, component: PostCreateComponent},
-  { path: GROUP_REQUESTS, component: RequestsComponent}
+  { path: GROUP_REQUESTS, component: RequestsComponent},
+  { path: GROUP_MEMBERS, component: MembersComponent}
 ];
 
 @NgModule({
