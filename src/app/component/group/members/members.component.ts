@@ -55,6 +55,33 @@ export class MembersComponent {
       .pipe(catchError(this.errorHandlerService.handleError))
       .subscribe(() => {
         this.currentlyChaningRoles = new Set<Number>()
+        this.groupService.getMembersByGroupId(groupId).pipe(
+          catchError(this.errorHandlerService.handleError)
+        ).subscribe(
+          (users) => {
+            this.users = users
+          }
+        )
+      })
+  }
+
+  kickUser(userId: Number) {
+    const groupId = this.route.snapshot.paramMap.get("id");
+    if (!groupId) {
+      console.error("Missing group id in param map")
+      return
+    }
+    this.groupService.kickUserFromGroup(userId.toString(), groupId)
+      .pipe(catchError(this.errorHandlerService.handleError))
+      .subscribe(() => {
+        this.currentlyChaningRoles = new Set<Number>()
+        this.groupService.getMembersByGroupId(groupId).pipe(
+          catchError(this.errorHandlerService.handleError)
+        ).subscribe(
+          (users) => {
+            this.users = users
+          }
+        )
       })
   }
 

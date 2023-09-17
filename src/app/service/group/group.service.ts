@@ -131,4 +131,8 @@ export class GroupService {
       return this.http.put<any>(`${this.groupURL}/${groupId}/user/${userId}`, {role: role})
     }
 
+    public kickUserFromGroup(userId: string, groupId: string) {
+      return this.http.delete<any>(`${this.groupURL}/${groupId}/user/${userId}`)
+    }
+
 }

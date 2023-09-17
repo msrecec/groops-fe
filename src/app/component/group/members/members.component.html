@@ -14,6 +14,7 @@
       <div class="container-data-col">
         <div class="data" style="color: white">{{user.username}}</div>
         <div *ngIf="currentUserId !== user.id && (user.role !== RoleEnum.ROLE_ADMIN || currentlyChaningRoles.has(user.id))" class="data"><button (click)="changeRole(user.id, user.role)" class="button-green">Change role</button></div>
+        <div *ngIf="currentUserId !== user.id && (user.role !== RoleEnum.ROLE_ADMIN || currentlyChaningRoles.has(user.id))" class="data"><button (click)="kickUser(user.id)" class="button-red">Kick user</button></div>
       </div>
       <div *ngIf="currentUserId !== user.id && (user.role !== RoleEnum.ROLE_ADMIN || currentlyChaningRoles.has(user.id))" class="data-2" >
         <select (change)="currentlyChaningRoles.add(user.id)" style="width: 120px" id="dropdown" [(ngModel)]="user.role">
