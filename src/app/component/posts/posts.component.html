@@ -1,30 +1,6 @@
 <app-navigation></app-navigation>
-<div class="container">
-    <div [@transitionAnimation] class="profile-edit-form">
-        <div *ngIf="(!profilePicture || profilePicture.trim().toString() === '') && localUrl === null "
-             class="profile-picture-container">
-            <img class="profile-edit-img" src="assets/images/default-picture-profile.jpg" alt="Profile Picture">
-        </div>
-        <div *ngIf="profilePicture && profilePicture.trim().toString() !== '' || localUrl !== null "
-             class="profile-picture-container">
-            <img style="display: none" #profilePictureEditRef (load)="onLoad(profilePictureEditRef)" *ngIf="localUrl === null" class="profile-edit-img"
-                 [src]="profilePicture.toString()"
-                 alt="Profile Picture">
-            <img style="filter: blur(9px)" *ngIf="!imgLoaded && localUrl === null" class="profile-edit-img"
-                 [src]="profilePictureThumbnail.toString()"
-                 alt="Thumbnail Profile Picture">
-            <img *ngIf="localUrl !== null" [src]="localUrl" class="profile-edit-img" alt="New profile Picture">
-        </div>
-        <input type="file" (change)="showPreviewImageAndSetFile($event)" #fileSelect id="fileUpload" name="fileUpload"
-               multiple="multiple" accept="image/*" style="display:none;"/>
-        <button type="submit" (click)="fileSelect.click()" class="profile-picture-edit-button">Choose picture</button>
-        <textarea [(ngModel)]="description" style="padding-top: 20px; padding-bottom: 20px; border-radius: 5px;"
-                  id="description" name="description" placeholder="description"></textarea>
-    </div>
-      <div *ngIf="passwordRequiredError.length != 0" style="color: red">
-          {{passwordRequiredError}}
-      </div>
-      <button (click)="updateProfile()" type="submit" class="profile-edit-button">Update</button>
-      <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>
-      <app-spinning *ngIf="isSpinning"></app-spinning>
+<div class="container scrollable-content">
+  <div class="container-groups">
+
+  </div>
 </div>

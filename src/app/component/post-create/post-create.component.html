@@ -19,13 +19,10 @@
                multiple="multiple" accept="image/*" style="display:none;"/>
         <button type="submit" (click)="fileSelect.click()" class="profile-picture-edit-button">Choose picture</button>
         <div>
-        <textarea [(ngModel)]="description" style="padding-top: 20px; padding-bottom: 20px; border-radius: 5px;"
+        <textarea [(ngModel)]="description" style="padding-top: 20px; padding-bottom: 20px; border-radius: 5px; height: 300px"
                   id="description" name="description" placeholder="description"></textarea>
         </div>
-        <div *ngIf="firstNameRequiredError.length != 0" style="color: red">
-            {{firstNameRequiredError}}
-        </div>
-        <button (click)="updateProfile()" type="submit" class="profile-edit-button">Submit</button>
+        <button (click)="post()" type="submit" class="profile-edit-button">Post</button>
         <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>
         <app-spinning *ngIf="isSpinning"></app-spinning>
     </div>

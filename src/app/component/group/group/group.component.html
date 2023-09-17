@@ -21,7 +21,7 @@
             <div style="flex-direction: row">
                 <button *ngIf="hasRole()" (click)="toGroupPosts()" class="button-blue">Posts</button>
               <button *ngIf="isAdmin() || isUser()" (click)="toGroupMembers()" class="button-blue">Members</button>
-              <button *ngIf="isAdmin()" (click)="toGroupJoinRequests()" class="button-blue">Join requests{{users.length !== 0 ? ' ' + users.length : ''}}</button>
+              <button *ngIf="isAdmin()" (click)="toGroupJoinRequests()" class="button-blue">Join requests <span style="color: red; font-size: 14px;"><b>{{users.length !== 0 ? ' ' + users.length : ''}}</b></span></button>
                 <button *ngIf="isAdmin()" (click)="toGroupEdit()" class="button-green">Edit</button>
                 <button *ngIf="hasRole()" (click)="leaveGroup()" class="button-red">Leave</button>
                 <button *ngIf="isAdmin()" (click)="deleteGroup()" class="button-red">Delete</button>
