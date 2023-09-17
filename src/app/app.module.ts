@@ -52,6 +52,9 @@ import { PostEditComponent } from './component/post-edit/post-edit.component';
 import { MembersComponent } from './component/group/members/members.component';
 import { NotificationsComponent } from './component/notifications/notifications.component';
 import { RequestsComponent } from './component/group/requests/requests.component';
+import { PostSingleComponent } from './component/post-single/post-single.component';
+import { CommentComponent } from './component/comment/comment.component';
+import { CommentAddComponent } from './component/comment-add/comment-add.component';
 
 @NgModule({
     declarations: [
@@ -87,6 +90,9 @@ import { RequestsComponent } from './component/group/requests/requests.component
         MembersComponent,
         NotificationsComponent,
         RequestsComponent,
+        PostSingleComponent,
+        CommentComponent,
+        CommentAddComponent,
     ],
     imports: [
         BrowserModule,

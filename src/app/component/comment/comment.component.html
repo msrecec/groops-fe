@@ -1,0 +1,20 @@
+<div class="container-groups">
+  <div [@transitionAnimation] class="registration-form" *ngFor="let comment of comments">
+    <div>
+      <img *ngIf="comment.user.profilePictureThumbnailDownloadLink"
+           src="{{comment.user.profilePictureThumbnailDownloadLink}}"
+           class="profile-edit-img"
+           alt="New profile Picture">
+    </div>
+    <img *ngIf="!comment.user.profilePictureThumbnailDownloadLink" src="assets/images/default-picture-profile.jpg"
+         class="profile-edit-img"
+         alt="New profile Picture">
+    <div class="container-data-col">
+      <div class="data" style="color: white">{{comment.user.username}}</div>
+    </div>
+    <div class="data-2">
+      <div style="color: white">{{comment.text}}</div>
+    </div>
+  </div>
+</div>
+

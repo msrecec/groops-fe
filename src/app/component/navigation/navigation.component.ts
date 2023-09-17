@@ -9,7 +9,7 @@ import {
   GROUPS,
   HOME,
   LOGIN,
-  NOTIFICATIONS,
+  NOTIFICATIONS, POST_CREATE,
   PROFILE,
   PROFILE_EDIT
 } from "../../constants/app.constants";
@@ -91,6 +91,15 @@ export class NavigationComponent implements OnInit {
       this.router.navigate([`/${GROUP_POSTS.replace(":id", id)}`]).then(r => this.handleNavigation(GROUP_POSTS));
     }
 
+    toCreatePost() {
+      const id = this.route.snapshot.paramMap.get("id")
+      if(!id) {
+        console.error("Missing id of group in url")
+        return
+      }
+      this.router.navigate([`/${POST_CREATE.replace(":id", id)}`]).then(r => this.handleNavigation(POST_CREATE));
+    }
+
     isHome() {
       return this.getFullRoute() === HOME
     }
@@ -132,7 +141,7 @@ export class NavigationComponent implements OnInit {
     }
 
     isPostable() {
-      return this.getFullRoute().includes("posts")
+      return this.getFullRoute().includes("posts") || this.getFullRoute().includes("post-single")
     }
 
     canCreatePosts() {

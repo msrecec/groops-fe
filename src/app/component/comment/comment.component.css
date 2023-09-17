@@ -8,10 +8,6 @@
   width: 80%;
   margin: 10px auto 0;
   flex-direction: row;
-  overflow-x: hidden; /* Enable vertical scrolling */
-  flex-wrap: wrap; /* This property makes items wrap to a new row */
-  justify-content: flex-start; /* Align items to the start of the container (left) */
-  align-items: flex-start; /* Align items to the start of the container (top) */
 }
 
 .button {
@@ -59,16 +55,16 @@
 
 
 .container-groups {
-  width: 1440px;
+  width: 100%;
   display: flex;
   /*width: 500px;*/
-  /*height: 100%;*/
   margin: 0 auto;
   flex: 1; /* Allow this div to grow and take up remaining vertical space */
   overflow-x: hidden; /* Enable vertical scrolling */
   flex-wrap: wrap; /* This property makes items wrap to a new row */
-  justify-content: flex-start; /* Align items to the start of the container (left) */
-  align-items: flex-start; /* Align items to the start of the container (top) */
+  justify-content: center; /* Align items to the start of the container (left) */
+  align-items: center; /* Align items to the start of the container (top) */
+  flex-direction: column;
 }
 
 .container-data-col {
@@ -76,10 +72,10 @@
   /*width: 500px;*/
   height: 100%;
   flex-wrap: wrap; /* This property makes items wrap to a new row */
-  justify-content: flex-start; /* Align items to the start of the container (left) */
-  align-items: flex-start; /* Align items to the start of the container (top) */
+  justify-content: center; /* Align items to the start of the container (left) */
+  align-items: center; /* Align items to the start of the container (top) */
   flex-direction: column;
-  margin: 0 auto 0 40px;
+  margin: 0 auto 0 20px;
 }
 
 .container-data-row {
@@ -87,10 +83,10 @@
   /*width: 500px;*/
   height: 100%;
   flex-wrap: wrap; /* This property makes items wrap to a new row */
-  justify-content: flex-start; /* Align items to the start of the container (left) */
-  align-items: flex-start; /* Align items to the start of the container (top) */
-  flex-direction: row;
-  margin: 0 auto 0 10px;
+  justify-content: center; /* Align items to the start of the container (left) */
+  align-items: center; /* Align items to the start of the container (top) */
+  flex-direction: column;
+  /*margin: 0 auto 0 10px;*/
 }
 
 .data {
@@ -100,9 +96,16 @@
   margin: 0 auto;
 }
 
+.data-2 {
+  display: flex;
+  width: 150px;
+  height: 30px;
+  margin-top: 55px;
+}
+
 .registration-form {
-  height: 100px;
-  width: 300px;
+  height: 150px;
+  width: 400px;
   /*backdrop-filter: blur(9px);*/
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
@@ -162,8 +165,8 @@
 
 .profile-edit-img {
   border: 2px solid #000; /* Square border */
-  height: 110px;
-  width: 110px;
+  height: 140px;
+  width: 140px;
   overflow: hidden; /* Crop the image to fit the container */
   border-radius: 10%; /* Create a circular border */
   object-fit: cover; /* Ensure the entire image fits */
@@ -179,12 +182,12 @@
   cursor: pointer;
   border: none;
   margin: 3px;
-  width: 100px;
+  width: 120px;
 }
-
 .button-green:hover {
   background-color: #4da85a;
 }
+
 
 
 .button-blue {
@@ -197,7 +200,21 @@
   border: none;
   margin: 3px
 }
-
 .button-blue:hover {
   background-color: #1976d2;
+}
+
+.button-red {
+  text-decoration: none;
+  color: white;
+  background-color: #cb1a1a;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  margin: 3px;
+  width: 120px;
+}
+.button-red:hover {
+  background-color: #a62020;
 }

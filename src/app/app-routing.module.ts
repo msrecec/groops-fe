@@ -22,7 +22,7 @@ import {
   PASSWORD_CHANGE,
   PASSWORD_FORGOT,
   PASSWORD_FORGOT_CHANGE,
-  PASSWORD_FORGOT_USER, POST_CREATE,
+  PASSWORD_FORGOT_USER, POST, POST_CREATE,
   PROFILE,
   PROFILE_EDIT,
   REGISTER
@@ -62,6 +62,8 @@ import {PostsComponent} from "./component/posts/posts.component";
 import {PostCreateComponent} from "./component/post-create/post-create.component";
 import {RequestsComponent} from "./component/group/requests/requests.component";
 import {MembersComponent} from "./component/group/members/members.component";
+import {PostComponent} from "./component/post/post.component";
+import {PostSingleComponent} from "./component/post-single/post-single.component";
 
 
 
@@ -91,7 +93,8 @@ const routes: Routes = [
   { path: GROUP_POSTS, component: PostsComponent},
   { path: POST_CREATE, component: PostCreateComponent},
   { path: GROUP_REQUESTS, component: RequestsComponent},
-  { path: GROUP_MEMBERS, component: MembersComponent}
+  { path: GROUP_MEMBERS, component: MembersComponent},
+  { path: POST, component: PostSingleComponent}
 ];
 
 @NgModule({

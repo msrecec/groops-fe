@@ -1,1 +1,37 @@
-<p>post works!</p>
+<div [@transitionAnimation] class="profile-edit-form scrollable-content">
+  <!--        <div *ngIf="(!profilePicture || profilePicture.trim().toString() === '') && localUrl === null "-->
+  <!--             class="profile-picture-container">-->
+  <!--            <img class="profile-edit-img" src="assets/images/default-picture-profile.jpg" alt="Profile Picture">-->
+  <!--        </div>-->
+  <div *ngIf="profilePicture && profilePicture.trim().toString() !== '' || localUrl !== null "
+       class="profile-picture-container-2">
+    <img style="display: none" #profilePictureEditRef (load)="onLoad(profilePictureEditRef)" *ngIf="localUrl === null"
+         class="profile-edit-img-2"
+         [src]="profilePicture.toString()"
+         alt="Profile Picture">
+    <img style="filter: blur(9px)" *ngIf="!imgLoaded && localUrl === null" class="profile-edit-img-2"
+         [src]="profilePictureThumbnail.toString()"
+         alt="Thumbnail Profile Picture">
+  </div>
+  <input type="file" (change)="showPreviewImageAndSetFile($event)" #fileSelect id="fileUpload" name="fileUpload"
+         multiple="multiple" accept="image/*" style="display:none;"/>
+  <div>
+    <div style="padding-top: 20px; padding-bottom: 20px; border-radius: 5px; width: 200px; color: white"
+         id="description">{{text}}</div>
+  </div>
+  <span style="color:white; margin: 3px">{{post?.likeCount}} likes</span>
+  <button *ngIf="(role === RoleEnum.ROLE_ADMIN || role === RoleEnum.ROLE_USER) && !post?.youLike" (click)="like()"
+          type="submit" class="profile-edit-button">Like
+  </button>
+  <button *ngIf="(role === RoleEnum.ROLE_ADMIN || role === RoleEnum.ROLE_USER) && post?.youLike" (click)="dislike()"
+          type="submit" class="profile-edit-button">Unlike
+  </button>
+  <button (click)="deletePost()" *ngIf="currentUser && user && currentUser.id === user.id" type="submit" class="button-red">Delete</button>
+  <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>
+  <br>
+  <span (click)="expandCommentsToggle()" class="comment" style="color: white">{{post?.commentCount}} comments</span>
+  <app-comment *ngIf="showComments" [comments]="comments"></app-comment>
+  <app-comment-add (addedComment)="onCommentAddHandler()" *ngIf="postId" postId="{{postId}}"></app-comment-add>
+</div>
+
+

@@ -67,17 +67,17 @@ export class PostsComponent {
     this.dobRequiredError = ""
     this.isSpinning = true
     this.errorToggle = false
-    if (this.fileToUpload) {
-      // const fileCommand: UserUpdateFileCommand = new UserUpdateFileCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description ? this.description.trim() : "", this.fileToUpload)
-      this.groupService.createPostWithFile(this.description, this.fileToUpload).pipe(catchError((err) => {
-        this.isSpinning = false;
-        return this.showErrorMessage(err)
-      })).subscribe(() => {
-        this.isSpinning = false
-        this.toProfile()
-      })
-      return
-    }
+    // if (this.fileToUpload) {
+    //   // const fileCommand: UserUpdateFileCommand = new UserUpdateFileCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description ? this.description.trim() : "", this.fileToUpload)
+    //   this.groupService.createPostWithFile(this.description, this.fileToUpload).pipe(catchError((err) => {
+    //     this.isSpinning = false;
+    //     return this.showErrorMessage(err)
+    //   })).subscribe(() => {
+    //     this.isSpinning = false
+    //     this.toProfile()
+    //   })
+    //   return
+    // }
     const command: UserCommand = new UserCommand(this.username.trim(), this.firstName.trim(), this.lastName.trim(), new Date(this.dob.trim()), this.description ? this.description.trim() : "")
     this.isSpinning = true
     this.userService.updateUserWithoutFile(command).pipe(catchError((err) => {

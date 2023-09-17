@@ -9,6 +9,8 @@ import {Observable} from "rxjs";
 import {User} from "../../model/user.model";
 import {RoleEnum} from "../../model/enum/role.constants";
 import {UserRole} from "../../model/user.role";
+import {Post} from "../../model/post.model";
+import {Comment} from "../../model/comment.model";
 
 @Injectable({
     providedIn: 'root'
@@ -43,6 +45,30 @@ export class GroupService {
         return this.http.get<Group>(`${this.groupURL}/${id}`);
     }
 
+    public findPostById(id: string, postId: string): Observable<Post> {
+      return this.http.get<Post>(`${this.groupURL}/${id}/post/${postId}`);
+    }
+
+    public like(id: string, postId: string): Observable<any> {
+      return this.http.post<any>(`${this.groupURL}/${id}/post/${postId}/like`, {});
+    }
+
+    public getComments(postId: string) {
+      return this.http.get<Comment[]>(`${this.groupURL}/post/${postId}/comment`)
+    }
+
+    public addComment(postId: string, text: string) {
+      return this.http.post<any>(`${this.groupURL}/post/${postId}/comment`, {text: text})
+    }
+
+    public deletePost(id: string, postId: string) {
+      return this.http.delete<any>(`${this.groupURL}/${id}/post/${postId}`)
+    }
+
+    public dislike(id: string, postId: string): Observable<any> {
+      return this.http.delete<any>(`${this.groupURL}/${id}/post/${postId}/like`, {});
+    }
+
     public getGroupRolesForCurrentUserById(id: string) {
         return this.http.get<GroupRoles>(`${this.groupURL}/${id}/authorities`);
     }
@@ -63,7 +89,7 @@ export class GroupService {
         return this.http.post<Group>(`${this.groupURL}`, {name: name});
     }
 
-    public createPostWithFile(text: string, file: File): Observable<Group> {
+    public createPostWithFile(id: string, text: string, file: File): Observable<Post> {
         const formData: FormData = new FormData();
         formData.append('file', file);
 
@@ -72,11 +98,11 @@ export class GroupService {
         });
         formData.append('command', blob);
 
-        return this.http.post<Group>(`${this.groupURL}/post/media`, formData);
+        return this.http.post<Post>(`${this.groupURL}/${id}/post/media`, formData);
     }
 
-    public createPostWithoutFile(text: string): Observable<Group> {
-        return this.http.post<Group>(`${this.groupURL}/post`, {text: text});
+    public createPostWithoutFile(id: string, text: string): Observable<Post> {
+        return this.http.post<Post>(`${this.groupURL}/${id}/post`, {text: text});
     }
 
     public updateGroupWithFile(id: string, name: string, file: File): Observable<Group> {

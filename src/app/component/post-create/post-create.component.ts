@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserService} from "../../service/user/user.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserUpdateFileCommand} from "../../command/user.update.file.command";
 import {catchError, Observable, throwError} from "rxjs";
 import {UserCommand} from "../../command/user.command";
 import {User} from "../../model/user.model";
-import {PROFILE} from "../../constants/app.constants";
+import {POST, PROFILE} from "../../constants/app.constants";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Error} from "../../model/error.model";
 import {transitionAnimation} from "../../animation/transition.animation";
+import {GroupService} from "../../service/group/group.service";
 
 @Component({
   selector: 'app-post-create',
@@ -20,19 +21,25 @@ export class PostCreateComponent {
   imgLoaded = false;
   profilePicture: string = ""
   profilePictureThumbnail: string = ""
-  description: string | null = null
+  text: string = ""
+  groupId: string = ""
   errorToggle: Boolean = false
   errorMessage: string = ''
   fileToUpload: File | null = null
   localUrl: any[] | null = null;
   isSpinning = false
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private groupService: GroupService, private route: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
-
+    const id = this.route.snapshot.paramMap.get("id")
+    if(!id) {
+      console.error("Missing parameter id")
+      return
+    }
+    this.groupId = id
   }
 
   onLoad(image: HTMLImageElement) {
@@ -41,8 +48,8 @@ export class PostCreateComponent {
   }
 
 
-  private toProfile() {
-    this.router.navigate([`/${PROFILE}`]).then(() => this.handleNavigation(PROFILE));
+  private toPost(postId: string) {
+    this.router.navigate([`/${POST.replace(":id", this.groupId).replace(":postId", postId)}`]).then(() => this.handleNavigation(POST));
   }
 
   private handleNavigation(route: string) {
@@ -62,7 +69,25 @@ export class PostCreateComponent {
   }
 
   post() {
-
+    this.isSpinning = true
+    if (!this.fileToUpload) {
+      this.groupService.createPostWithoutFile(this.groupId, this.text).pipe(
+        catchError(err => this.showErrorMessage(err))
+      ).subscribe((post) => {
+        this.isSpinning = false
+        this.toPost(post.id.toString())
+      })
+      return
+    }
+    this.groupService.createPostWithFile(this.groupId, this.text, this.fileToUpload).pipe(
+      catchError(err => {
+        this.isSpinning = false
+        return this.showErrorMessage(err)
+      })
+    ).subscribe((post) => {
+      this.isSpinning = false
+      this.toPost(post.id.toString())
+    })
   }
 
 

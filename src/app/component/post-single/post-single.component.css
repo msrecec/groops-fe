@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  height: 84.9vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  width: 80%;
+  margin: 10px auto;
+  flex-direction: column;
+  overflow-x: hidden; /* Enable vertical scrolling */
+  flex-wrap: wrap; /* This property makes items wrap to a new row */
+  /*justify-content: center; !* Align items to the start of the container (left) *!*/
+  align-items: center; /* Align items to the start of the container (top) */
+  /*overflow-y: auto;*/
+  /*flex: 1; !* Allow this div to grow and take up remaining vertical space *!*/
+}
+
+
+.profile-container-3 {
+  /*flex: 1; !* Allow this div to grow and take up remaining vertical space *!*/
+  overflow-x: hidden; /* Enable vertical scrolling */
+  flex-wrap: wrap; /* This property makes items wrap to a new row */
+  justify-content: center; /* Align items to the start of the container (left) */
+  align-items: center; /* Align items to the start of the container (top) */
+  display: flex;
+  width: 100%;
+}
+
+.scrollable-content {
+  /*flex: 1; !* Allow this div to grow and take up remaining vertical space *!*/
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; /* Transparent background */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(33, 150, 243, 0.5); /* Semi-transparent color for the handle */
+  border-radius: 5px; /* Rounded corners for the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(33, 150, 243, 0.8); /* Darker color on hover */
+}
+
+
+/*-----------------------------------------------------------------------------------------*/

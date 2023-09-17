@@ -1,10 +1,10 @@
 <app-navigation></app-navigation>
 <div class="container">
     <div [@transitionAnimation] class="profile-edit-form">
-        <div *ngIf="(!profilePicture || profilePicture.trim().toString() === '') && localUrl === null "
-             class="profile-picture-container">
-            <img class="profile-edit-img" src="assets/images/default-picture-profile.jpg" alt="Profile Picture">
-        </div>
+<!--        <div *ngIf="(!profilePicture || profilePicture.trim().toString() === '') && localUrl === null "-->
+<!--             class="profile-picture-container">-->
+<!--            <img class="profile-edit-img" src="assets/images/default-picture-profile.jpg" alt="Profile Picture">-->
+<!--        </div>-->
         <div *ngIf="profilePicture && profilePicture.trim().toString() !== '' || localUrl !== null "
              class="profile-picture-container">
             <img style="display: none" #profilePictureEditRef (load)="onLoad(profilePictureEditRef)" *ngIf="localUrl === null" class="profile-edit-img"
@@ -19,8 +19,8 @@
                multiple="multiple" accept="image/*" style="display:none;"/>
         <button type="submit" (click)="fileSelect.click()" class="profile-picture-edit-button">Choose picture</button>
         <div>
-        <textarea [(ngModel)]="description" style="padding-top: 20px; padding-bottom: 20px; border-radius: 5px; height: 300px"
-                  id="description" name="description" placeholder="description"></textarea>
+        <textarea [(ngModel)]="text" style="padding-top: 20px; padding-bottom: 20px; border-radius: 5px; height: 200px; width: 200px"
+                  id="description" name="description" placeholder="text"></textarea>
         </div>
         <button (click)="post()" type="submit" class="profile-edit-button">Post</button>
         <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>

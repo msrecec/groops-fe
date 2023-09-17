@@ -1,0 +1,12 @@
+<div [@transitionAnimation] class="container">
+  <form (submit)="$event.preventDefault()" class="login-form">
+    <div>
+      <input [(ngModel)]="text" type="text" id="username" name="username" placeholder="add comment" required>
+    </div>
+    <div>
+      <button (click)="addComment()" type="submit" class="login-button">Add comment</button>
+    </div>
+    <div *ngIf="errorToggle" style="color: red">{{errorMessage}}</div>
+  </form>
+</div>
+
