@@ -8,6 +8,10 @@
     width: 80%;
     margin: 10px auto 0;
     flex-direction: row;
+  overflow-x: hidden; /* Enable vertical scrolling */
+  flex-wrap: wrap; /* This property makes items wrap to a new row */
+  justify-content: flex-start; /* Align items to the start of the container (left) */
+  align-items: flex-start; /* Align items to the start of the container (top) */
 }
 
 .button {
@@ -58,7 +62,7 @@
     width: 1440px;
     display: flex;
     /*width: 500px;*/
-    height: 100%;
+    /*height: 100%;*/
     margin: 0 auto;
     flex: 1; /* Allow this div to grow and take up remaining vertical space */
     overflow-x: hidden; /* Enable vertical scrolling */

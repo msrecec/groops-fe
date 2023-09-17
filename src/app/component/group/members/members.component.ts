@@ -7,6 +7,7 @@ import {catchError} from "rxjs";
 import {RoleEnum} from "../../../model/enum/role.constants";
 import {transitionAnimation} from "../../../animation/transition.animation";
 import {UserRole} from "../../../model/user.role";
+import {UserService} from "../../../service/user/user.service";
 
 @Component({
   selector: 'app-members',
@@ -15,11 +16,13 @@ import {UserRole} from "../../../model/user.role";
   animations: [transitionAnimation]
 })
 export class MembersComponent {
+  currentUserId: Number = -1
   users: UserRole[] = []
   currentlyChaningRoles: Set<Number> = new Set<Number>()
   selectedOption: string = "ROLE_USER"
 
-  constructor(private groupService: GroupService, private errorHandlerService: ErrorHandlerService, private router: Router, private route: ActivatedRoute) {
+  constructor(private groupService: GroupService, private errorHandlerService: ErrorHandlerService, private router: Router, private route: ActivatedRoute,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -28,13 +31,18 @@ export class MembersComponent {
       console.error("Missing group id in param map")
       return
     }
-    this.groupService.getMembersByGroupId(groupId).pipe(
+    this.userService.getCurrentUser().pipe(
       catchError(this.errorHandlerService.handleError)
-    ).subscribe(
-      (users) => {
-        this.users = users
-      }
-    )
+    ).subscribe((user) => {
+      this.currentUserId = user.id
+      this.groupService.getMembersByGroupId(groupId).pipe(
+        catchError(this.errorHandlerService.handleError)
+      ).subscribe(
+        (users) => {
+          this.users = users
+        }
+      )
+    })
   }
 
   changeRole(userId: Number, role: RoleEnum) {
