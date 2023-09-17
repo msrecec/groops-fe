@@ -1,43 +1,30 @@
 .container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 85.1vh;
+  height: 84.9vh;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  border-radius: 10px;
   width: 80%;
-  margin: 10px auto 0;
-  flex-direction: column;
-  /*background: url('/assets/images/groops.jpg') no-repeat center center;*/
-  /*background-size: cover;*/
-  /*filter: blur(9px);*/
+  margin: 10px auto;
+  flex-direction: row;
+  overflow-x: hidden; /* Enable vertical scrolling */
+  flex-wrap: wrap; /* This property makes items wrap to a new row */
+  justify-content: flex-start; /* Align items to the start of the container (left) */
+  align-items: flex-start; /* Align items to the start of the container (top) */
 }
 
-/*.middle-section {*/
-/*  text-align: center;*/
-/*  background-color: rgba(0, 0, 0, 0.5);*/
-/*  padding: 20px;*/
-/*  border-radius: 10px;*/
-/*  margin-top: 180px;*/
-/*}*/
 
-.button {
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 15px;
-}
-
-.button:hover {
-  background-color: #1976d2;
+.profile-container-3 {
+  /*flex: 1; !* Allow this div to grow and take up remaining vertical space *!*/
+  overflow-x: hidden; /* Enable vertical scrolling */
+  flex-wrap: wrap; /* This property makes items wrap to a new row */
+  justify-content: center; /* Align items to the start of the container (left) */
+  align-items: center; /* Align items to the start of the container (top) */
+  display: flex;
+  width: 100%;
 }
 
 .scrollable-content {
-  flex: 1; /* Allow this div to grow and take up remaining vertical space */
+  /*flex: 1; !* Allow this div to grow and take up remaining vertical space *!*/
   overflow-y: auto; /* Enable vertical scrolling */
 }
 
@@ -62,3 +49,5 @@
   background: rgba(33, 150, 243, 0.8); /* Darker color on hover */
 }
 
+
+/*-----------------------------------------------------------------------------------------*/

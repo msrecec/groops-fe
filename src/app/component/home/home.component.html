@@ -1,5 +1,8 @@
-<app-navigation></app-navigation>
-<div *ngIf="justLoggedIn" [@transitionAnimation] class="container scrollable-content">
-</div>
-<div *ngIf="!justLoggedIn" class="container scrollable-content">
+<app-navigation [showGroupPosts]="true" (toggleMyPostsEvent)="handleToggleMyPostsEvent($event)"></app-navigation>
+<div class="container scrollable-content">
+    <div *ngIf="showPosts" class="profile-container-3">
+        <div [@transitionAnimation] *ngFor="let post of posts" class="profile-container-3">
+            <app-post postId="{{post.id}}" groupId="{{post.group.id}}"></app-post>
+        </div>
+    </div>
 </div>
