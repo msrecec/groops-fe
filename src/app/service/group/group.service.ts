@@ -135,4 +135,8 @@ export class GroupService {
       return this.http.delete<any>(`${this.groupURL}/${groupId}/user/${userId}`)
     }
 
+    public getCurrentUserRoleEnum(groupId: string) {
+      return this.http.get<RoleEnum>(`${this.groupURL}/${groupId}/currentUserRole`)
+    }
+
 }

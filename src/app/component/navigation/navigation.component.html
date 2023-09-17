@@ -7,6 +7,8 @@
         <li><button routerLink="/{{ACCOUNT_EDIT}}" [ngClass]="{'button-active': isAccountEdit(), 'button': !isAccountEdit()}">Account</button></li>
         <li><button routerLink="/{{GROUP_CREATE}}" [ngClass]="{'button-active': isGroupCreate(), 'button': !isGroupCreate()}"  class="button">Create Group</button></li>
         <li *ngIf="isSubrouteOfGroup()" ><button (click)="toGroup()" [ngClass]="{'button-active': isGroup(), 'button': !isGroup()}" >Group</button></li>
+        <li *ngIf="isPostable()" ><button (click)="toPosts()" [ngClass]="{'button-active': isPosts(), 'button': !isPosts()}" >Posts</button></li>
+        <li *ngIf="isPostable() && canCreatePostsFlag" ><button (click)="toPosts()" [ngClass]="{'button-active': isPosts(), 'button': !isPosts()}" >Create post</button></li>
         <li [@transitionAnimation] *ngIf="isGroups() && !isGroupCreate()" ><button (click)="toggleMy()" [ngClass]="{'button': isMy(), 'button-grey': !isMy()}">{{myGroups()}}</button></li>
         <li [@transitionAnimation] *ngIf="isGroups() && !isGroupCreate()">
             <div class="search-container">

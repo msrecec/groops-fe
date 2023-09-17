@@ -1,8 +1,11 @@
 import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {transitionAnimation} from "../../animation/transition.animation";
-import {ActivatedRoute, Route, Router, UrlSegment} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {
-  ACCOUNT_EDIT, GROUP, GROUP_CREATE,
+  ACCOUNT_EDIT,
+  GROUP,
+  GROUP_CREATE,
+  GROUP_POSTS,
   GROUPS,
   HOME,
   LOGIN,
@@ -12,6 +15,9 @@ import {
 } from "../../constants/app.constants";
 import {AuthService} from "../../service/auth/auth.service";
 import {GroupService} from "../../service/group/group.service";
+import {catchError} from "rxjs";
+import {ErrorHandlerService} from "../../service/error/error-handler.service";
+import {RoleEnum} from "../../model/enum/role.constants";
 
 @Component({
     selector: 'app-navigation',
@@ -24,6 +30,7 @@ export class NavigationComponent implements OnInit {
     navbarHeight = 50;
     currentRoute = ''
     groupToggle = false;
+    canCreatePostsFlag: boolean | null = null
     @Output() toggleGroupEvent = new EventEmitter<boolean>();
     @Output() toggleMyEvent = new EventEmitter<boolean>();
     @Output() toggleSearchEvent = new EventEmitter<string | null>();
@@ -31,13 +38,14 @@ export class NavigationComponent implements OnInit {
     @Input() groupButtonShow: boolean = false;
     @Input() createPostButtonShow: boolean = false;
 
-    constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute, private groupService: GroupService) {
+    constructor(private router: Router, private authService: AuthService, private route: ActivatedRoute, private groupService: GroupService, private errorHandlerService: ErrorHandlerService) {
 
     }
 
     ngOnInit(): void {
         this.setDefaultRoute()
         this.route.snapshot.url
+        this.canCreatePosts()
     }
 
     private setDefaultRoute() {
@@ -74,6 +82,15 @@ export class NavigationComponent implements OnInit {
       this.router.navigate([`/${GROUP.replace(":id", id)}`]).then(r => this.handleNavigation(GROUP));
     }
 
+    toPosts() {
+      const id = this.route.snapshot.paramMap.get("id")
+      if(!id) {
+        console.error("Missing id of group in url")
+        return
+      }
+      this.router.navigate([`/${GROUP_POSTS.replace(":id", id)}`]).then(r => this.handleNavigation(GROUP_POSTS));
+    }
+
     isHome() {
       return this.getFullRoute() === HOME
     }
@@ -103,15 +120,7 @@ export class NavigationComponent implements OnInit {
     }
 
     isPosts() {
-        return this.currentRoute.includes("/groups/") && this.currentRoute.includes("/posts")
-    }
-
-    isPostCreate() {
-        return this.currentRoute.includes("/groups/") && this.currentRoute.includes("/post-create")
-    }
-
-    isGroupList() {
-
+        return this.currentRoute.includes("/groups/") && this.currentRoute.endsWith("/posts")
     }
 
     isGroup() {
@@ -122,20 +131,28 @@ export class NavigationComponent implements OnInit {
       return this.getFullRoute().includes("group-single")
     }
 
-    isGroupEdit() {
-
+    isPostable() {
+      return this.getFullRoute().includes("posts")
     }
 
-    isPost() {
-
-    }
-
-    isPostEdit() {
-
-    }
-
-    isMembers() {
-
+    canCreatePosts() {
+      if(!this.isPostable()) {
+        return
+      }
+      const groupId = this.route.snapshot.paramMap.get("id")
+      if(!groupId) {
+        console.error("Missing group id in params")
+        return
+      }
+      if(this.canCreatePostsFlag !== null) {
+        return
+      }
+      this.groupService.getCurrentUserRoleEnum(groupId).pipe(
+        catchError(this.errorHandlerService.handleError)
+      ).subscribe((role: RoleEnum) => {
+        this.canCreatePostsFlag = role !== RoleEnum.ROLE_LURKER
+        console.log(this.canCreatePostsFlag)
+      })
     }
 
     private getFullRoute() {
