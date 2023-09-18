@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: `http://localhost:8080/api/groops`,
-    wsUrl: 'ws://8080/api/groops/ws/secured'
+    apiUrl: `https://localhost/api/groops`,
+    wsUrl: 'wss://localhost/api/groops/ws/secured'
 };
