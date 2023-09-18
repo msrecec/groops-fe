@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  groops-angular:
+    image: groops-angular:${VERSION:-latest}
+    container_name: groops-angular
+    entrypoint: "ng serve --host 0.0.0.0 --configuration production"
+    build:
+      context: "."
+      dockerfile: "Dockerfile"
+    restart: always
+    networks:
+      appnet:
+        ipv4_address: 172.24.2.8
+networks:
+  appnet:
+    name: zipato_network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.24.2.0/16"
